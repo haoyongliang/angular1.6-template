@@ -1,0 +1,44 @@
+
+.ng-valid-label{
+    position:relative;
+    
+    
+    .ng-invalid.ng-dirty{
+        &+span{
+            text-align: left;
+            width: 100px;
+            right:10px;
+            bottom:-13px;
+            display: block;
+            position:absolute;
+            z-index: 99;
+            font-size:8px;
+            opacity: 0.7;
+            padding:0; 
+            margin:0;   
+            
+            p{
+                text-align: left;
+//              min-width: 120px;
+                color: rgb(255, 255, 255);
+                background-color: rgba(51, 153, 204, 0.8);
+//              border: 1px solid rgb(102, 153, 204);
+                border-radius: 2px;
+                padding:3px 10px;
+                margin: 0;
+                opacity:1;
+            }         
+        }
+        &+span:after{
+            border: 5px solid transparent;
+            border-bottom: 8px solid rgba(51, 153, 204, 0.8);
+            width: 0;
+            height: 0;
+            position: absolute;
+            top:-13px;
+            right: 12px;
+            content: ' '
+        }
+        
+    }
+}

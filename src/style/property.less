@@ -1,0 +1,31 @@
+// 圆角函数
+.radius (@radius: 2px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    -ms-border-radius: @radius;
+    -o-border-radius: @radius;
+    border-radius: @radius;
+}
+// 动画函数
+.animation(@time: 0.3s) {   
+    transition: all @time;
+    -webkit-transition: all @time;
+    -moz-transition: all @time;
+    -o-transition: all @time;
+    -ms-transition: all @time;
+}
+// css变换函数
+.transform(@transform){
+    transform: @transform;
+    -ms-transform: @transform; 
+    -moz-transform: @transform;
+    -webkit-transform: @transform;
+    -o-transform: @transform;
+}
+.opacity(@num){
+    @msNum : @num*10;
+    opacity: @num;
+    -moz-opacity: @num;
+    -o-opacity: @num;
+    filter:alpha(opacity=@msNum);
+}

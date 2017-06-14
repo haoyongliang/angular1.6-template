@@ -1,0 +1,30 @@
+{
+  "name": "zdy2.0",
+  "description": "自定义平台 2.0版本",
+  "main": "",
+  "keywords": [
+    "angularjs"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-ui-router": "ui-router#^1.0.3+hybrid-2.0.0-2",
+    "jquery": "^3.2.1",
+    "ng-scrollbars": "^0.0.11",
+    "angular-cookies": "^1.6.4",
+    "angular-validation": "^1.4.4",
+    "bootstrap": "^3.3.7",
+    "animate.css": "^3.5.2",
+    "moment": "^2.18.1",
+    "angular-moment-picker": "moment-picker#^0.10.1"
+  }
+}

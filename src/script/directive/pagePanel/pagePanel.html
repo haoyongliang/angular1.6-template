@@ -1,0 +1,53 @@
+<div class="pagePanel p-r {{clazz}}" style="width: {{width}}; height: {{height}};background-color: white;">
+	<style>
+		.pp-font-size{
+			font-size: 16px !important;
+		}
+		.pp-blue{
+			color:#366092 !important;
+		}
+		.pp-gray{
+			color:#808080 !important;
+		}
+		.pp-btn:active,.pp-btn:hover,.pp-btn:visited,.pp-btn:focus{
+			background-color: #E8EEF8;
+		}
+		.pp-btn{
+			cursor: pointer;
+		}
+	</style>
+	<div class="p-a h-100 w-100  d-n animated fadeIn" style="z-index: 333; background-color: rgba(0,0,0,.2);" id="visiblePanel" ng-click="hidePanel()"></div>
+	<header style="border-bottom: {{borderBottom}};height: 38px; line-height: 38px;" class="pp-font-size pp-gray">
+		<!--包含返回 标题 操作-->
+		<div class="w-100 h-100 flex " ng-if="headStyle=='1'">
+			<div class="d-ib center pp-btn" style="width: 38px;" ui-sref="<">
+				<span class=" glyphicon glyphicon-menu-left"></span>
+			</div>
+			<div class="d-ib w-30 flex-1 pp-blue" style="text-align: {{textAlign}};">标题{{showBgPanel}}3</div>
+			<div class="d-ib pp-btn center" style="width: 38px;" ng-click="showPanel()">
+				<span class="glyphicon glyphicon-menu-hamburger"></span>
+			</div>
+		</div>
+		<!--包含返回标题操作，但返回仅仅是占用位置，不显示-->
+		<div class="w-100 h-100 flex fd-r" ng-if="headStyle=='2'">
+			<div class="d-ib " style="width: 38px;"> </div>
+			<div class="d-ib w-30 flex-1" style="text-align: {{textAlign}};">标题</div>
+			<div class="d-ib center" style="width: 38px;">
+				<span class="glyphicon glyphicon-menu-hamburger" style="color: #808080;"></span>
+			</div>
+		</div>
+		<!--包含标题、操作-->
+		<div class="w-100 h-100 flex fd-r" ng-if="headStyle=='3'">
+			<div class="d-ib " style="width: 10px;"> </div>
+			<div class="d-ib w-30 flex-1" style="text-align: {{textAlign}};">标题</div>
+			<div class="d-ib center" style="width: 38px;">
+				<span class="glyphicon glyphicon-menu-hamburger" style="color: #808080;"></span>
+			</div>
+		</div>
+	</header>
+	<section style="height:calc(100% - 39px);" >
+		<div ng-scrollbars  class="h-100">
+				<div ng-transclude></div>
+		</div>
+	</section>
+</div>
