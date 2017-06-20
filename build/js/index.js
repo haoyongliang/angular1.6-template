@@ -1,11 +1,71 @@
 'use strict';
 
-var APP = angular.module('app', ['ui.router', 'ngScrollbars', 'ngCookies', 'validation', 'moment-picker']);
+var APP = angular.module('app', ['ui.router', 'ngScrollbars', 'ngCookies', 'validation', 'moment-picker', 'LocalStorageModule']);
+'use strict';
+
+APP.config(function (localStorageServiceProvider) {
+  localStorageServiceProvider.setPrefix('XIZHUOKEJI').setStorageType('sessionStorage').setNotify(true, true);
+});
+'use strict';
+
+//详情参考http://indrimuska.github.io/angular-moment-picker/
+APP.config(['momentPickerProvider', function (momentPickerProvider) {
+    momentPickerProvider.options({
+        /* Picker properties */
+        locale: 'en',
+        format: 'L LTS',
+        minView: 'decade',
+        maxView: 'minute',
+        startView: 'year',
+        autoclose: true,
+        today: false,
+        keyboard: false,
+
+        /* Extra: Views properties */
+        leftArrow: '&larr;',
+        rightArrow: '&rarr;',
+        yearsFormat: 'YYYY',
+        monthsFormat: 'MMM',
+        daysFormat: 'D',
+        hoursFormat: 'HH:[00]',
+        minutesFormat: moment.localeData().longDateFormat('LT').replace(/[aA]/, ''),
+        secondsFormat: 'ss',
+        minutesStep: 5,
+        secondsStep: 1
+    });
+}]);
+'use strict';
+
+APP.config(['$qProvider', function ($qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
+}]);
+APP.config(['$sceDelegateProvider', function ($sceDelegateProvider) {
+    $sceDelegateProvider.resourceUrlWhitelist(['*://localhost:8080/**', 'self']);
+}]);
+'use strict';
+
+APP.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+	$stateProvider.state('main', {
+		url: '/main',
+		templateUrl: 'view/main/main.html',
+		controller: 'mainCtrl'
+	}).state('main.page1', {
+		url: '/page1',
+		templateUrl: 'view/new_file.html'
+	}).state('main.page2', {
+		url: '/page1',
+		templateUrl: 'view/new_file2.html'
+	});
+
+	$urlRouterProvider.otherwise('main');
+}]);
+'use strict';
+
 APP.config(function (ScrollBarsProvider) {
 	// scrollbar defaults
 	ScrollBarsProvider.defaults = {
 		autoHideScrollbar: false,
-		setHeight: 100,
+		setHeight: '100%',
 		scrollInertia: 500,
 		axis: 'yx',
 		theme: 'minimal-dark',
@@ -18,6 +78,38 @@ APP.config(function (ScrollBarsProvider) {
 		}
 	};
 });
+'use strict';
+
+APP.config(['$validationProvider', function ($validationProvider) {
+	var expression = {
+		phone: /^1[\d]{10}/,
+		password: function password(value) {
+			return value > 5;
+		}
+	};
+
+	var defaultMsg = {
+		phone: {
+			success: '',
+			error: '必须是11位手机号'
+		},
+		password: {
+			success: '',
+			error: ' 长度至少6位'
+		}
+	};
+
+	$validationProvider.setExpression(expression).setDefaultMsg(defaultMsg);
+}]);
+'use strict';
+
+APP.controller('indexCtrl', ['$timeout', '$log', '$scope', 'localStorageService', function (timeout, log, $scope, localStorageService) {
+	$scope.mainMode = true;
+	localStorageService.set('username', 'haoyongliang');
+	timeout(function () {
+		log.info(localStorageService.get('username'));
+	}, 5000);
+}]);
 'use strict';
 
 APP.factory('Reddit', function ($http, $sce) {
@@ -55,11 +147,24 @@ APP.controller('mainCtrl', ['$scope', '$timeout', '$myHttp', 'cache', '$log', 'R
 	$timeout(function () {
 		$log.info('info');
 	}, 0);
+	$scope.params = {
+		page: 4
+	};
+	$scope.money = 4544444444444444;
+	$scope.handler = function () {
+		return function (data, hasMoreData) {
+			hasMoreData.flag = data.data["object"].hasMoreData;
+			$scope.items.push(data.data["object"].data);
+		};
+	};
 	$scope.name = 'jsdf';
 	$scope.scrollbarConfig = {
 		setHeight: 200
 	};
 	$scope.items = ['张三'];
+	for (var i = 0; i < 30; i++) {
+		$scope.items.push('lisi' + i);
+	}
 	$scope.showBgPanel = false;
 	$scope.mydate = '2017';
 
@@ -108,7 +213,7 @@ APP.service('cache', ['$cookies', function ($cookies) {
 'use strict';
 
 /**
- * 操作get,post请求
+ * 操作http服务
  */
 APP.service('$myHttp', ['$rootScope', '$filter', '$http', '$timeout', '$q', function ($rootScope, $filter, $http, $timeout, $q) {
 
@@ -120,7 +225,12 @@ APP.service('$myHttp', ['$rootScope', '$filter', '$http', '$timeout', '$q', func
 
 		var def = $q.defer();
 
-		$http.post(url, { 'params': params }).then(function (resp) {
+		$http({
+			mehtod: 'POST',
+			url: url,
+			data: params,
+			headers: { 'Content-Type': undefined }
+		}).then(function (resp) {
 			def.resolve(resp);
 		}).catch(function (err) {
 			def.reject(err);
@@ -143,6 +253,22 @@ APP.service('$myHttp', ['$rootScope', '$filter', '$http', '$timeout', '$q', func
 		});
 
 		return def.promise;
+	};
+	//jsonp请求
+	this.getDataByJsonp = function (url, params, jsonpCallbackParam, before) {
+		if ($.isFunction(before)) {
+			before();
+		}
+		var deff = $q.defer();
+
+		$http.jsonp(url, {
+			params: params,
+			'jsonpCallbackParam': jsonpCallbackParam || 'callback'
+		}).then(function (data) {
+			def.resolve(data);
+		}).catch(function (err) {
+			def.reject(err);
+		});
 	};
 }]);
 'use strict';
@@ -173,82 +299,6 @@ $.extend({
 		return random;
 	}
 });
-'use strict';
-
-//详情参考http://indrimuska.github.io/angular-moment-picker/
-APP.config(['momentPickerProvider', function (momentPickerProvider) {
-    momentPickerProvider.options({
-        /* Picker properties */
-        locale: 'en',
-        format: 'L LTS',
-        minView: 'decade',
-        maxView: 'minute',
-        startView: 'year',
-        autoclose: true,
-        today: false,
-        keyboard: false,
-
-        /* Extra: Views properties */
-        leftArrow: '&larr;',
-        rightArrow: '&rarr;',
-        yearsFormat: 'YYYY',
-        monthsFormat: 'MMM',
-        daysFormat: 'D',
-        hoursFormat: 'HH:[00]',
-        minutesFormat: moment.localeData().longDateFormat('LT').replace(/[aA]/, ''),
-        secondsFormat: 'ss',
-        minutesStep: 5,
-        secondsStep: 1
-    });
-}]);
-'use strict';
-
-APP.config(['$qProvider', function ($qProvider) {
-    $qProvider.errorOnUnhandledRejections(false);
-}]);
-//APP.config(['$sceDelegateProvider', function ($sceDelegateProvider) {
-//  $sceDelegateProvider.resourceUrlWhitelist(['*://api.reddit.com/**', 'self']);
-//}]);
-'use strict';
-
-APP.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-	$stateProvider.state('main', {
-		url: '/main',
-		templateUrl: 'view/main/main.html',
-		controller: 'mainCtrl'
-	}).state('main.page1', {
-		url: '/page1',
-		templateUrl: 'view/new_file.html'
-	}).state('main.page2', {
-		url: '/page1',
-		templateUrl: 'view/new_file2.html'
-	});
-
-	$urlRouterProvider.otherwise('main');
-}]);
-'use strict';
-
-APP.config(['$validationProvider', function ($validationProvider) {
-	var expression = {
-		phone: /^1[\d]{10}/,
-		password: function password(value) {
-			return value > 5;
-		}
-	};
-
-	var defaultMsg = {
-		phone: {
-			success: '',
-			error: '必须是11位手机号'
-		},
-		password: {
-			success: '',
-			error: ' 长度至少6位'
-		}
-	};
-
-	$validationProvider.setExpression(expression).setDefaultMsg(defaultMsg);
-}]);
 'use strict';
 
 /**
@@ -331,6 +381,32 @@ APP.directive('appColor', function () {
 						}
 					}
 				}
+			}
+		}
+	};
+});
+'use strict';
+
+/**
+ * 使用方式：html页面<script type="text/javascript-lazy"> </script>标签中写入代码，代码会随着.html加载被执行。
+ */
+APP.directive('script', function () {
+	return {
+		restrict: 'E',
+		scope: false,
+		link: function link(scope, elem, attr) {
+			if (attr.type === 'text/javascript-lazy') {
+				var s = document.createElement("script");
+				s.type = "text/javascript";
+				var src = elem.attr('src');
+				if (src !== undefined) {
+					s.src = src;
+				} else {
+					var code = elem.text();
+					s.text = code;
+				}
+				document.head.appendChild(s);
+				elem.remove();
 			}
 		}
 	};
@@ -511,67 +587,6 @@ APP.directive('appPagePanel', function ($timeout, uuid) {
 });
 'use strict';
 
-/* ng-infinite-scroll - v1.0.0 - 2013-02-23 */
-var mod;
-
-mod = angular.module('infinite-scroll', []);
-
-mod.directive('infiniteScroll', ['$rootScope', '$window', '$timeout', function ($rootScope, $window, $timeout) {
-  return {
-    link: function link(scope, elem, attrs) {
-      var checkWhenEnabled, handler, scrollDistance, scrollEnabled;
-      $window = angular.element($window);
-      scrollDistance = 0;
-      if (attrs.infiniteScrollDistance != null) {
-        scope.$watch(attrs.infiniteScrollDistance, function (value) {
-          return scrollDistance = parseInt(value, 10);
-        });
-      }
-      scrollEnabled = true;
-      checkWhenEnabled = false;
-      if (attrs.infiniteScrollDisabled != null) {
-        scope.$watch(attrs.infiniteScrollDisabled, function (value) {
-          scrollEnabled = !value;
-          if (scrollEnabled && checkWhenEnabled) {
-            checkWhenEnabled = false;
-            return handler();
-          }
-        });
-      }
-      handler = function handler() {
-        var elementBottom, remaining, shouldScroll, windowBottom;
-        windowBottom = $window.height() + $window.scrollTop();
-        elementBottom = elem.offset().top + elem.height();
-        remaining = elementBottom - windowBottom;
-        shouldScroll = remaining <= $window.height() * scrollDistance;
-        if (shouldScroll && scrollEnabled) {
-          if ($rootScope.$$phase) {
-            return scope.$eval(attrs.infiniteScroll);
-          } else {
-            return scope.$apply(attrs.infiniteScroll);
-          }
-        } else if (shouldScroll) {
-          return checkWhenEnabled = true;
-        }
-      };
-      $window.on('scroll', handler);
-      scope.$on('$destroy', function () {
-        return $window.off('scroll', handler);
-      });
-      return $timeout(function () {
-        if (attrs.infiniteScrollImmediateCheck) {
-          if (scope.$eval(attrs.infiniteScrollImmediateCheck)) {
-            return handler();
-          }
-        } else {
-          return handler();
-        }
-      }, 0);
-    }
-  };
-}]);
-'use strict';
-
 /**
  * 注意：因为自带滚动条，所以在使用<left>或者<right>标签的时候高度无法100%，只能自适应
  * 左固定，右百分比自适应布局
@@ -673,25 +688,255 @@ APP.directive('appRightLeftLayout', function ($timeout, uuid) {
 				}
 			});
 		}
-
 	};
 });
 'use strict';
 
-APP.directive('appYearSelector', function (uuid) {
+/**
+ * 
+<div style="height: 200px; width: 200px; background-color: pink;"> 通过最外层的div设置宽高
+	<div ng-scrollbars> 在容器中添加滚动条
+		<div app-scroll-load url='http://localhost:8080/springmvc_project/getAllStudent' params="{{params}}" method="get" num-name="page2"  callback="handler()" histroy-count="200" histroy-count-name="num"> 在滚动条中添加下拉加载
+			<div ng-repeat="item in items"  >{{item}}</div>
+		</div>
+	</div>
+</div>
+ * 滚动加载，必须配合ng-scrollbars 指令内部使用
+ * 需要传递给服务端的参数必须包含第N页，每页多少条记录
+ * url:请求的地址
+ * target-push:是一个数组或者集合，会将请求回的数据添加到数据集中,不要和callback同时使用,一般不用该属性
+ * params:请求参数
+ * method:请求方式
+ * num-name:服务端需要通过该值(字段名)获取当前显示第几页的数据
+ * history-count:每页显示记录数
+ * history-count-name:服务端需要通过该值(字段名)获取每页显示记录数
+ * callback:如果不是简单的将请求回的数据添加到数据集中用回调函数，callback='handler()' ,不要和target-push同时使用
+ * handler在ctrl中的写法,data就是请求回的数据,hasMoreData用于标记是否继续滚动，如果设置该对象的flag=false则不继续滚动
+ * 	$scope.handler = function(){
+ * 		return function(data,hasMoreData){
+ * 			hasMoreData.flag = false;//之后的滚动将不会请求加载新数据
+ * 			//这里可以将data中数据绑定到controller中
+ * 		}
+ * 	}
+ */
+
+APP.directive('appScrollLoad', function ($myHttp, $log, uuid) {
 	return {
-		templateUrl: 'script/directive/yearselector/yearselector.html?t=' + uuid.getUUID(),
+		//		templateUrl:'script/directive/scrollLoad/scrollLoad.html?t='+ uuid.getUUID(),
+		template: '',
 		scope: {
-			model: "=ngModel"
+			url: "@",
+			targetPush: '=', //请求回的数据添加到数据集中，该值表示的对象必须是数组或者集合
+			callback: '&',
+			method: "@",
+			params: "@",
+			numName: "@",
+			histroyCountName: "@",
+			histroyCount: "@"
 		},
 		replace: true,
-		restrict: 'E',
+		restrict: 'A',
 		controller: function controller($scope) {},
 		link: function link($scope, $element, $attrs, ngModelCtrl) {
-			console.log(2);
-			$scope.change = function () {
-				$scope.model = "aaa";
+
+			var busy = false; //防止重复滚动多次
+			var hasMoreData = { flag: true }; //标记是否继续请求数据
+			var draggerBottom = void 0; //滚动条距离底部的距离
+			var params = angular.fromJson($scope.params || '{}');
+			var method = angular.lowercase($scope.method || 'post');
+			var numName = $scope.numName || 'page'; //服务端需要参数用于显示第几页的数据，这是该参数的名字
+			var historyCount = $scope.histroyCount || 20; //每页显示多少条数据
+			var histroyCountName = $scope.histroyCountName || 'historyCountName';
+			var handlerMethod = function handlerMethod(data) {
+				//将请求回的数据push到指定数据集中
+				if (angular.isDefined($scope.targetPush)) {
+					$scope.targetPush.push(data);
+				}
+				//执行自定义回调函数处理数据
+				if (!!$scope.callback()) {
+					$scope.callback()(data, hasMoreData);
+				}
 			};
+			var catchMethod = function catchMethod(e) {
+				params[numName] = params[numName] - 1;
+				$log.error('请求数据失败，请求路径' + url + '请求参数:' + $scope.params);
+			};
+			var finallyMethod = function finallyMethod() {
+				busy = false;
+			};
+			var reqHandler = function reqHandler(callback) {
+				switch (method) {
+					case "post":
+						$myHttp.getData($scope.url, params).then(function (data) {
+							handlerMethod(data);
+							if ($.isFunction(callback)) {
+								callback();
+							}
+						}).catch(function () {
+							catchMethod();
+						}).finally(function () {
+							finallyMethod();
+						});
+						break;
+					case "get":
+						$myHttp.getDataByGet($scope.url, params).then(function (data) {
+							handlerMethod(data);
+							if ($.isFunction(callback)) {
+								callback();
+							}
+						}).catch(function () {
+							catchMethod();
+						}).finally(function () {
+							finallyMethod();
+						});
+						break;
+				}
+			};
+
+			params[numName] = 1;
+			params[histroyCountName] = historyCount;
+
+			reqHandler(function () {
+				params[numName] = 2;
+			});
+
+			$element.on('mousewheel', function () {
+				draggerBottom = $element.closest('.mCustomScrollBox').next().find('.mCSB_dragger').css('bottom'); //mCustomScrollBox，mCSB_dragger是ng-scrollbars指令中的类
+				//如果滚动条滚动到底部
+				if (parseInt(draggerBottom) < 1 && !busy && !!hasMoreData.flag) {
+					busy = true;
+					params[numName] = params[numName] + 1;
+					reqHandler();
+				} else {
+					var val = $element.children(":last-child").val();
+					console.log(val);
+				}
+			});
 		}
+	};
+});
+'use strict';
+
+/**
+ * 输入框中的千分位
+ * 使用方式 <input type="text" ng-model = "" app-currency bit="3"/> 这些是必须
+ * type必须是text类型
+ * ng-model 必须有
+ * currency 必须有
+ * bit 小数点保留位数，可以不写，默认保留2位
+ */
+APP.directive('appCurrency', function ($filter, $browser) {
+	return {
+		require: 'ngModel',
+		link: function link($scope, $element, $attrs, ngModelCtrl) {
+
+			var separators = {
+				'thousands': $filter('number')(1000).substr(1, 1),
+				'decimal': $filter('number')(1.1).substr(1, 1)
+			};
+			var decimalEntered = false;
+			var bit = $attrs.bit || 2;
+			ngModelCtrl.$parsers.push(function (viewValue) {
+				if (!!$attrs.isF) {
+					if (viewValue > 0) {
+						viewValue = -viewValue;
+					}
+				}
+				return viewValue + ''.split(separators.thousands).join('').split(separators.decimal).join('.');
+			});
+
+			ngModelCtrl.$render = function () {
+				$element.val($filter('number')((ngModelCtrl.$viewValue + '').replace(/,/g, ''), bit, false));
+			};
+			var listener = function listener() {
+				var value = $element.val().split(separators.thousands).join('').split(separators.decimal).join('.');
+				if (decimalEntered) {
+					decimalEntered = false;
+					return;
+				}
+
+				if (!!$attrs.isF) {
+					if (value > 0) {
+						value = -value;
+					}
+				}
+				$element.val($filter('number')(value, bit));
+			};
+
+			$element.bind('focus', function () {
+				if (!!$attrs.readonly || $attrs.readonly == 'true') {
+					return;
+				}
+				var value = ngModelCtrl.$modelValue;
+				if (!angular.isUndefined(value)) {
+					var v = value.toString().replace(/,/g, '');
+					if (parseFloat(v) == 0.0) {
+						v = "";
+					}
+
+					$element.val(v);
+				}
+			});
+
+			$element.bind('blur', function () {
+				listener();
+			});
+
+			$element.bind('keypress', function (event) {
+				var key = event.which;
+				if (key == 0 || key == 8 || 15 < key && key < 19 || 37 <= key && key <= 40) {
+					return;
+				}
+				if (String.fromCharCode(key) != separators.thousands && String.fromCharCode(key) != separators.decimal && !(48 <= key && key <= 57) && String.fromCharCode(key) != '-') {
+					event.preventDefault();
+					return;
+				}
+				if (String.fromCharCode(key) == separators.decimal) decimalEntered = true;
+			});
+
+			$element.bind('paste cut', function () {
+				$browser.defer(listener);
+			});
+		}
+	};
+});
+'use strict';
+
+//千分位格式化过滤器
+//使用方式 {{123 | thousands :34}}
+//说明 : ":34"表示保留小数点后34位 ,可以不写默认保留2位
+APP.filter('thousands', function () {
+	//数字千分位
+
+	return function (value, bit) {
+		bit = bit || 2;
+		//四舍五入方法
+		function keepTwoDecimalFull(num) {
+			num = String(num).replace(',', '');
+			var result = parseFloat(num);
+			if (isNaN(result)) {
+				result = '0';
+			}
+			var str = '1';
+			for (var i = 0; i < bit; i++) {
+				str += '0';
+			}
+			result = Math.round(num * str) / str;
+			var s_x = result.toString();
+			var pos_decimal = s_x.indexOf('.');
+			if (pos_decimal < 0) {
+				pos_decimal = s_x.length;
+				s_x += '.';
+			}
+			while (s_x.length <= pos_decimal + parseInt(bit)) {
+				s_x += '0';
+			}
+			return s_x;
+		}
+
+		var result = keepTwoDecimalFull(value).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,');
+		//去掉小数点后的千分位
+		result = result.split('.')[0] + '.' + result.split('.')[1].replace(',', '');
+		return result;
 	};
 });

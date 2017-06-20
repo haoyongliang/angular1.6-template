@@ -1,188 +1,7 @@
 @charset "UTF-8";
-html {
-  font-size: 62.5%;
-  font-family: tahoma, Helvetica, Arial, "\5FAE\8F6F\96C5\9ED1";
-}
-body,
-ul,
-ol,
-dl,
-dd,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-pre,
-form,
-fieldset,
-legend,
-input,
-button,
-textarea,
-p,
-blockquote,
-table,
-th,
-td,
-menu {
-  margin: 0;
-  padding: 0;
-  box-sizing: content-box;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-ul,
-ol,
-menu {
-  list-style: none;
-}
-fieldset,
-img {
-  border: none;
-}
-img,
-object,
-select,
-input,
-textarea,
-button {
-  vertical-align: middle;
-}
-input,
-textarea,
-select,
-address,
-caption,
-cite,
-code,
-dfn,
-em,
-i,
-b,
-strong,
-small,
-th,
-var,
-abbr {
-  font-size: 100%;
-  font-style: normal;
-}
-caption,
-th {
-  text-align: left;
-}
-article,
-aside,
-footer,
-header,
-hgroup,
-nav,
-section,
-figure,
-figcaption {
-  display: block;
-}
-code,
-kbd,
-pre,
-samp,
-tt {
-  font-family: Consolas, "Courier New", Courier, monospace;
-}
-address,
-cite,
-dfn,
-em,
-var,
-i {
-  font-style: normal;
-}
-blockquote,
-q {
-  quotes: none;
-}
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: "";
-  content: none;
-}
-a {
-  color: #06f;
-  text-decoration: none;
-  cursor: pointer;
-}
-a:link,
-a:visited,
-a:active {
-  color: #06f;
-}
-a:hover,
-a:focus {
-  color: #f60;
-  text-decoration: underline;
-  outline: none;
-}
-.pc_bodyContainerBGColor {
-  background-color: #E8EEF8 !important;
-}
-.ng-valid-label {
-  position: relative;
-}
-.ng-valid-label .ng-invalid.ng-dirty + span {
-  text-align: left;
-  width: 100px;
-  right: 10px;
-  bottom: -13px;
-  display: block;
-  position: absolute;
-  z-index: 99;
-  font-size: 8px;
-  opacity: 0.7;
-  padding: 0;
-  margin: 0;
-}
-.ng-valid-label .ng-invalid.ng-dirty + span p {
-  text-align: left;
-  color: #ffffff;
-  background-color: rgba(51, 153, 204, 0.8);
-  border-radius: 2px;
-  padding: 3px 10px;
-  margin: 0;
-  opacity: 1;
-}
-.ng-valid-label .ng-invalid.ng-dirty + span:after {
-  border: 5px solid transparent;
-  border-bottom: 8px solid rgba(51, 153, 204, 0.8);
-  width: 0;
-  height: 0;
-  position: absolute;
-  top: -13px;
-  right: 12px;
-  content: ' ';
-}
-.mCSB_outside + .mCS-minimal-dark.mCSB_scrollTools_vertical,
-.mCSB_outside + .mCS-minimal.mCSB_scrollTools_vertical {
-  right: -4px;
-  margin: 12px 0;
-}
-.mCustomScrollBox.mCS-minimal + .mCSB_scrollTools + .mCSB_scrollTools.mCSB_scrollTools_horizontal,
-.mCustomScrollBox.mCS-minimal + .mCSB_scrollTools.mCSB_scrollTools_horizontal,
-.mCustomScrollBox.mCS-minimal-dark + .mCSB_scrollTools + .mCSB_scrollTools.mCSB_scrollTools_horizontal,
-.mCustomScrollBox.mCS-minimal-dark + .mCSB_scrollTools.mCSB_scrollTools_horizontal {
-  bottom: -4px;
-  margin: 0 12px;
-}
-.mCS-minimal-dark.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
-  background-color: #CCE2F2 !important;
-  filter: "alpha(opacity=20)";
-  -ms-filter: "alpha(opacity=20)";
-}
+/*
+ * 常用的工具样式
+ */
 .p-a {
   position: absolute !important;
 }
@@ -209,6 +28,18 @@ a:focus {
 }
 .f-22 {
   font-size: 22px !important;
+}
+.f-big {
+  font-size: 16px !important;
+}
+.f-middleBig {
+  font-size: 14px !important;
+}
+.f-middleSmall {
+  font-size: 13px !important;
+}
+.f-small {
+  font-size: 12px !important;
 }
 .m-auto {
   margin: 0px auto !important;
@@ -596,6 +427,195 @@ a:focus {
 }
 .overflow-h {
   overflow: hidden !important;
+}
+html {
+  font-size: 62.5%;
+  font-family: tahoma, Helvetica, Arial, "\5FAE\8F6F\96C5\9ED1";
+}
+body,
+ul,
+ol,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+p,
+blockquote,
+table,
+th,
+td,
+menu {
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+ul,
+ol,
+menu {
+  list-style: none;
+}
+fieldset,
+img {
+  border: none;
+}
+img,
+object,
+select,
+input,
+textarea,
+button {
+  vertical-align: middle;
+}
+input,
+textarea,
+select,
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+i,
+b,
+strong,
+small,
+th,
+var,
+abbr {
+  font-size: 100%;
+  font-style: normal;
+}
+caption,
+th {
+  text-align: left;
+}
+article,
+aside,
+footer,
+header,
+hgroup,
+nav,
+section,
+figure,
+figcaption {
+  display: block;
+}
+code,
+kbd,
+pre,
+samp,
+tt {
+  font-family: Consolas, "Courier New", Courier, monospace;
+}
+address,
+cite,
+dfn,
+em,
+var,
+i {
+  font-style: normal;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+a {
+  color: #06f;
+  text-decoration: none;
+  cursor: pointer;
+}
+a:link,
+a:visited,
+a:active {
+  color: #06f;
+}
+a:hover,
+a:focus {
+  color: #f60;
+  text-decoration: underline;
+  outline: none;
+}
+.pc_bodyContainerBGColor {
+  background-color: #E8EEF8 !important;
+}
+.ng-valid-label {
+  position: relative;
+}
+.ng-valid-label .ng-invalid.ng-dirty + span {
+  text-align: left;
+  width: 100px;
+  right: 10px;
+  bottom: -13px;
+  display: block;
+  position: absolute;
+  z-index: 99;
+  font-size: 8px;
+  opacity: 0.7;
+  padding: 0;
+  margin: 0;
+}
+.ng-valid-label .ng-invalid.ng-dirty + span p {
+  text-align: left;
+  color: #ffffff;
+  background-color: rgba(51, 153, 204, 0.8);
+  border-radius: 2px;
+  padding: 3px 10px;
+  margin: 0;
+  opacity: 1;
+}
+.ng-valid-label .ng-invalid.ng-dirty + span:after {
+  border: 5px solid transparent;
+  border-bottom: 8px solid rgba(51, 153, 204, 0.8);
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: -13px;
+  right: 12px;
+  content: ' ';
+}
+/*
+ * 滚动条样式
+ */
+.mCSB_outside + .mCS-minimal-dark.mCSB_scrollTools_vertical,
+.mCSB_outside + .mCS-minimal.mCSB_scrollTools_vertical {
+  right: -4px;
+  margin: 12px 0;
+}
+.mCustomScrollBox.mCS-minimal + .mCSB_scrollTools + .mCSB_scrollTools.mCSB_scrollTools_horizontal,
+.mCustomScrollBox.mCS-minimal + .mCSB_scrollTools.mCSB_scrollTools_horizontal,
+.mCustomScrollBox.mCS-minimal-dark + .mCSB_scrollTools + .mCSB_scrollTools.mCSB_scrollTools_horizontal,
+.mCustomScrollBox.mCS-minimal-dark + .mCSB_scrollTools.mCSB_scrollTools_horizontal {
+  bottom: -4px;
+  margin: 0 12px;
+}
+.mCS-minimal-dark.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+  filter: "alpha(opacity=20)";
+  -ms-filter: "alpha(opacity=20)";
+}
+.header-font-size {
+  font-size: 16px !important;
 }
 .pc_body {
   position: relative;

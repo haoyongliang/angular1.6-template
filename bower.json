@@ -25,6 +25,7 @@
     "bootstrap": "^3.3.7",
     "animate.css": "^3.5.2",
     "moment": "^2.18.1",
-    "angular-moment-picker": "moment-picker#^0.10.1"
+    "angular-moment-picker": "moment-picker#^0.10.1",
+    "angular-local-storage": "^0.6.0"
   }
 }

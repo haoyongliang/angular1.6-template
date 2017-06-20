@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html ng-app="app" class="h-100" >
+<html ng-app="app" class="h-100" ng-controller="indexCtrl">
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	</head>
-	<body class="pc_bodyContainer">
+	<body class="pc_bodyContainer" ng-if="mainMode">
 		<nav>
 			<img class="logo" ng-src="image/pc_logo.png"></img>
 			<ul>
@@ -31,22 +32,22 @@
 			</ul>
 		</nav>
 		<div ui-view class="h-100 w-100 " ng-src="image/pc_logo.png">
-			 
+
 		</div>
 		<script src="lib/jquery/dist/jquery.js"></script>
 		<script type="text/javascript" src="lib/angular/angular.js"></script>
 		<script type="text/javascript" src="lib/angular-ui-router/release/angular-ui-router.js"></script>
 		<script type="text/javascript" src="lib/angular-cookies/angular-cookies.min.js"></script>
 		<script type="text/javascript" src="lib/angular-validation/dist/angular-validation.js"></script>
-		
+
 		<!--动画animate.css-->
 		<link rel="stylesheet" href="lib/animate.css/animate.min.css" />
-		
+
 		<!--bootstrap-->
 		<link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.min.css"/>
 		<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
-		
-			
+
+
 		<!--滚动条scroll-->
 		<link rel="stylesheet" href="lib/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" type="text/css"/>
 		<script src="lib/angular/angular.min.js"></script>
@@ -54,14 +55,17 @@
 		<script src="lib/ng-scrollbars/dist/scrollbars.min.js"></script>
 
 		<!--时间控件angular-moment-picker, momentjs-->
-		<script src="lib/moment/min/moment.min.js"></script>	
+		<script src="lib/moment/min/moment.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="lib/angular-moment-picker/dist/angular-moment-picker.css"/>
 		<link rel="stylesheet" href="lib/angular-moment-picker/dist/themes/material-ui.min.css" />
 		<script src="lib/angular-moment-picker/dist/angular-moment-picker.js"></script>
 		
+		<!--localstorage-->
+		<script src="../lib/angular-local-storage/dist/angular-local-storage.min.js"></script>
+
 		<!--版本主题样式-->
 		<link rel="stylesheet" type="text/css" href="style/css/index.css"/>
-		
+
 		<!--项目JS-->
 		<script src="js/index.js"></script>
 	</body>
