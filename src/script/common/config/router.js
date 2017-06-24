@@ -1,16 +1,24 @@
 APP.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
-	$stateProvider.state('main',{
-		url : '/main',
-		templateUrl : 'view/main/main.html',
+	
+	
+	$stateProvider.state('login',{//登陆页面
+		url : '/login',
+		templateUrl : 'script/platform/component/login/login.html',
+		controller : 'loginCtrl'
+	}).state('home',{//登陆后的页面
+		url : '/home',
+		templateUrl : 'script/platform/component/home/home.html',
+		controller : 'homeCtrl'
+	}).state('home.main',{
+		url:'/main',
+		templateUrl : 'script/platform/component/home/main/main.html',
 		controller : 'mainCtrl'
-	}).state('main.page1',{
-		url : '/page1',
-		templateUrl : 'view/new_file.html',
-	}).state('main.page2',{
-		url : '/page1',
-		templateUrl : 'view/new_file2.html',
+	}).state('home.organization',{
+		url:'/organization',
+		templateUrl : 'script/platform/component/home/organization/organization.html',
+		controller : 'organizationCtrl'
 	});
 	
 	
-	$urlRouterProvider.otherwise('main')
+	$urlRouterProvider.otherwise('login')
 }])

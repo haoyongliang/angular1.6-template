@@ -1,7 +1,7 @@
 /**
  * 使用方式：html页面<script type="text/javascript-lazy"> </script>标签中写入代码，代码会随着.html加载被执行。
  */
-APP.directive('script', function() {
+APP.directive('script', [()=> {
 	return {
 	  restrict: 'E',
 	  scope: false,
@@ -26,4 +26,4 @@ APP.directive('script', function() {
 	    }
 	  }
 	};
-});
+}]);

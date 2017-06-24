@@ -1,22 +1,115 @@
 
 @import "./base.less";
+@import "./function.less";
 @import "./reset.less";
 //@import "./normalize.less";
 @import "./theme/default.less";
-@import "./validation.less";  
-@import "./size.less";  
+@import "./validation.less";    
 @import "./scrollbar.less";
 @import "./component.less";
 @import "./login.less";
+@import "./../script/platform/directive/navUserInfo/navUserInfo.less";   
 
 @pc_bodyContainer_nav_height:50px;
 @pc_bodyContainer_body_padding: 16px;
 @pc_bodyContainer_body_height : @pc_bodyContainer_nav_height;
 
+.navUserInfo{
+    background-color:@color_menu_second !important;
+    width:400px;
+    height: 240px;
+    right:0;
+    z-index:1000;
+//  .opacity(10); 
+    .userinfo-top{
+       height:80px;
+       .w-100;
+       .userinfo-left{
+           width:25%;
+           height: 80px;
+           float: left;
+           line-height: 80px;
+           padding-left:35px;
+           img{
+               width:45px;
+               height: 45px;
+               border-radius: 50px;
+               border:1px solid white;
+           }
+           &:hover{
+               cursor: pointer;
+              
+           }
+           &:active{
+                background-color:@color_menu_selected;
+           }
+       }
+       .userinfo-right{
+           width:75%;
+           height: 100%;
+           float:left;
+           .name{
+               font-size:18px;
+               color:white;
+               font-weight: 500;
+               padding-top:20px;
+               
+           }
+           .signature{
+               font-size:13px;
+              color:@color_font6;
+           }
+       }
+    }
+    .userinfo-center{
+        height:80px;
+       .w-100;
+       .userinfo-left{
+           width:50%;
+           height: 100%;
+           background-color:@pc_bodyContainer_navBGColor;
+           float: left;
+           border-right:2px solid @nav-spliceLineColor;
+       }
+       .userinfo-right{
+           width:50%;
+           height: 100%;
+           background-color:@pc_bodyContainer_navBGColor;
+           float:left;
+       }
+    }
+    .userinfo-bottom{
+        height:80px;
+        .w-100;
+        width: 100%;
+        .block1{
+            width:400/3px;
+            float: left;
+            background-color:red;
+            height: 80px;
+        }
+        .block2{
+            width:400/3px;
+            float: left;
+            background-color:gray;
+            height: 80px;
+        }
+        .block3{
+             width:400/3px;
+            float: left;
+            background-color:red;
+            height: 80px;
+        }
+    }
+}
+
+
+
 //每一个body都要引入的样式
 .pc_body{
     position: relative;
-    height: calc(~'100% - @{pc_bodyContainer_body_height}');
+//  height: calc(~'100% - @{pc_bodyContainer_body_height}');
+    height: 100%;
     padding: @pc_bodyContainer_body_padding;
 }
 .pc_bodyContainer{
@@ -35,7 +128,7 @@
         top: 0px;
         left: 0px;
         width: 100%;
-        
+         
         .logo{
             width:200px;
             margin-left: @pc_bodyContainer_body_padding;
@@ -43,7 +136,7 @@
             top:14px;
             cursor: pointer;
             vertical-align: middle;
-        }
+        }   
         ul{
             right: 0;
             position:absolute;

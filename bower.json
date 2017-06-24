@@ -16,8 +16,6 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "^1.6.4",
-    "angular-ui-router": "ui-router#^1.0.3+hybrid-2.0.0-2",
     "jquery": "^3.2.1",
     "ng-scrollbars": "^0.0.11",
     "angular-cookies": "^1.6.4",
@@ -26,6 +24,11 @@
     "animate.css": "^3.5.2",
     "moment": "^2.18.1",
     "angular-moment-picker": "moment-picker#^0.10.1",
-    "angular-local-storage": "^0.6.0"
+    "angular-local-storage": "^0.6.0",
+    "angular-ui-router": "^1.0.4",
+    "angular": "^1.6.4",
+    "angular-confirm": "angular1-confirm#^1.1.0",
+    "angular-less": "^1.0.1",
+    "less": "^2.7.2"
   }
 }

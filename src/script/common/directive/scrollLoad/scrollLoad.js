@@ -26,7 +26,7 @@
  * 	}
  */
 
-APP.directive('appScrollLoad', ($myHttp, $log,uuid) => {
+APP.directive('appScrollLoad',['$myHttp','$log','uuid', ($myHttp, $log,uuid) => {
 	return {
 //		templateUrl:'script/directive/scrollLoad/scrollLoad.html?t='+ uuid.getUUID(),
 		template : '',
@@ -67,7 +67,7 @@ APP.directive('appScrollLoad', ($myHttp, $log,uuid) => {
 			}
 			let catchMethod = function(e){
 				params[numName] = params[numName] - 1;
-				$log.error('请求数据失败，请求路径'+url+'请求参数:'+$scope.params);
+				$log.error('请求数据失败，请求路径'+$scope.url+'请求参数:'+$scope.params);
 			}
 			let finallyMethod = function(){
 				busy = false;
@@ -122,4 +122,4 @@ APP.directive('appScrollLoad', ($myHttp, $log,uuid) => {
 			});
 		}
 	}
-})
+}])

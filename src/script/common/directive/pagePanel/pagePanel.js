@@ -4,9 +4,9 @@
  * head-style="1" 设置头部样式，包括返回，标题 更多
  * head-style="2" 设置头部样式，包括返回，标题 更多，但是返回只占用位置
  */
-APP.directive('appPagePanel',function($timeout,uuid){
+APP.directive('appPagePanel',['$timeout','uuid',($timeout,uuid)=>{
 	return {
-		templateUrl:'script/directive/pagePanel/pagePanel.html?t='+uuid.getUUID(),
+		templateUrl:'script/common/directive/pagePanel/pagePanel.html?t='+uuid.getUUID(),
 		scope:{
 			width :"@",
 			height : "@",
@@ -19,10 +19,10 @@ APP.directive('appPagePanel',function($timeout,uuid){
 		},
 		transclude: true,
 		restrict: 'E',
-		controller:function($scope){
+		controller($scope){
 			
 		},
-		link: function($scope, $element, $attrs, ngModelCtrl){
+		link($scope, $element, $attrs, ngModelCtrl){
 			//给属性设置默认值
 			if(!(!!$scope.textAlign && ($scope.textAlign=='left' || $scope.textAlign=='center' || $scope.textAlign=='right'))){
 				$scope.textAlign = 'center';
@@ -69,4 +69,4 @@ APP.directive('appPagePanel',function($timeout,uuid){
 		}
 		
 	}
-});
+}]);

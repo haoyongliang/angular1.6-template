@@ -614,12 +614,158 @@ a:focus {
   filter: "alpha(opacity=20)";
   -ms-filter: "alpha(opacity=20)";
 }
-.header-font-size {
-  font-size: 16px !important;
+/**
+     * 登陆界面样式
+ */
+.login {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: -o-flex;
+  display: -moz-flex;
+  display: flex;
+  flex-direction: column;
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  width: 100% !important;
+}
+.login .head {
+  width: 100% !important;
+  height: 140px;
+  top: 0;
+  left: 0;
+  background-color: blue;
+}
+.login .body {
+  flex: 1;
+  background-color: lightgoldenrodyellow;
+}
+.login .footer {
+  width: 100% !important;
+  height: 62px;
+  bottom: 0;
+  left: 0;
+  background-color: gray;
+}
+.navUserInfo {
+  background-color: #373d41 !important;
+  width: 400px;
+  height: 240px;
+  right: 0;
+  z-index: 1000;
+}
+.navUserInfo .userinfo-top {
+  height: 80px;
+  width: 100% !important;
+}
+.navUserInfo .userinfo-center {
+  height: 80px;
+  width: 100% !important;
+}
+.navUserInfo .userinfo-center .userinfo-left {
+  width: 50%;
+  height: 100%;
+  display: inline-block;
+  background-color: red;
+}
+.navUserInfo .userinfo-center .userinfo-right {
+  width: 50%;
+  height: 100%;
+  display: inline-block;
+  background-color: blue;
+}
+.navUserInfo .userinfo-bottom {
+  height: 80px;
+  width: 100% !important;
+}
+.navUserInfo {
+  background-color: #373d41 !important;
+  width: 400px;
+  height: 240px;
+  right: 0;
+  z-index: 1000;
+}
+.navUserInfo .userinfo-top {
+  height: 80px;
+  width: 100% !important;
+}
+.navUserInfo .userinfo-top .userinfo-left {
+  width: 25%;
+  height: 80px;
+  float: left;
+  line-height: 80px;
+  padding-left: 35px;
+}
+.navUserInfo .userinfo-top .userinfo-left img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50px;
+  border: 1px solid white;
+}
+.navUserInfo .userinfo-top .userinfo-left:hover {
+  cursor: pointer;
+}
+.navUserInfo .userinfo-top .userinfo-left:active {
+  background-color: #95b3d7;
+}
+.navUserInfo .userinfo-top .userinfo-right {
+  width: 75%;
+  height: 100%;
+  float: left;
+}
+.navUserInfo .userinfo-top .userinfo-right .name {
+  font-size: 18px;
+  color: white;
+  font-weight: 500;
+  padding-top: 20px;
+}
+.navUserInfo .userinfo-top .userinfo-right .signature {
+  font-size: 13px;
+  color: #808080;
+}
+.navUserInfo .userinfo-center {
+  height: 80px;
+  width: 100% !important;
+}
+.navUserInfo .userinfo-center .userinfo-left {
+  width: 50%;
+  height: 100%;
+  background-color: #24282C;
+  float: left;
+  border-right: 2px solid #757F76;
+}
+.navUserInfo .userinfo-center .userinfo-right {
+  width: 50%;
+  height: 100%;
+  background-color: #24282C;
+  float: left;
+}
+.navUserInfo .userinfo-bottom {
+  height: 80px;
+  width: 100% !important;
+  width: 100%;
+}
+.navUserInfo .userinfo-bottom .block1 {
+  width: 133.33333333px;
+  float: left;
+  background-color: red;
+  height: 80px;
+}
+.navUserInfo .userinfo-bottom .block2 {
+  width: 133.33333333px;
+  float: left;
+  background-color: gray;
+  height: 80px;
+}
+.navUserInfo .userinfo-bottom .block3 {
+  width: 133.33333333px;
+  float: left;
+  background-color: red;
+  height: 80px;
 }
 .pc_body {
   position: relative;
-  height: calc(100% - 50px);
+  height: 100%;
   padding: 16px;
 }
 .pc_bodyContainer {
@@ -665,17 +811,17 @@ a:focus {
   text-decoration: none;
 }
 .pc_bodyContainer nav ul li.nav-catalog a:hover {
-  background-color: #95B3D7;
+  background-color: #95b3d7;
 }
 .pc_bodyContainer nav ul li.nav-catalog a:visited {
-  background-color: #95B3D7;
+  background-color: #95b3d7;
 }
 .pc_bodyContainer nav ul li.nav-catalog a:focus {
-  background-color: #95B3D7;
+  background-color: #95b3d7;
 }
 .pc_bodyContainer nav ul li.nav-catalog a:active {
-  background-color: #95B3D7;
+  background-color: #95b3d7;
 }
 .pc_bodyContainer nav ul li.nav-pipe {
-  color: #373d41;
+  color: #757F76;
 }

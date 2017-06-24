@@ -8,7 +8,7 @@
  * target='{{number}}'，如果不需要判断容器content中的数据，则用target指定需要判断的数据
  * <div app-color default-color='red' positive-color='{{blue}}' negative-color='{{black}}' zero-color='white' target='{{number}}'>-1</div>
  */
-APP.directive('appColor',function(){
+APP.directive('appColor',[()=>{
 	return {
 		scope:{},
 		restrict: 'A',
@@ -87,4 +87,4 @@ APP.directive('appColor',function(){
 			}
 		}
 	}
-});
+}]);

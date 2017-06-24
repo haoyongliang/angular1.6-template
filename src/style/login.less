@@ -1,226 +1,27 @@
-@CHARSET "UTF-8";
-body {
-   /*  background: -webkit-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.15) 30%, rgba(255,255,255,.3) 32%, rgba(255,255,255,0) 33%) 0 0, -webkit-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.1) 11%, rgba(255,255,255,.3) 13%, rgba(255,255,255,0) 14%) 0 0, -webkit-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 17%, rgba(255,255,255,.43) 19%, rgba(255,255,255,0) 20%) 0 110px, -webkit-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 11%, rgba(255,255,255,.4) 13%, rgba(255,255,255,0) 14%) -130px -170px, -webkit-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 11%, rgba(255,255,255,.4) 13%, rgba(255,255,255,0) 14%) 130px 370px, -webkit-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.1) 11%, rgba(255,255,255,.2) 13%, rgba(255,255,255,0) 14%) 0 0, -webkit-linear-gradient(45deg, #343702 0%, #184500 20%, #187546 30%, #006782 40%, #0b1284 50%, #760ea1 60%, #83096e 70%, #840b2a 80%, #b13e12 90%, #e27412 100%);
-    background-color: #840b2a;
-    background: -moz-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.15) 30%, rgba(255,255,255,.3) 32%, rgba(255,255,255,0) 33%) 0 0, -moz-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.1) 11%, rgba(255,255,255,.3) 13%, rgba(255,255,255,0) 14%) 0 0, -moz-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 17%, rgba(255,255,255,.43) 19%, rgba(255,255,255,0) 20%) 0 110px, -moz-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 11%, rgba(255,255,255,.4) 13%, rgba(255,255,255,0) 14%) -130px -170px, -moz-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 11%, rgba(255,255,255,.4) 13%, rgba(255,255,255,0) 14%) 130px 370px, -moz-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.1) 11%, rgba(255,255,255,.2) 13%, rgba(255,255,255,0) 14%) 0 0, -moz-linear-gradient(45deg, #343702 0%, #184500 20%, #187546 30%, #006782 40%, #0b1284 50%, #760ea1 60%, #83096e 70%, #840b2a 80%, #b13e12 90%, #e27412 100%);
-    background-color: #840b2a;
-    background: -o-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.15) 30%, rgba(255,255,255,.3) 32%, rgba(255,255,255,0) 33%) 0 0, -o-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.1) 11%, rgba(255,255,255,.3) 13%, rgba(255,255,255,0) 14%) 0 0, -o-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 17%, rgba(255,255,255,.43) 19%, rgba(255,255,255,0) 20%) 0 110px, -o-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 11%, rgba(255,255,255,.4) 13%, rgba(255,255,255,0) 14%) -130px -170px, -o-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 11%, rgba(255,255,255,.4) 13%, rgba(255,255,255,0) 14%) 130px 370px, -o-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.1) 11%, rgba(255,255,255,.2) 13%, rgba(255,255,255,0) 14%) 0 0, -o-linear-gradient(45deg, #343702 0%, #184500 20%, #187546 30%, #006782 40%, #0b1284 50%, #760ea1 60%, #83096e 70%, #840b2a 80%, #b13e12 90%, #e27412 100%);
-    background-size: 1000px 1000px, 410px 410px, 610px 610px, 530px 530px, 730px 730px, 1000px 1000px; */
-    /* background-color: #E94F25; */
-    /* background-color: #fda; */
-
+@import "./base.less";
+/**
+     * 登陆界面样式
+ */
+.login{
+    .flex;
+    .fd-c;
+    .w-100;
+    .head{
+        .w-100;
+        height: 140px;
+        top:0;
+        left:0;
+        background-color:blue;
+    }
+    .body{
+        .flex-1;
+        background-color:lightgoldenrodyellow;
+    }
+    .footer{
+        .w-100;
+        height: 62px;
+        bottom:0;
+        left:0;
+        background-color:gray;
+    }
 }
-
-
-.login {
-    width: 400px;
-    height: 320px;
-    overflow: visible;
-    background: rgba(255,255,255,0.95);
-    border-radius: 6px;
-    box-shadow: 3px 3px 6px rgba(0,0,0,0.6);
-    position: absolute;
-    bottom: 0px;
-    right: 10%;
-    margin: auto;
-    top: 20px;
-}
-
-.login .titulo {
-    width: 100%;
-    height: 14px;
-    padding-top: 30px;
-
-    font-size: 18px;
-
-    margin-bottom:40px;
-    border-top-right-radius: 6px;
-    border-top-left-radius: 6px;
-    font-family: "微软雅黑";
-}
-.login .titulo a{width: 50%; display: block; float: left; text-align: center; text-decoration: none; color: #333;padding-bottom:16px;border-bottom: 1px solid #ddd;}
-.login .titulo a.tithover{border-bottom: 2px solid #f47935;padding-bottom:15px}
-.login form {
-    width: 280px;
-    height: auto;
-    overflow: hidden;
-    margin-left: auto;
-    margin-right: auto;
-}
-.login form .inputDiv{
-	position: relative;
-}
-.login form .inputDiv:after{
-	postion: absolute;
-	top: 5px;
-	left : 5px;
-	font-family: "ucgi";
-    position: absolute;
-    color: #aaa;
-    top: 12px;
-    left: 13px;
-}
-.login form .inputDiv.usernameDiv:after{
-	content: "\e638";
-}
-.login form .inputDiv.passwordDiv:after{
-	content: "\e6b5";
-}
-.login form input[type=text], .login form input[type=password] {
-	box-sizing: border-box;
-    width: 280px;
-    font-size: 13px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 40px;
-    border: none;
-    background: none;
-    background-image: none;
-    color:#333;
-
-    margin: 0;
-}
-
-.login form input[type=text] {
-
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-}
-.login form input[type=password] {
-
-    border: 1px solid #ddd;
-}
-
-.login form .enviar {
-    width: 280px;
-    height: 12px;
-    margin-top: 50px;
-    display: block;
-    height:40px;
-    line-height:40px;
-    border-radius: 6px;
-    border: none;
-
-    background: #f47935;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: normal;
-    color: #FFF;
-    font-family: "微软雅黑";
-}
-.login form .enviar:hover{
-	background-color: #DD4020;
-	cursor:pointer;
-}
-
-.login .olvido {
-    width: 240px;
-    height: auto;
-    overflow: hidden;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    font-size: 10px;
-    text-align: center;
-}
-
-.login .olvido .col {
-    width: 50%;
-    height: auto;
-    float: left;
-}
-
-.login .olvido .col a {
-    color: #fff;
-    text-decoration: none;
-    font: 12px Arial;
-}
-
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
-
-/* HTML5 display-role reset for older browsers */
-
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block }
-
-html,body { line-height: 1 ; height: 100%; overflow: hidden; position: relative;}
-
-ol, ul { list-style: none }
-
-blockquote, q { quotes: none }
-
-blockquote:before, blockquote:after, q:before, q:after {
-    content: '';
-    content: none;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-
-/**2017-3-21修改**/
-.head{height: 18%; background: #fff; position: relative; border-bottom: 1px solid #8c8c8c;}
-.head-container{margin: 0 auto;  max-width: 1200px; min-width: 1024px; }
-.head-container img{position: absolute; bottom: 10px;}
-.login-main{background: url("../images/login_bg.png") no-repeat center; width: 100%; height: 74%; background-size: 100% 100%; }
-.login-footer{width: 100%;
-    height: 8%;
-    background-color: #fff;
-    position: relative;}
-.login-footer .login-footer-container {
-    max-width: 1200px;
-    min-width: 1024px;
-    margin: 0px auto;
-    position: relative;
-    height: 100%;}
-.login-footer .login-footer-container p{text-align: center;
-    font-size: 12px;
-    color: #333;
-    height: 15px;
-    position: absolute;
-    font-family: "arial", "微软雅黑";
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    line-height: 15px;}
-.login-footer .login-footer-container a.downloadApp {
-    position: absolute;
-    display: inline-block;
-    top: 0px;
-    bottom: 0px;
-    right: 12px;
-    color: #666;
-    font-size: 12px;
-    margin: auto;
-    height: 23px;
-    line-height: 23px;
-}
-.login-footer .login-footer-container a.downloadApp img {
-    height: 20px;
-    position: relative;
-    top: 5px;
-}
-.foot_downapp{}
-.foot_downimg{display: none;}
-.foot_downapp:hover .foot_downimg{display: block; position: absolute; right: 0; bottom: 50px; box-shadow: 2px 2px 6px rgba(0,0,0,0.6)}
-.titpDiv{font-size: 12px; color: #666; margin-top: 10px; margin-bottom: 20px; }
-.titpDiv input{vertical-align: middle;}
-.titpDiv .left{float: left;}
-.titpDiv .right{float: right;}
-.zcDiv{text-align: center; margin-top: 10px; }
-.zcDiv a{color:#666; text-decoration: none; font-size: 12px;}

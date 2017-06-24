@@ -1,57 +1,47 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>SAIFAMC办公系统-用户登录</title>
-<!--版本主题样式-->
-<link rel="stylesheet" type="text/css" href="style/css/index.css"/>
-</head>
-<body>
+<html ng-app="app" class="h-100" ng-controller="indexCtrl">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+	
+	<body class="w-100 h-100" >
+		<!--登录页-->
+		<drosea-login ng-if="!mainMode" class="w-100 h-100"></drosea-login>
+		<script src="lib/jquery/dist/jquery.js"></script>
+		<script type="text/javascript" src="lib/angular/angular.js"></script>
+		<script type="text/javascript" src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+		<script type="text/javascript" src="lib/angular-cookies/angular-cookies.min.js"></script>
+		<script type="text/javascript" src="lib/angular-validation/dist/angular-validation.js"></script>
 
-<div class="head">
-    <div class="head-container">
-        <img class="logo" src="image/logo.png">
-    </div>
-</div>
+		<!--动画animate.css-->
+		<link rel="stylesheet" href="lib/animate.css/animate.min.css" />
 
-<div class="login-main">
-	<section class="login">
+		<!--bootstrap-->
+		<link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.min.css"/>
+		<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
-		<div class="titulo"><a class="tithover" href="#">账户登录</a><a href="#">安全登录</a> </div>
-		<form>
-			<div class="usernameDiv inputDiv">
-		    	<input type="text" id="logName" required title="Username required" placeholder="用户名" data-icon="U">
-			</div>
-			<div class="passwordDiv inputDiv">
-	        	<input type="password" id="password" required title="Password required" placeholder="密 码" data-icon="x">
-	        </div>
-            <div class="titpDiv inputDiv">
-                <div class="left">
-                	<!--<input type="checkbox">下次自动登录</div>-->
-                	<a href="#" style="text-decoration: none; color: #F57834;">立即注册</a>
-            	</div>
-            	<div class="right">忘记密码</div>
-            <div id="error" style="padding-top: 22px; color:#EB403C; font-size: 12px"></div>
-	       <!--  <div class="olvido">
-	        	<div class="col"><a href="#" title="Ver Carásteres">Register</a></div>
-	            <div class="col"><a href="#" title="Recuperar Password">Fotgot Password?</a></div>
-	        </div> -->
-	        <a class="enviar" style="margin-top:12px" id="loginBtn">登 录</a>
-            <!--<div class="zcDiv">
-                <a href="/">立即注册</a>
-            </div>-->
-	    </form>
-	</section>
-</div>
-<div class="login-footer">
-    <div class="login-footer-container">
-        <!-- <p>本系统建议运行环境为Chrome<a title="点击下载" href="http://dl.google.com/release2/bo26ez30rcitgyuswe830vv04ejpvc3spzwynlc7unklxoctxbstgy0otycv79glemtj6mlpt681o1f8dja9ajvo6eed98on0ff/55.0.2883.75_chrome_installer.exe">(点击下载)</a>，如果您是首次登录系统请确认您的浏览器是否为Chrome，有任何处理不了的问题请即时联系系统管理员。</p> -->
-        <p>版权所有  ©2017-2020 广州赛富合银资产管理有限公司, All Right Reserved.</p>
-        <div class="foot_downapp"><img class="foot_downimg" src="image/saifudown.png">
-        <a class="downloadApp" data-toggle="popover" data-original-title="" title=""><img src="image/icon-phone.png">下载App</a></div>
-    </div>
-</div>
-	<script src="lib/jquery/dist/jquery.js"></script>
-	<script src="assets/js/login.js"></script>
-</body>
+
+		<!--滚动条scroll-->
+		<link rel="stylesheet" href="lib/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" type="text/css"/>
+		<script src="lib/angular/angular.min.js"></script>
+		<script src="lib/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+		<script src="lib/ng-scrollbars/dist/scrollbars.min.js"></script>
+
+		<!--时间控件angular-moment-picker, momentjs-->
+		<script src="lib/moment/min/moment.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="lib/angular-moment-picker/dist/angular-moment-picker.css"/>
+		<link rel="stylesheet" href="lib/angular-moment-picker/dist/themes/material-ui.min.css" />
+		<script src="lib/angular-moment-picker/dist/angular-moment-picker.js"></script>
+		
+		<!--localstorage-->
+		<script src="../lib/angular-local-storage/dist/angular-local-storage.min.js"></script>
+
+		<!--版本主题样式-->
+		<link rel="stylesheet" type="text/css" href="style/css/index.css"/>
+
+		<!--项目JS-->
+		<script src="js/index.js"></script>
+	</body>
 </html>

@@ -6,7 +6,7 @@
  * currency 必须有
  * bit 小数点保留位数，可以不写，默认保留2位
  */
-APP.directive('appCurrency', function($filter, $browser) {
+APP.directive('appCurrency', ['$filter','$browser',($filter, $browser)=> {
 	return {
 		require: 'ngModel',
 		link: function($scope, $element, $attrs, ngModelCtrl) {
@@ -85,4 +85,4 @@ APP.directive('appCurrency', function($filter, $browser) {
 			})
 		}
 	}
-})
+}])

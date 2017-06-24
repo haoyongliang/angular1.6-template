@@ -1,4 +1,4 @@
-APP.config(function (ScrollBarsProvider) {
+APP.config(['ScrollBarsProvider',(ScrollBarsProvider)=>{
 	// scrollbar defaults
 	ScrollBarsProvider.defaults = {
 		autoHideScrollbar: false,
@@ -14,4 +14,4 @@ APP.config(function (ScrollBarsProvider) {
 			enable: false // enable scrolling buttons by default
 		}
 	};
-});
+}]);

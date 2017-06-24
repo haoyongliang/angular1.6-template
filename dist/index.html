@@ -3,37 +3,48 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-		
+		<link rel="icon" href="image/favico.ico" type="image/x-icon" /> 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	</head>
-	<body class="pc_bodyContainer" ng-if="mainMode">
-		<nav>
-			<img class="logo" ng-src="image/pc_logo.png"></img>
-			<ul>
-				<li class="nav-catalog">
-					<a href="">工作</a>
-				</li>
-				<li class="nav-pipe">|</li>
-				<li class="nav-catalog">
-					<a href="">数据</a>
-				</li>
-				<li class="nav-pipe">|</li>
-				<li class="nav-catalog">
-					<a href="">Angilababy</a>
-				</li>
-				<li class="nav-pipe">|</li>
-				<li class="nav-catalog">
-					<a href="">全屏</a>
-				</li>
-				<li class="nav-pipe">|</li>
-				<li class="nav-catalog">
-					<a href="">退出</a>
-				</li>
-			</ul>
-		</nav>
-		<div ui-view class="h-100 w-100 " ng-src="image/pc_logo.png">
+	
+	<body class="w-100 h-100" >
+		<div ui-view class="h-100 w-100 " >
 
 		</div>
+		
+		<!--登录页-->
+		<!--<drosea-login ng-if="!mainMode" class="w-100 h-100"></drosea-login>-->
+		<!--登陆后的界面-->
+		<!--<div class="pc_bodyContainer" ng-if="!mainMode">
+			<nav>
+				<img class="logo" ng-src="image/pc_logo.png"></img>
+				<ul>
+					<li class="nav-catalog">
+						<a href="">工作</a>
+					</li>
+					<li class="nav-pipe">|</li>
+					<li class="nav-catalog">
+						<a href="">数据</a>
+					</li>
+					<li class="nav-pipe">|</li>
+					<li class="nav-catalog">
+						<a href="">Angilababy</a>
+					</li>
+					<li class="nav-pipe">|</li>
+					<li class="nav-catalog">
+						<a href="">全屏</a>
+					</li>
+					<li class="nav-pipe">|</li>
+					<li class="nav-catalog">
+						<a href="">退出</a>
+					</li>
+				</ul>
+			</nav>
+			<div ui-view class="h-100 w-100 " >
+	
+			</div>
+		</div>-->
+		
 		<script src="lib/jquery/dist/jquery.js"></script>
 		<script type="text/javascript" src="lib/angular/angular.js"></script>
 		<script type="text/javascript" src="lib/angular-ui-router/release/angular-ui-router.js"></script>
@@ -61,8 +72,15 @@
 		<script src="lib/angular-moment-picker/dist/angular-moment-picker.js"></script>
 		
 		<!--localstorage-->
-		<script src="../lib/angular-local-storage/dist/angular-local-storage.min.js"></script>
+		<script src="lib/angular-local-storage/dist/angular-local-storage.min.js"></script>
 
+		<!--ngconfirm-->
+		<script src="lib/angular-confirm/js/angular-confirm.js"></script>
+		<link rel="stylesheet" href="lib/angular-confirm/css/angular-confirm.css" />
+		
+		<!--less-->
+		<script src="../lib/less/dist/less.js"></script>
+		<script src="lib/angular-less/angular-less.js"></script>
 		<!--版本主题样式-->
 		<link rel="stylesheet" type="text/css" href="style/css/index.css"/>
 

@@ -8,9 +8,9 @@
  * left-style="bg-gray"左边布局的样式
  * right-styl="bg-gray"右边布局样式
  */
-APP.directive('appLeftRightLayout',function($timeout,uuid){
+APP.directive('appLeftRightLayout',['$timeout','uuid',($timeout,uuid)=>{
 	return {
-		templateUrl:'script/directive/leftRightLayout/leftRightLayout.html?t='+ uuid.getUUID(),
+		templateUrl:'script/common/directive/leftRightLayout/leftRightLayout.html?t='+ uuid.getUUID(),
 		scope:{
 			width :"@",
 			height : "@",
@@ -28,10 +28,10 @@ APP.directive('appLeftRightLayout',function($timeout,uuid){
 			right:"?right"
 		},
 		restrict: 'E',
-		controller:function($scope){
+		controller($scope){
 			
 		},
-		link: function($scope, $element, $attrs, ngModelCtrl){
+		link($scope, $element, $attrs, ngModelCtrl){
 			$scope.id = "lrc-containerd-" + uuid.getUUID();
 			$scope.curIsShowLeft = true;//当前是否显示左边布局
 			$scope.leftWidthBak = $scope.leftWidth;//备份左边布局宽度，滑动时使用
@@ -106,4 +106,4 @@ APP.directive('appLeftRightLayout',function($timeout,uuid){
 		}
 		
 	}
-});
+}]);

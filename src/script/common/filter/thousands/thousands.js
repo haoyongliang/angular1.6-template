@@ -1,7 +1,7 @@
 //千分位格式化过滤器
 //使用方式 {{123 | thousands :34}}
 //说明 : ":34"表示保留小数点后34位 ,可以不写默认保留2位
-APP.filter('thousands', function() {//数字千分位
+APP.filter('thousands', [()=> {//数字千分位
 	
 	return function(value, bit) {
 		bit = bit || 2;
@@ -35,4 +35,4 @@ APP.filter('thousands', function() {//数字千分位
 		result = result.split('.')[0] +'.'+ result.split('.')[1].replace(',','');
 		return result;
 	}
-})
+}])

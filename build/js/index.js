@@ -1,11 +1,40 @@
 'use strict';
 
-var APP = angular.module('app', ['ui.router', 'ngScrollbars', 'ngCookies', 'validation', 'moment-picker', 'LocalStorageModule']);
+var APP = angular.module('app', ['ui.router', 'ngScrollbars', 'ngCookies', 'validation', 'moment-picker', 'LocalStorageModule', 'cp.ngConfirm', 'ngLess']);
 'use strict';
 
-APP.config(function (localStorageServiceProvider) {
+APP.constant('loginMode', {
+	NAME: 'LOGINMODE',
+	RESULT: 'success' }); //用户登陆状态名字
+'use strict';
+
+APP.run(['$rootScope', '$log', '$timeout', 'loginMode', '$state', '$stateParams', function ($rootScope, $log, $timeout, loginMode, $state, $stateParams) {
+	$rootScope.$state = $state;
+	$rootScope.$stateParams = $stateParams;
+
+	$rootScope.$on('LocalStorageModule.notification.setitem', function (event, data) {
+		if (!!data) {
+			//登陆
+			if (data.key == loginMode.NAME) {
+				$log.info('用户正在尝试登陆');
+			}
+		}
+	});
+
+	$rootScope.$on('LocalStorageModule.notification.removeitem', function (event, data) {
+		if (!!data) {
+			//退出登陆登陆
+			if (data.key == loginMode.NAME) {
+				$log.info('用户正在退出登陆');
+			}
+		}
+	});
+}]);
+'use strict';
+
+APP.config(['localStorageServiceProvider', function (localStorageServiceProvider) {
   localStorageServiceProvider.setPrefix('XIZHUOKEJI').setStorageType('sessionStorage').setNotify(true, true);
-});
+}]);
 'use strict';
 
 //详情参考http://indrimuska.github.io/angular-moment-picker/
@@ -37,7 +66,7 @@ APP.config(['momentPickerProvider', function (momentPickerProvider) {
 'use strict';
 
 APP.config(['$qProvider', function ($qProvider) {
-    $qProvider.errorOnUnhandledRejections(false);
+    //  $qProvider.errorOnUnhandledRejections(false);
 }]);
 APP.config(['$sceDelegateProvider', function ($sceDelegateProvider) {
     $sceDelegateProvider.resourceUrlWhitelist(['*://localhost:8080/**', 'self']);
@@ -45,23 +74,30 @@ APP.config(['$sceDelegateProvider', function ($sceDelegateProvider) {
 'use strict';
 
 APP.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-	$stateProvider.state('main', {
+
+	$stateProvider.state('login', { //登陆页面
+		url: '/login',
+		templateUrl: 'script/platform/component/login/login.html',
+		controller: 'loginCtrl'
+	}).state('home', { //登陆后的页面
+		url: '/home',
+		templateUrl: 'script/platform/component/home/home.html',
+		controller: 'homeCtrl'
+	}).state('home.main', {
 		url: '/main',
-		templateUrl: 'view/main/main.html',
+		templateUrl: 'script/platform/component/home/main/main.html',
 		controller: 'mainCtrl'
-	}).state('main.page1', {
-		url: '/page1',
-		templateUrl: 'view/new_file.html'
-	}).state('main.page2', {
-		url: '/page1',
-		templateUrl: 'view/new_file2.html'
+	}).state('home.organization', {
+		url: '/organization',
+		templateUrl: 'script/platform/component/home/organization/organization.html',
+		controller: 'organizationCtrl'
 	});
 
-	$urlRouterProvider.otherwise('main');
+	$urlRouterProvider.otherwise('login');
 }]);
 'use strict';
 
-APP.config(function (ScrollBarsProvider) {
+APP.config(['ScrollBarsProvider', function (ScrollBarsProvider) {
 	// scrollbar defaults
 	ScrollBarsProvider.defaults = {
 		autoHideScrollbar: false,
@@ -77,7 +113,7 @@ APP.config(function (ScrollBarsProvider) {
 			enable: false // enable scrolling buttons by default
 		}
 	};
-});
+}]);
 'use strict';
 
 APP.config(['$validationProvider', function ($validationProvider) {
@@ -101,99 +137,16 @@ APP.config(['$validationProvider', function ($validationProvider) {
 
 	$validationProvider.setExpression(expression).setDefaultMsg(defaultMsg);
 }]);
-'use strict';
+"use strict";
 
-APP.controller('indexCtrl', ['$timeout', '$log', '$scope', 'localStorageService', function (timeout, log, $scope, localStorageService) {
-	$scope.mainMode = true;
-	localStorageService.set('username', 'haoyongliang');
-	timeout(function () {
-		log.info(localStorageService.get('username'));
-	}, 5000);
-}]);
-'use strict';
-
-APP.factory('Reddit', function ($http, $sce) {
-
-	var Reddit = function Reddit() {
-		this.items = [];
-		this.busy = false;
-		this.after = 'a';
-	};
-
-	Reddit.prototype.nextPage = function () {
-		if (this.busy) return;
-		this.busy = true;
-
-		var url = "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su";
-		url = $sce.trustAsResourceUrl(url);
-		$http.jsonp(url, {
-			params: {
-				wd: this.after
-			},
-			jsonpCallbackParam: 'cb'
-		}).then(function (data) {
-			console.log(data);
-			this.items.push(data.data.s);
-			this.after = this.after + 'a';
-			this.busy = false;
-		}.bind(this)).catch(function (e) {
-			console.log(e);
-		});
-	};
-
-	return Reddit;
-});
-APP.controller('mainCtrl', ['$scope', '$timeout', '$myHttp', 'cache', '$log', 'Reddit', function ($scope, $timeout, $myHttp, cache, $log, Reddit) {
-	$timeout(function () {
-		$log.info('info');
-	}, 0);
-	$scope.params = {
-		page: 4
-	};
-	$scope.money = 4544444444444444;
-	$scope.handler = function () {
-		return function (data, hasMoreData) {
-			hasMoreData.flag = data.data["object"].hasMoreData;
-			$scope.items.push(data.data["object"].data);
-		};
-	};
-	$scope.name = 'jsdf';
-	$scope.scrollbarConfig = {
-		setHeight: 200
-	};
-	$scope.items = ['张三'];
-	for (var i = 0; i < 30; i++) {
-		$scope.items.push('lisi' + i);
+$.extend({
+	getRandom: function getRandom() {
+		//获取随机数
+		var random = Math.random() + "";
+		random = random.split(".")[1];
+		return random;
 	}
-	$scope.showBgPanel = false;
-	$scope.mydate = '2017';
-
-	$scope.reddit = new Reddit();
-	//	$scope.add = function(){
-	//		alert(1)
-	//	}
-	$scope.add = function () {
-		$scope.aaa = '2342423';
-		$myHttp.getDataByGet('data/data.json').then(function (data) {
-			cache.put('a', 'aa');
-
-			$timeout(function () {
-				$scope.$digest();
-				$scope.$apply(function () {
-					$scope.data += data;
-				});
-			}, 0);
-			return $myHttp.getDataByGet('data/test.json');
-		}).then(function (resp) {
-			console.log(resp);
-			$scope.items.push(resp);
-		}).catch(function (err) {
-			console.log(err);
-		}).finally(function () {
-			console.log('请求结束');
-		});
-	};
-}]);
+});
 'use strict';
 
 /**
@@ -289,16 +242,58 @@ APP.service('uuid', ['$rootScope', '$filter', '$http', '$timeout', '$q', functio
 		}
 	};
 }]);
-"use strict";
+'use strict';
 
-$.extend({
-	getRandom: function getRandom() {
-		//获取随机数
-		var random = Math.random() + "";
-		random = random.split(".")[1];
-		return random;
+/**
+ * 首页控制器
+ */
+APP.controller('indexCtrl', ['$timeout', '$log', '$scope', 'localStorageService', '$rootScope', '$state', 'loginMode', '$ngConfirm', function ($timeout, $log, $scope, localStorageService, $rootScope, $state, loginMode, $ngConfirm) {
+	console.log($state);
+	//没有登陆成功则跳转到登陆界面
+	if (localStorageService.get(loginMode.NAME) != loginMode.RESULT) {
+		$state.go('login', {}, { location: 'replace' });
 	}
-});
+}]);
+'use strict';
+
+//千分位格式化过滤器
+//使用方式 {{123 | thousands :34}}
+//说明 : ":34"表示保留小数点后34位 ,可以不写默认保留2位
+APP.filter('thousands', [function () {
+	//数字千分位
+
+	return function (value, bit) {
+		bit = bit || 2;
+		//四舍五入方法
+		function keepTwoDecimalFull(num) {
+			num = String(num).replace(',', '');
+			var result = parseFloat(num);
+			if (isNaN(result)) {
+				result = '0';
+			}
+			var str = '1';
+			for (var i = 0; i < bit; i++) {
+				str += '0';
+			}
+			result = Math.round(num * str) / str;
+			var s_x = result.toString();
+			var pos_decimal = s_x.indexOf('.');
+			if (pos_decimal < 0) {
+				pos_decimal = s_x.length;
+				s_x += '.';
+			}
+			while (s_x.length <= pos_decimal + parseInt(bit)) {
+				s_x += '0';
+			}
+			return s_x;
+		}
+
+		var result = keepTwoDecimalFull(value).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,');
+		//去掉小数点后的千分位
+		result = result.split('.')[0] + '.' + result.split('.')[1].replace(',', '');
+		return result;
+	};
+}]);
 'use strict';
 
 /**
@@ -311,7 +306,7 @@ $.extend({
  * target='{{number}}'，如果不需要判断容器content中的数据，则用target指定需要判断的数据
  * <div app-color default-color='red' positive-color='{{blue}}' negative-color='{{black}}' zero-color='white' target='{{number}}'>-1</div>
  */
-APP.directive('appColor', function () {
+APP.directive('appColor', [function () {
 	return {
 		scope: {},
 		restrict: 'A',
@@ -384,33 +379,92 @@ APP.directive('appColor', function () {
 			}
 		}
 	};
-});
+}]);
 'use strict';
 
 /**
- * 使用方式：html页面<script type="text/javascript-lazy"> </script>标签中写入代码，代码会随着.html加载被执行。
+ * 输入框中的千分位
+ * 使用方式 <input type="text" ng-model = "" app-currency bit="3"/> 这些是必须
+ * type必须是text类型
+ * ng-model 必须有
+ * currency 必须有
+ * bit 小数点保留位数，可以不写，默认保留2位
  */
-APP.directive('script', function () {
+APP.directive('appCurrency', ['$filter', '$browser', function ($filter, $browser) {
 	return {
-		restrict: 'E',
-		scope: false,
-		link: function link(scope, elem, attr) {
-			if (attr.type === 'text/javascript-lazy') {
-				var s = document.createElement("script");
-				s.type = "text/javascript";
-				var src = elem.attr('src');
-				if (src !== undefined) {
-					s.src = src;
-				} else {
-					var code = elem.text();
-					s.text = code;
+		require: 'ngModel',
+		link: function link($scope, $element, $attrs, ngModelCtrl) {
+
+			var separators = {
+				'thousands': $filter('number')(1000).substr(1, 1),
+				'decimal': $filter('number')(1.1).substr(1, 1)
+			};
+			var decimalEntered = false;
+			var bit = $attrs.bit || 2;
+			ngModelCtrl.$parsers.push(function (viewValue) {
+				if (!!$attrs.isF) {
+					if (viewValue > 0) {
+						viewValue = -viewValue;
+					}
 				}
-				document.head.appendChild(s);
-				elem.remove();
-			}
+				return viewValue + ''.split(separators.thousands).join('').split(separators.decimal).join('.');
+			});
+
+			ngModelCtrl.$render = function () {
+				$element.val($filter('number')((ngModelCtrl.$viewValue + '').replace(/,/g, ''), bit, false));
+			};
+			var listener = function listener() {
+				var value = $element.val().split(separators.thousands).join('').split(separators.decimal).join('.');
+				if (decimalEntered) {
+					decimalEntered = false;
+					return;
+				}
+
+				if (!!$attrs.isF) {
+					if (value > 0) {
+						value = -value;
+					}
+				}
+				$element.val($filter('number')(value, bit));
+			};
+
+			$element.bind('focus', function () {
+				if (!!$attrs.readonly || $attrs.readonly == 'true') {
+					return;
+				}
+				var value = ngModelCtrl.$modelValue;
+				if (!angular.isUndefined(value)) {
+					var v = value.toString().replace(/,/g, '');
+					if (parseFloat(v) == 0.0) {
+						v = "";
+					}
+
+					$element.val(v);
+				}
+			});
+
+			$element.bind('blur', function () {
+				listener();
+			});
+
+			$element.bind('keypress', function (event) {
+				var key = event.which;
+				if (key == 0 || key == 8 || 15 < key && key < 19 || 37 <= key && key <= 40) {
+					return;
+				}
+				if (String.fromCharCode(key) != separators.thousands && String.fromCharCode(key) != separators.decimal && !(48 <= key && key <= 57) && String.fromCharCode(key) != '-') {
+					event.preventDefault();
+					return;
+				}
+				if (String.fromCharCode(key) == separators.decimal) decimalEntered = true;
+			});
+
+			$element.bind('paste cut', function () {
+				$browser.defer(listener);
+			});
 		}
 	};
-});
+}]);
 'use strict';
 
 /**
@@ -422,9 +476,9 @@ APP.directive('script', function () {
  * left-style="bg-gray"左边布局的样式
  * right-styl="bg-gray"右边布局样式
  */
-APP.directive('appLeftRightLayout', function ($timeout, uuid) {
+APP.directive('appLeftRightLayout', ['$timeout', 'uuid', function ($timeout, uuid) {
 	return {
-		templateUrl: 'script/directive/leftRightLayout/leftRightLayout.html?t=' + uuid.getUUID(),
+		templateUrl: 'script/common/directive/leftRightLayout/leftRightLayout.html?t=' + uuid.getUUID(),
 		scope: {
 			width: "@",
 			height: "@",
@@ -514,9 +568,34 @@ APP.directive('appLeftRightLayout', function ($timeout, uuid) {
 				}
 			});
 		}
-
 	};
-});
+}]);
+'use strict';
+
+/**
+ * 使用方式：html页面<script type="text/javascript-lazy"> </script>标签中写入代码，代码会随着.html加载被执行。
+ */
+APP.directive('script', [function () {
+	return {
+		restrict: 'E',
+		scope: false,
+		link: function link(scope, elem, attr) {
+			if (attr.type === 'text/javascript-lazy') {
+				var s = document.createElement("script");
+				s.type = "text/javascript";
+				var src = elem.attr('src');
+				if (src !== undefined) {
+					s.src = src;
+				} else {
+					var code = elem.text();
+					s.text = code;
+				}
+				document.head.appendChild(s);
+				elem.remove();
+			}
+		}
+	};
+}]);
 'use strict';
 
 /**
@@ -524,9 +603,9 @@ APP.directive('appLeftRightLayout', function ($timeout, uuid) {
  * head-style="1" 设置头部样式，包括返回，标题 更多
  * head-style="2" 设置头部样式，包括返回，标题 更多，但是返回只占用位置
  */
-APP.directive('appPagePanel', function ($timeout, uuid) {
+APP.directive('appPagePanel', ['$timeout', 'uuid', function ($timeout, uuid) {
 	return {
-		templateUrl: 'script/directive/pagePanel/pagePanel.html?t=' + uuid.getUUID(),
+		templateUrl: 'script/common/directive/pagePanel/pagePanel.html?t=' + uuid.getUUID(),
 		scope: {
 			width: "@",
 			height: "@",
@@ -582,9 +661,8 @@ APP.directive('appPagePanel', function ($timeout, uuid) {
 			console.log($scope.borderBottom);
 			//			$scope.updateScrollbar('scrollTo', 10);
 		}
-
 	};
-});
+}]);
 'use strict';
 
 /**
@@ -596,7 +674,7 @@ APP.directive('appPagePanel', function ($timeout, uuid) {
  * left-style="bg-gray"左边布局的样式
  * right-styl="bg-gray"右边布局样式
  */
-APP.directive('appRightLeftLayout', function ($timeout, uuid) {
+APP.directive('appRightLeftLayout', ['$timeout', 'uuid', function ($timeout, uuid) {
 	return {
 		templateUrl: 'script/directive/leftRightLayout/rightLeftLayout.html ?t=' + uuid.getUUID(),
 		scope: {
@@ -689,7 +767,7 @@ APP.directive('appRightLeftLayout', function ($timeout, uuid) {
 			});
 		}
 	};
-});
+}]);
 'use strict';
 
 /**
@@ -720,7 +798,7 @@ APP.directive('appRightLeftLayout', function ($timeout, uuid) {
  * 	}
  */
 
-APP.directive('appScrollLoad', function ($myHttp, $log, uuid) {
+APP.directive('appScrollLoad', ['$myHttp', '$log', 'uuid', function ($myHttp, $log, uuid) {
 	return {
 		//		templateUrl:'script/directive/scrollLoad/scrollLoad.html?t='+ uuid.getUUID(),
 		template: '',
@@ -759,7 +837,7 @@ APP.directive('appScrollLoad', function ($myHttp, $log, uuid) {
 			};
 			var catchMethod = function catchMethod(e) {
 				params[numName] = params[numName] - 1;
-				$log.error('请求数据失败，请求路径' + url + '请求参数:' + $scope.params);
+				$log.error('请求数据失败，请求路径' + $scope.url + '请求参数:' + $scope.params);
 			};
 			var finallyMethod = function finallyMethod() {
 				busy = false;
@@ -814,129 +892,163 @@ APP.directive('appScrollLoad', function ($myHttp, $log, uuid) {
 			});
 		}
 	};
-});
+}]);
 'use strict';
 
-/**
- * 输入框中的千分位
- * 使用方式 <input type="text" ng-model = "" app-currency bit="3"/> 这些是必须
- * type必须是text类型
- * ng-model 必须有
- * currency 必须有
- * bit 小数点保留位数，可以不写，默认保留2位
- */
-APP.directive('appCurrency', function ($filter, $browser) {
+APP.controller('homeCtrl', ['$rootScope', '$scope', '$log', 'localStorageService', 'loginMode', '$state', '$timeout', '$ngConfirm', function ($rootScope, $scope, $log, localStorageService, loginMode, $state, $timeout, $ngConfirm) {
+    /**
+     * 退出登陆
+     */
+    $scope.loginOut = function () {
+        $ngConfirm({
+            theme: 'supervan',
+            title: '提示!',
+            content: '<strong>您确定要退出吗?</strong>',
+            scope: $scope,
+            buttons: {
+                sayBoo: {
+                    text: '确定',
+                    btnClass: 'btn-blue',
+                    action: function action(scope, button) {
+                        localStorageService.remove(loginMode.NAME);
+                        $state.go('login', {}, { location: 'replace' });
+                        return true; // prevent close;
+                    }
+                },
+                close: {
+                    text: '取消',
+                    btnClass: 'btn-default'
+                }
+            }
+        });
+    };
+    $scope.showUserInfo = function () {
+        if (!!$scope.userInfoMode) {
+            $scope.userInfoMode = false;
+        } else {
+            $scope.userInfoMode = true;
+        }
+    };
+}]);
+'use strict';
+
+APP.controller('loginCtrl', ['$rootScope', '$scope', '$log', 'localStorageService', 'loginMode', '$state', '$timeout', '$location', function ($rootScope, $scope, $log, localStorageService, loginMode, $state, $timeout, $location) {
+	//检测到如果登陆了则直接跳转到登陆后的页面
+	if (localStorageService.get(loginMode.NAME) == loginMode.RESULT) {
+		$state.go('home.main', {}, { location: 'replace' });
+	}
+
+	//变量
+
+	//timeout
+
+
+	//函数
+	$scope.login = function () {
+		localStorageService.set(loginMode.NAME, loginMode.RESULT);
+		$state.go('home.main', {}, { absolute: true, location: 'replace' });
+	};
+}]);
+'use strict';
+
+APP.directive('dropseaNavUserInfo', ['uuid', function (uuid) {
 	return {
-		require: 'ngModel',
-		link: function link($scope, $element, $attrs, ngModelCtrl) {
+		templateUrl: 'script/platform/directive/navUserInfo/navUserInfo.html?t=' + uuid.getUUID(),
+		scope: {},
+		replace: true,
+		restrict: 'E',
+		controller: function controller($scope) {},
+		link: function link($scope, $element, $attrs, ngModelCtrl) {}
 
-			var separators = {
-				'thousands': $filter('number')(1000).substr(1, 1),
-				'decimal': $filter('number')(1.1).substr(1, 1)
-			};
-			var decimalEntered = false;
-			var bit = $attrs.bit || 2;
-			ngModelCtrl.$parsers.push(function (viewValue) {
-				if (!!$attrs.isF) {
-					if (viewValue > 0) {
-						viewValue = -viewValue;
-					}
-				}
-				return viewValue + ''.split(separators.thousands).join('').split(separators.decimal).join('.');
-			});
-
-			ngModelCtrl.$render = function () {
-				$element.val($filter('number')((ngModelCtrl.$viewValue + '').replace(/,/g, ''), bit, false));
-			};
-			var listener = function listener() {
-				var value = $element.val().split(separators.thousands).join('').split(separators.decimal).join('.');
-				if (decimalEntered) {
-					decimalEntered = false;
-					return;
-				}
-
-				if (!!$attrs.isF) {
-					if (value > 0) {
-						value = -value;
-					}
-				}
-				$element.val($filter('number')(value, bit));
-			};
-
-			$element.bind('focus', function () {
-				if (!!$attrs.readonly || $attrs.readonly == 'true') {
-					return;
-				}
-				var value = ngModelCtrl.$modelValue;
-				if (!angular.isUndefined(value)) {
-					var v = value.toString().replace(/,/g, '');
-					if (parseFloat(v) == 0.0) {
-						v = "";
-					}
-
-					$element.val(v);
-				}
-			});
-
-			$element.bind('blur', function () {
-				listener();
-			});
-
-			$element.bind('keypress', function (event) {
-				var key = event.which;
-				if (key == 0 || key == 8 || 15 < key && key < 19 || 37 <= key && key <= 40) {
-					return;
-				}
-				if (String.fromCharCode(key) != separators.thousands && String.fromCharCode(key) != separators.decimal && !(48 <= key && key <= 57) && String.fromCharCode(key) != '-') {
-					event.preventDefault();
-					return;
-				}
-				if (String.fromCharCode(key) == separators.decimal) decimalEntered = true;
-			});
-
-			$element.bind('paste cut', function () {
-				$browser.defer(listener);
-			});
-		}
 	};
-});
+}]);
 'use strict';
 
-//千分位格式化过滤器
-//使用方式 {{123 | thousands :34}}
-//说明 : ":34"表示保留小数点后34位 ,可以不写默认保留2位
-APP.filter('thousands', function () {
-	//数字千分位
-
-	return function (value, bit) {
-		bit = bit || 2;
-		//四舍五入方法
-		function keepTwoDecimalFull(num) {
-			num = String(num).replace(',', '');
-			var result = parseFloat(num);
-			if (isNaN(result)) {
-				result = '0';
-			}
-			var str = '1';
-			for (var i = 0; i < bit; i++) {
-				str += '0';
-			}
-			result = Math.round(num * str) / str;
-			var s_x = result.toString();
-			var pos_decimal = s_x.indexOf('.');
-			if (pos_decimal < 0) {
-				pos_decimal = s_x.length;
-				s_x += '.';
-			}
-			while (s_x.length <= pos_decimal + parseInt(bit)) {
-				s_x += '0';
-			}
-			return s_x;
-		}
-
-		var result = keepTwoDecimalFull(value).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,');
-		//去掉小数点后的千分位
-		result = result.split('.')[0] + '.' + result.split('.')[1].replace(',', '');
-		return result;
+//APP.factory('Reddit', function($http,$sce) {
+//
+//
+//var Reddit = function() {
+//  this.items = [];
+//  this.busy = false;
+//  this.after = 'a';
+//};
+//
+//Reddit.prototype.nextPage = function() {
+//  if (this.busy) return;
+//  this.busy = true;
+//
+//  var url = "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su";
+//  url = $sce.trustAsResourceUrl(url);
+//  $http.jsonp(
+//  	url,
+//  	{
+//  		params: {
+//        wd: this.after
+//      },
+//      jsonpCallbackParam:'cb'
+//    }).then(function(data) {
+//	    	console.log(data);
+//	      this.items.push(data.data.s);
+//	      this.after = this.after+'a';
+//	      this.busy = false;
+//  }.bind(this))
+//  .catch(function(e){
+//  	console.log(e);
+//  });
+//};
+//	
+//return Reddit;
+//});
+APP.controller('mainCtrl', ['$scope', '$timeout', '$myHttp', 'cache', '$log', function ($scope, $timeout, $myHttp, cache, $log) {
+	$timeout(function () {
+		$log.info('info');
+	}, 0);
+	$scope.params = {
+		page: 4
 	};
-});
+	$scope.money = 4544444444444444;
+	$scope.handler = function () {
+		return function (data, hasMoreData) {
+			hasMoreData.flag = data.data["object"].hasMoreData;
+			$scope.items.push(data.data["object"].data);
+		};
+	};
+	$scope.name = 'jsdf';
+	$scope.scrollbarConfig = {
+		setHeight: 200
+	};
+	$scope.items = ['张三'];
+	for (var i = 0; i < 30; i++) {
+		$scope.items.push('lisi' + i);
+	}
+	$scope.showBgPanel = false;
+	$scope.mydate = '2017';
+
+	//	$scope.add = function(){
+	//		alert(1)
+	//	}
+	$scope.add = function () {
+		$scope.aaa = '2342423';
+		$myHttp.getDataByGet('data/data.json').then(function (data) {
+			cache.put('a', 'aa');
+
+			$timeout(function () {
+				$scope.$digest();
+				$scope.$apply(function () {
+					$scope.data += data;
+				});
+			}, 0);
+			return $myHttp.getDataByGet('data/test.json');
+		}).then(function (resp) {
+			console.log(resp);
+			$scope.items.push(resp);
+		}).catch(function (err) {
+			console.log(err);
+		}).finally(function () {
+			console.log('请求结束');
+		});
+	};
+}]);
+'use strict';
+
+APP.controller('organizationCtrl', ['$scope', '$timeout', '$myHttp', 'cache', '$log', function ($scope, $timeout, $myHttp, cache, $log) {}]);

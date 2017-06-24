@@ -1,0 +1,32 @@
+<div class="w-100 h-100" ng-controller="homeCtrl">
+	<div class="pc_bodyContainer" ng-if="!mainMode">
+		<nav>
+			<img class="logo" ng-src="image/pc_logo.png"></img>
+			<ul>
+				<li class="nav-catalog">
+					<a href="">工作{{aaa}}</a>
+				</li>
+				<li class="nav-pipe">|</li>
+				<li class="nav-catalog">
+					<a href="">数据</a>
+				</li>
+				<li class="nav-pipe">|</li>
+				<li class="nav-catalog">
+					<a href="" ng-click="showUserInfo()">Angilababy</a>
+				</li>
+				<li class="nav-pipe">|</li>
+				<li class="nav-catalog">
+					<a href="">全屏</a>
+				</li>
+				<li class="nav-pipe">|</li>
+				<li class="nav-catalog">
+					<a href="" ng-click="loginOut()">退出</a>
+				</li>
+			</ul>
+		</nav>
+		<dropsea-nav-user-info ng-if="userInfoMode" ></dropsea-nav-user-info>
+		<div ui-view class="h-100 w-100 p-r animated fadeIn" >
+		
+		</div>
+	</div>
+</div>
