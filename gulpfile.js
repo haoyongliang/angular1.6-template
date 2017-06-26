@@ -38,6 +38,14 @@ gulp.task('less',function(){
 	 .pipe(gulp.dest(app.prdPath + 'style/css'))
 	 .pipe($.connect.reload());
 });
+gulp.task('icon',function(){
+	 gulp.src(app.srcPath + 'style/icon/**/*.*')
+	 .pipe($.plumber())
+	 .pipe(gulp.dest(app.devPath + 'style/css'))
+	 .pipe(gulp.dest(app.prdPath + 'style/css'))
+	 .pipe($.connect.reload());
+});
+
 
 gulp.task('componentLess',function(){
 	 gulp.src(app.srcPath + 'script/**/*.less')
@@ -52,11 +60,11 @@ gulp.task('componentLess',function(){
 gulp.task('js',function(){
 	gulp.src(app.srcPath + 'script/**/*.js')
 	.pipe($.plumber())
-	
+
 	.pipe($.babel({
 		presets : ['es2015']
 	}))
-	
+
 	.pipe($.concat('index.js'))
 	.pipe(gulp.dest(app.devPath + 'js'))
 	.pipe($.ngAnnotate())
@@ -73,7 +81,7 @@ gulp.task('image',function(){
 	.pipe($.connect.reload());
 })
 
-gulp.task('build',['image','js','less','componentLess','lib','html','json']);
+gulp.task('build',['image','js','less','componentLess','lib','html','json','icon']);
 
 gulp.task('clean',function(){
 	gulp.src([app.devPath, app.prdPath])
@@ -82,7 +90,7 @@ gulp.task('clean',function(){
 
 gulp.task('serve',['build'],function(){
 	$.connect.server({
-		root : [app.prdPath],
+		root : [app.devPath],
 		livereload:true,
 		port:1234
 	});

@@ -1,18 +1,35 @@
-<div ng-controller="mainCtrl" class="pc_body " >
-	
-	<div class="h-100 w-100 " >
-		<app-left-right-layout left-width="444px" class="h-100" left-style="border:1px solid black" right-style="bg-gray" center-style="p-t-15" >
+<div ng-controller="organizationCtrl" class="pc_body " >
+<style>
+	.organization{
+		app-page-panel{
+
+		}
+	}
+</style>
+	<div class="h-100 w-100 organization" >
+		<app-left-right-layout  left-width="444px" class="h-100" left-style="border:1px solid black;" right-style="" center-style="p-t-27" >
 			<left class="h-100">
-				<app-page-panel width="100%"  height="500px" head-style='2' class="animated fadeIn" border="1px solid red">
-					<div class="h-100 bg-gray">
-						asdfasdf
+				<app-page-panel width="100%"  height="100%" head-style='2' class="animated fadeIn" header="我的组织" callback="callback()" left-btn-icon="glyphicon glyphicon-plus">
+					<div class="h-100 ">
+						<app-count-head>
+							当前有20条数据
+						</app-count-head>
+						<div style="height:calc(100% - 28px); border:1px solid #D9D9D9;"></div>
 					</div>
-				</app-page-panel>				 
+				</app-page-panel>
 			</left>
-			<right>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. At ipsam distinctio quibusdam recusandae culpa sint quasi sit quidem. Incidunt autem quia corrupti quam quaerat eum eaque magnam alias neque quibusdam?
+			<right class="h-100">
+				<app-page-panel  head-style='2' class="h-100 w-100 animated fadeIn" header="广东普惠金融（湛江）股份有限公司" callback="callback()" left-btn-icon="" >
+					<div class="h-100 ">
+						<app-count-head>
+							当前有50条基础数据
+						</app-count-head>
+						<div style="height:calc(100% - 28px); border:1px solid #D9D9D9;">
+
+						</div>
+					</div>
+				</app-page-panel>
 			</right>
 		</app-left-right-layout>
 	</div>
 </div>
-

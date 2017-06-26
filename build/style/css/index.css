@@ -167,6 +167,42 @@
 .p-t-15 {
   padding-top: 15px !important;
 }
+.p-l-20 {
+  padding-left: 20px !important;
+}
+.p-r-20 {
+  padding-right: 20px !important;
+}
+.p-b-20 {
+  padding-bottom: 20px !important;
+}
+.p-t-20 {
+  padding-top: 20px !important;
+}
+.p-l-25 {
+  padding-left: 25px !important;
+}
+.p-r-25 {
+  padding-right: 25px !important;
+}
+.p-b-25 {
+  padding-bottom: 25px !important;
+}
+.p-t-25 {
+  padding-top: 25px !important;
+}
+.p-l-27 {
+  padding-left: 27px !important;
+}
+.p-r-27 {
+  padding-right: 27px !important;
+}
+.p-b-27 {
+  padding-bottom: 27px !important;
+}
+.p-t-27 {
+  padding-top: 27px !important;
+}
 .p-l-30 {
   padding-left: 30px !important;
 }
@@ -646,37 +682,6 @@ a:focus {
   bottom: 0;
   left: 0;
   background-color: gray;
-}
-.navUserInfo {
-  background-color: #373d41 !important;
-  width: 400px;
-  height: 240px;
-  right: 0;
-  z-index: 1000;
-}
-.navUserInfo .userinfo-top {
-  height: 80px;
-  width: 100% !important;
-}
-.navUserInfo .userinfo-center {
-  height: 80px;
-  width: 100% !important;
-}
-.navUserInfo .userinfo-center .userinfo-left {
-  width: 50%;
-  height: 100%;
-  display: inline-block;
-  background-color: red;
-}
-.navUserInfo .userinfo-center .userinfo-right {
-  width: 50%;
-  height: 100%;
-  display: inline-block;
-  background-color: blue;
-}
-.navUserInfo .userinfo-bottom {
-  height: 80px;
-  width: 100% !important;
 }
 .navUserInfo {
   background-color: #373d41 !important;

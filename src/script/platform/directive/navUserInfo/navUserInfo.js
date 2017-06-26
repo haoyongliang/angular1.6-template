@@ -6,11 +6,10 @@ APP.directive('dropseaNavUserInfo',['uuid',(uuid)=>{
 		replace:true,
 		restrict: 'E',
 		controller:function($scope){
-			
+
 		},
 		link: function($scope, $element, $attrs, ngModelCtrl){
-			
+				
 		}
-		
 	}
 }])

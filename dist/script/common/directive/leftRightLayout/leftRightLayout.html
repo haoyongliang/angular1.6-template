@@ -6,12 +6,12 @@
 		.lrl-centerBtn:hover{
 			background-color:#E4E8F1;
 		}
-		
+
 	</style>
 	<div id="a{{id}}"  class="f-l h-100 {{leftStyle}} " style="width:{{leftWidth}};; left:0 ;top:0">
-		<div  class="h-100 " ng-scrollbars>
-			<div ng-transclude='left' ></div>
-		</div>
+		<!-- <div  class="h-100 " ng-scrollbars> -->
+			<div ng-transclude='left' class="h-100"></div>
+		<!-- </div> -->
 	</div>
 	<div id="b{{id}}"  class=" h-100 " style="margin-left:{{leftWidth}}">
 		<div class="h-100   p-r ">
@@ -19,11 +19,11 @@
 				<span class="{{centerIcon}} {centerIconStyle}"></span>
 			</div>
 			<div  class="h-100 {{rightStyle}}"  style="margin-left:{{centerWidth}}">
-				<div ng-scrollbars class="h-100">
-					<div ng-transclude='right' ></div>
-				</div>
+				<!-- <div ng-scrollbars class="h-100"> -->
+					<div ng-transclude='right' class="h-100"></div>
+				<!-- </div> -->
 			</div>
-			
+
 		</div>
 	</div>
 </div>

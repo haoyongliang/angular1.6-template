@@ -1,3 +1,88 @@
-.aaaa{
-    color:red;
+.navUserInfo{
+    background-color:@color_menu_second !important;
+    width:400px;
+    height: 240px;
+    right:0;
+    z-index:1000;
+//  .opacity(10);
+    .userinfo-top{
+       height:80px;
+       .w-100;
+       .userinfo-left{
+           width:25%;
+           height: 80px;
+           float: left;
+           line-height: 80px;
+           padding-left:35px;
+           img{
+               width:45px;
+               height: 45px;
+               border-radius: 50px;
+               border:1px solid white;
+           }
+           &:hover{
+               cursor: pointer;
+
+           }
+           &:active{
+                background-color:@color_menu_selected;
+           }
+       }
+       .userinfo-right{
+           width:75%;
+           height: 100%;
+           float:left;
+           .name{
+               font-size:18px;
+               color:white;
+               font-weight: 500;
+               padding-top:20px;
+
+           }
+           .signature{
+               font-size:13px;
+              color:@color_font6;
+           }
+       }
+    }
+    .userinfo-center{
+        height:80px;
+       .w-100;
+       .userinfo-left{
+           width:50%;
+           height: 100%;
+           background-color:@pc_bodyContainer_navBGColor;
+           float: left;
+           border-right:2px solid @nav-spliceLineColor;
+       }
+       .userinfo-right{
+           width:50%;
+           height: 100%;
+           background-color:@pc_bodyContainer_navBGColor;
+           float:left;
+       }
+    }
+    .userinfo-bottom{
+        height:80px;
+        .w-100;
+        width: 100%;
+        .block1{
+            width:400/3px;
+            float: left;
+            background-color:red;
+            height: 80px;
+        }
+        .block2{
+            width:400/3px;
+            float: left;
+            background-color:gray;
+            height: 80px;
+        }
+        .block3{
+             width:400/3px;
+            float: left;
+            background-color:red;
+            height: 80px;
+        }
+    }
 }

@@ -12,7 +12,7 @@
 				</li>
 				<li class="nav-pipe">|</li>
 				<li class="nav-catalog">
-					<a href="" ng-click="showUserInfo()">Angilababy</a>
+					<a href="" ng-click="showOrHideNav('navuserinfo')">Angilababy</a>
 				</li>
 				<li class="nav-pipe">|</li>
 				<li class="nav-catalog">
@@ -24,9 +24,9 @@
 				</li>
 			</ul>
 		</nav>
-		<dropsea-nav-user-info ng-if="userInfoMode" ></dropsea-nav-user-info>
+		<dropsea-nav-user-info ng-if="navuserinfo" ></dropsea-nav-user-info>
 		<div ui-view class="h-100 w-100 p-r animated fadeIn" >
-		
+
 		</div>
 	</div>
 </div>

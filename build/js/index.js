@@ -1,34 +1,35 @@
 'use strict';
 
-var APP = angular.module('app', ['ui.router', 'ngScrollbars', 'ngCookies', 'validation', 'moment-picker', 'LocalStorageModule', 'cp.ngConfirm', 'ngLess']);
+var APP = angular.module('app', ['ui.router', 'ngScrollbars', 'ngCookies', 'validation', 'moment-picker', 'LocalStorageModule', 'cp.ngConfirm']);
 'use strict';
 
 APP.constant('loginMode', {
 	NAME: 'LOGINMODE',
-	RESULT: 'success' }); //用户登陆状态名字
+	RESULT: 'success' //登陆成功
+}); //用户登陆状态名字
 'use strict';
 
 APP.run(['$rootScope', '$log', '$timeout', 'loginMode', '$state', '$stateParams', function ($rootScope, $log, $timeout, loginMode, $state, $stateParams) {
-	$rootScope.$state = $state;
-	$rootScope.$stateParams = $stateParams;
+  $rootScope.$state = $state;
+  $rootScope.$stateParams = $stateParams;
 
-	$rootScope.$on('LocalStorageModule.notification.setitem', function (event, data) {
-		if (!!data) {
-			//登陆
-			if (data.key == loginMode.NAME) {
-				$log.info('用户正在尝试登陆');
-			}
-		}
-	});
+  $rootScope.$on('LocalStorageModule.notification.setitem', function (event, data) {
+    if (!!data) {
+      //登陆
+      if (data.key == loginMode.NAME) {
+        $log.info('用户正在尝试登陆');
+      }
+    }
+  });
 
-	$rootScope.$on('LocalStorageModule.notification.removeitem', function (event, data) {
-		if (!!data) {
-			//退出登陆登陆
-			if (data.key == loginMode.NAME) {
-				$log.info('用户正在退出登陆');
-			}
-		}
-	});
+  $rootScope.$on('LocalStorageModule.notification.removeitem', function (event, data) {
+    if (!!data) {
+      //退出登陆登陆
+      if (data.key == loginMode.NAME) {
+        $log.info('用户正在退出登陆');
+      }
+    }
+  });
 }]);
 'use strict';
 
@@ -137,16 +138,6 @@ APP.config(['$validationProvider', function ($validationProvider) {
 
 	$validationProvider.setExpression(expression).setDefaultMsg(defaultMsg);
 }]);
-"use strict";
-
-$.extend({
-	getRandom: function getRandom() {
-		//获取随机数
-		var random = Math.random() + "";
-		random = random.split(".")[1];
-		return random;
-	}
-});
 'use strict';
 
 /**
@@ -242,6 +233,16 @@ APP.service('uuid', ['$rootScope', '$filter', '$http', '$timeout', '$q', functio
 		}
 	};
 }]);
+"use strict";
+
+$.extend({
+	getRandom: function getRandom() {
+		//获取随机数
+		var random = Math.random() + "";
+		random = random.split(".")[1];
+		return random;
+	}
+});
 'use strict';
 
 /**
@@ -253,46 +254,6 @@ APP.controller('indexCtrl', ['$timeout', '$log', '$scope', 'localStorageService'
 	if (localStorageService.get(loginMode.NAME) != loginMode.RESULT) {
 		$state.go('login', {}, { location: 'replace' });
 	}
-}]);
-'use strict';
-
-//千分位格式化过滤器
-//使用方式 {{123 | thousands :34}}
-//说明 : ":34"表示保留小数点后34位 ,可以不写默认保留2位
-APP.filter('thousands', [function () {
-	//数字千分位
-
-	return function (value, bit) {
-		bit = bit || 2;
-		//四舍五入方法
-		function keepTwoDecimalFull(num) {
-			num = String(num).replace(',', '');
-			var result = parseFloat(num);
-			if (isNaN(result)) {
-				result = '0';
-			}
-			var str = '1';
-			for (var i = 0; i < bit; i++) {
-				str += '0';
-			}
-			result = Math.round(num * str) / str;
-			var s_x = result.toString();
-			var pos_decimal = s_x.indexOf('.');
-			if (pos_decimal < 0) {
-				pos_decimal = s_x.length;
-				s_x += '.';
-			}
-			while (s_x.length <= pos_decimal + parseInt(bit)) {
-				s_x += '0';
-			}
-			return s_x;
-		}
-
-		var result = keepTwoDecimalFull(value).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,');
-		//去掉小数点后的千分位
-		result = result.split('.')[0] + '.' + result.split('.')[1].replace(',', '');
-		return result;
-	};
 }]);
 'use strict';
 
@@ -383,6 +344,28 @@ APP.directive('appColor', [function () {
 'use strict';
 
 /**
+ * [templateUrl description]
+ * @type {String}
+ */
+APP.directive('appCountHead', ['$timeout', 'uuid', function ($timeout, uuid) {
+  return {
+    templateUrl: 'script/common/directive/countHead/countHead.html?t=' + uuid.getUUID(),
+    scope: {
+      height: "@"
+    },
+    transclude: true,
+    restrict: 'E',
+    controller: function controller($scope) {},
+    link: function link($scope, $element, $attrs, ngModelCtrl) {
+      if (!$scope.height) {
+        $scope.height = '28px';
+      }
+    }
+  };
+}]);
+'use strict';
+
+/**
  * 输入框中的千分位
  * 使用方式 <input type="text" ng-model = "" app-currency bit="3"/> 这些是必须
  * type必须是text类型
@@ -468,6 +451,32 @@ APP.directive('appCurrency', ['$filter', '$browser', function ($filter, $browser
 'use strict';
 
 /**
+ * 使用方式：html页面<script type="text/javascript-lazy"> </script>标签中写入代码，代码会随着.html加载被执行。
+ */
+APP.directive('script', [function () {
+	return {
+		restrict: 'E',
+		scope: false,
+		link: function link(scope, elem, attr) {
+			if (attr.type === 'text/javascript-lazy') {
+				var s = document.createElement("script");
+				s.type = "text/javascript";
+				var src = elem.attr('src');
+				if (src !== undefined) {
+					s.src = src;
+				} else {
+					var code = elem.text();
+					s.text = code;
+				}
+				document.head.appendChild(s);
+				elem.remove();
+			}
+		}
+	};
+}]);
+'use strict';
+
+/**
  * 注意：因为自带滚动条，所以在使用<left>或者<right>标签的时候高度无法100%，只能自适应
  * 左固定，右百分比自适应布局
  * width,height,默认100%
@@ -540,7 +549,7 @@ APP.directive('appLeftRightLayout', ['$timeout', 'uuid', function ($timeout, uui
 			if (!angular.isDefined($scope.centerIconStyle)) {
 				$scope.centerIconStyle = "";
 			}
-			//初始化left,right标签样式			
+			//初始化left,right标签样式
 			$element.find('left,right').addClass('h-100 w-100 d-ib');
 
 			//给中间栏添加点击事件,切换左右滑动特效
@@ -557,8 +566,9 @@ APP.directive('appLeftRightLayout', ['$timeout', 'uuid', function ($timeout, uui
 					}, 0);
 				} else {
 					$scope.curIsShowLeft = true;
-					$('#a' + $scope.id).animate({ width: $scope.leftWidthBak });
+
 					$('#b' + $scope.id).animate({ 'margin-left': $scope.leftWidthBak });
+					$('#a' + $scope.id).animate({ width: $scope.leftWidthBak });
 					$scope.leftWidth = $scope.leftWidthBak;
 					$timeout(function () {
 						$scope.$apply(function () {
@@ -573,95 +583,80 @@ APP.directive('appLeftRightLayout', ['$timeout', 'uuid', function ($timeout, uui
 'use strict';
 
 /**
- * 使用方式：html页面<script type="text/javascript-lazy"> </script>标签中写入代码，代码会随着.html加载被执行。
- */
-APP.directive('script', [function () {
-	return {
-		restrict: 'E',
-		scope: false,
-		link: function link(scope, elem, attr) {
-			if (attr.type === 'text/javascript-lazy') {
-				var s = document.createElement("script");
-				s.type = "text/javascript";
-				var src = elem.attr('src');
-				if (src !== undefined) {
-					s.src = src;
-				} else {
-					var code = elem.text();
-					s.text = code;
-				}
-				document.head.appendChild(s);
-				elem.remove();
-			}
-		}
-	};
-}]);
-'use strict';
-
-/**
  * 模拟移动端页面布局，上面是返回 标题 更多，下面是内容
  * head-style="1" 设置头部样式，包括返回，标题 更多
  * head-style="2" 设置头部样式，包括返回，标题 更多，但是返回只占用位置
  */
 APP.directive('appPagePanel', ['$timeout', 'uuid', function ($timeout, uuid) {
-	return {
-		templateUrl: 'script/common/directive/pagePanel/pagePanel.html?t=' + uuid.getUUID(),
-		scope: {
-			width: "@",
-			height: "@",
-			headStyle: "@",
-			textAlign: "@",
-			borderBottom: "@border",
-			leftBtnIcon: "@",
-			clazz: "@class"
+  return {
+    templateUrl: 'script/common/directive/pagePanel/pagePanel.html?t=' + uuid.getUUID(),
+    scope: {
+      header: "@",
+      width: "@",
+      height: "@",
+      headStyle: "@",
+      textAlign: "@",
+      borderBottom: "@border",
+      leftBtnIcon: "@",
+      clazz: "@class",
+      callback: "&"
 
-		},
-		transclude: true,
-		restrict: 'E',
-		controller: function controller($scope) {},
-		link: function link($scope, $element, $attrs, ngModelCtrl) {
-			//给属性设置默认值
-			if (!(!!$scope.textAlign && ($scope.textAlign == 'left' || $scope.textAlign == 'center' || $scope.textAlign == 'right'))) {
-				$scope.textAlign = 'center';
-			}
-			if (!$scope.height) {
-				$scope.height = '100%';
-			}
-			if (!$scope.width) {
-				$scope.width = '100%';
-			}
-			if (!$scope.headStyle) {
-				$scope.headStyle = '1';
-			}
-			if (!$scope.borderBottom) {
-				$scope.borderBottom = "1px solid #D9D9D9";
-			}
-			if (!$scope.leftBtnIcon) {
-				$scope.leftBtnIcon = "glyphicon glyphicon-menu-hamburger";
-			}
-			if (!$scope.clazz) {
-				$scope.clazz = '';
-			}
-			$scope.showPanel = function () {
-				var panel = $element.find('#visiblePanel');
-				panel.removeClass('d-n').addClass('d-b');
-			};
-			$scope.hidePanel = function () {
-				var panel = $element.find('#visiblePanel').removeClass('d-b').addClass('d-n');
-			};
+    },
+    transclude: true,
+    restrict: 'E',
+    controller: function controller($scope) {},
+    link: function link($scope, $element, $attrs, ngModelCtrl) {
+      $scope.id = "lrc-containerd-" + uuid.getUUID();
+      //给属性设置默认值
+      if (!(!!$scope.textAlign && ($scope.textAlign == 'left' || $scope.textAlign == 'center' || $scope.textAlign == 'right'))) {
+        $scope.textAlign = 'center';
+      }
+      if (!$scope.header) {
+        $scope.header = '';
+      }
+      if (!$scope.height) {
+        $scope.height = '100%';
+      }
+      if (!$scope.width) {
+        $scope.width = '100%';
+      }
+      if (!$scope.headStyle) {
+        $scope.headStyle = '1';
+      }
+      if (!$scope.borderBottom) {
+        $scope.borderBottom = "2px solid #A6A6A6";
+      }
+      if (!$scope.leftBtnIcon) {
+        $scope.leftBtnIcon = "glyphicon glyphicon-menu-hamburger";
+      }
 
-			$scope.change = function () {
-				$timeout(function () {
-					console.log(1111);
-					$scope.$apply(function () {
-						$scope.panel2 = '';
-					});
-				}, 2000);
-			};
-			console.log($scope.borderBottom);
-			//			$scope.updateScrollbar('scrollTo', 10);
-		}
-	};
+      if (!$scope.clazz) {
+        $scope.clazz = '';
+      }
+      $scope.showPanel = function () {
+        var panel = $element.find('#visiblePanel');
+        panel.removeClass('d-n').addClass('d-b');
+      };
+      $scope.hidePanel = function () {
+        var panel = $element.find('#visiblePanel').removeClass('d-b').addClass('d-n');
+      };
+
+      $element.on('click', ' .leftBtnIcon', function () {
+        if (angular.isFunction($scope.callback)) {
+          $scope.callback();
+        }
+      });
+
+      $scope.change = function () {
+        $timeout(function () {
+          console.log(1111);
+          $scope.$apply(function () {
+            $scope.panel2 = '';
+          });
+        }, 2000);
+      };
+    }
+  };
 }]);
 'use strict';
 
@@ -895,40 +890,95 @@ APP.directive('appScrollLoad', ['$myHttp', '$log', 'uuid', function ($myHttp, $l
 }]);
 'use strict';
 
+//千分位格式化过滤器
+//使用方式 {{123 | thousands :34}}
+//说明 : ":34"表示保留小数点后34位 ,可以不写默认保留2位
+APP.filter('thousands', [function () {
+	//数字千分位
+
+	return function (value, bit) {
+		bit = bit || 2;
+		//四舍五入方法
+		function keepTwoDecimalFull(num) {
+			num = String(num).replace(',', '');
+			var result = parseFloat(num);
+			if (isNaN(result)) {
+				result = '0';
+			}
+			var str = '1';
+			for (var i = 0; i < bit; i++) {
+				str += '0';
+			}
+			result = Math.round(num * str) / str;
+			var s_x = result.toString();
+			var pos_decimal = s_x.indexOf('.');
+			if (pos_decimal < 0) {
+				pos_decimal = s_x.length;
+				s_x += '.';
+			}
+			while (s_x.length <= pos_decimal + parseInt(bit)) {
+				s_x += '0';
+			}
+			return s_x;
+		}
+
+		var result = keepTwoDecimalFull(value).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,');
+		//去掉小数点后的千分位
+		result = result.split('.')[0] + '.' + result.split('.')[1].replace(',', '');
+		return result;
+	};
+}]);
+'use strict';
+
 APP.controller('homeCtrl', ['$rootScope', '$scope', '$log', 'localStorageService', 'loginMode', '$state', '$timeout', '$ngConfirm', function ($rootScope, $scope, $log, localStorageService, loginMode, $state, $timeout, $ngConfirm) {
-    /**
-     * 退出登陆
-     */
-    $scope.loginOut = function () {
-        $ngConfirm({
-            theme: 'supervan',
-            title: '提示!',
-            content: '<strong>您确定要退出吗?</strong>',
-            scope: $scope,
-            buttons: {
-                sayBoo: {
-                    text: '确定',
-                    btnClass: 'btn-blue',
-                    action: function action(scope, button) {
-                        localStorageService.remove(loginMode.NAME);
-                        $state.go('login', {}, { location: 'replace' });
-                        return true; // prevent close;
-                    }
-                },
-                close: {
-                    text: '取消',
-                    btnClass: 'btn-default'
-                }
-            }
-        });
-    };
-    $scope.showUserInfo = function () {
-        if (!!$scope.userInfoMode) {
-            $scope.userInfoMode = false;
-        } else {
-            $scope.userInfoMode = true;
+  // $scope.navuserinfo = false;
+  /**
+    * 退出登陆
+    */
+  $scope.loginOut = function () {
+    $ngConfirm({
+      theme: 'supervan',
+      title: '提示!',
+      content: '<strong>您确定要退出吗?</strong>',
+      scope: $scope,
+      buttons: {
+        sayBoo: {
+          text: '确定',
+          btnClass: 'btn-blue',
+          action: function action(scope, button) {
+            localStorageService.remove(loginMode.NAME);
+            $state.go('login', {}, {
+              location: 'replace'
+            });
+            return true; // prevent close;
+          }
+        },
+        close: {
+          text: '取消',
+          btnClass: 'btn-default'
         }
-    };
+      }
+    });
+  };
+  $scope.showUserInfo = function () {
+    if (!!$scope.userInfoMode) {
+      $scope.userInfoMode = false;
+    } else {
+      $scope.userInfoMode = true;
+    }
+  };
+
+  $scope.showOrHideNav = function (element) {
+    if (!!$scope[element]) {
+      $scope[element] = false;
+    } else {
+      $scope[element] = true;
+    }
+    var array = Array.from($scope);
+    for (var _element in array) {
+      $log.info(_element);
+    }
+  };
 }]);
 'use strict';
 
@@ -959,8 +1009,23 @@ APP.directive('dropseaNavUserInfo', ['uuid', function (uuid) {
 		restrict: 'E',
 		controller: function controller($scope) {},
 		link: function link($scope, $element, $attrs, ngModelCtrl) {}
-
 	};
+}]);
+'use strict';
+
+/**
+ * [description]
+ * @param  {[type]} $scope   [description]
+ * @param  {[type]} $timeout [description]
+ * @param  {[type]} $myHttp  [description]
+ * @param  {[type]} cache    [description]
+ * @param  {[type]} $log     [description]
+ * @return {[type]}          [description]
+ */
+APP.controller('organizationCtrl', ['$scope', '$timeout', '$myHttp', 'cache', '$log', function ($scope, $timeout, $myHttp, cache, $log) {
+  $scope.callback = function () {
+    alert(12334534);
+  };
 }]);
 'use strict';
 
@@ -1049,6 +1114,3 @@ APP.controller('mainCtrl', ['$scope', '$timeout', '$myHttp', 'cache', '$log', fu
 		});
 	};
 }]);
-'use strict';
-
-APP.controller('organizationCtrl', ['$scope', '$timeout', '$myHttp', 'cache', '$log', function ($scope, $timeout, $myHttp, cache, $log) {}]);
