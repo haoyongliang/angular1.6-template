@@ -42,7 +42,7 @@
   </style>
   <div class="app-tabs w-100 h-100">
     <ul>
-      <li ng-repeat="pane in scopes" ng-class="{active:pane.selected}" style="width:{{width}} !important">
+      <li ng-click="clickTtile(pane)" ng-repeat="pane in scopes" ng-class="{active:pane.selected}" style="width:{{width}} !important">
         <a href="" ng-click='select(pane)'>{{pane.tittle}}</a>
       </li>
     </ul>

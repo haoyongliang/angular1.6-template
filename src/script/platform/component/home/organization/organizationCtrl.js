@@ -11,4 +11,11 @@ APP.controller('organizationCtrl', ['$scope', '$timeout', '$myHttp', 'cache', '$
   $scope.callback = function(){
     alert(12334534);
   }
+
+  $scope.workset = function(){
+    alert('工作设置');
+  }
+  $scope.organizationManger = function(){
+    alert('组织管理');
+  }
 }])
