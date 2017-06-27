@@ -1,5 +1,5 @@
 /**
- * [templateUrl description]
+ * 显示当前有多少条记录
  * @type {String}
  */
 APP.directive('appCountHead', ['$timeout', 'uuid', ($timeout, uuid) => {

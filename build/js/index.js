@@ -33,6 +33,32 @@ APP.run(['$rootScope', '$log', '$timeout', 'loginMode', '$state', '$stateParams'
 }]);
 'use strict';
 
+APP.run(['$rootScope', function ($rootScope) {
+  $rootScope.colors = {
+    white: '#FFF',
+    main: '#366092', //主色
+    tableBg: '#f0f4fa', //表格背景色辅色
+    tableBorder: '#bfbfbf', //表格边框及线条的颜色
+    tableInsideBorder1: '#d9d9d9', //表格内部仙桃及其他辅助的颜色
+    tableInsideBorder2: '#e8e8e8', //表格内部仙桃及其他辅助的颜色
+    menuSecond: '#373d41', //二级菜单背景色
+    menuSelected: '#95b3d7', //菜单选中背景色
+    font1: '#366092', //深蓝
+    font2: '#5385c1', //浅蓝
+    font3: '#ff0000', //红色
+    font4: '#000000', //黑色
+    font5: '#333333', //浅黑
+    font6: '#808080' //灰色
+  };
+  $rootScope.fontZize = {
+    big: '16px',
+    middleBig: '14px',
+    middleSmall: '13px',
+    small: '12px'
+  };
+}]);
+'use strict';
+
 APP.config(['localStorageServiceProvider', function (localStorageServiceProvider) {
   localStorageServiceProvider.setPrefix('XIZHUOKEJI').setStorageType('sessionStorage').setNotify(true, true);
 }]);
@@ -249,11 +275,13 @@ $.extend({
  * 首页控制器
  */
 APP.controller('indexCtrl', ['$timeout', '$log', '$scope', 'localStorageService', '$rootScope', '$state', 'loginMode', '$ngConfirm', function ($timeout, $log, $scope, localStorageService, $rootScope, $state, loginMode, $ngConfirm) {
-	console.log($state);
-	//没有登陆成功则跳转到登陆界面
-	if (localStorageService.get(loginMode.NAME) != loginMode.RESULT) {
-		$state.go('login', {}, { location: 'replace' });
-	}
+
+  //没有登陆成功则跳转到登陆界面
+  if (localStorageService.get(loginMode.NAME) != loginMode.RESULT) {
+    $state.go('login', {}, {
+      location: 'replace'
+    });
+  }
 }]);
 'use strict';
 
@@ -344,7 +372,7 @@ APP.directive('appColor', [function () {
 'use strict';
 
 /**
- * [templateUrl description]
+ * 显示当前有多少条记录
  * @type {String}
  */
 APP.directive('appCountHead', ['$timeout', 'uuid', function ($timeout, uuid) {
@@ -890,6 +918,82 @@ APP.directive('appScrollLoad', ['$myHttp', '$log', 'uuid', function ($myHttp, $l
 }]);
 'use strict';
 
+/**
+ * tab切换,使用方式
+ <app-tabs>
+   <app-panel tittle='one'>
+     abc
+   </app-panel>
+   <app-panel tittle='two'>
+     def
+   </app-panel>
+ </app-tabs>
+ * @type {String}
+ */
+
+//父标签
+APP.directive('appTabs', ['$timeout', 'uuid', '$log', function ($timeout, uuid, $log) {
+  return {
+    restrict: "EA",
+    transclude: true,
+    scope: {},
+    templateUrl: 'script/common/directive/tabs/tab.html?t=' + uuid.getUUID(),
+    controller: ["$scope", function ($scope) {
+      var panes = $scope.scopes = [];
+
+      $scope.select = function (pane) {
+        angular.forEach(panes, function (scope) {
+          scope.selected = false;
+        });
+        pane.selected = true;
+      };
+
+      this.addScope = function (scope) {
+        if (panes.length === 0) {
+          $scope.select(scope);
+        }
+        panes.push(scope);
+        $scope.width = 100 / panes.length + '%';
+        $log.info($scope.width);
+      };
+    }],
+    link: function link($scope, $element, $attrs, ngModelCtrl) {}
+  };
+}]);
+//子标签,不进行懒加载
+APP.directive('appPanel', ['$timeout', 'uuid', function ($timeout, uuid) {
+  return {
+    restrict: 'EA',
+    scope: {
+      tittle: '@'
+    },
+    replace: true,
+    transclude: true,
+    require: '^appTabs', //继承外层指令
+    templateUrl: 'script/common/directive/tabs/panel.html?t=' + uuid.getUUID(),
+    link: function link(scope, elemenet, attrs, appTabsController) {
+      appTabsController.addScope(scope);
+    }
+  };
+}]);
+//子标签,懒加载，可以缓存上一次数据
+APP.directive('appPanelLazy', ['$timeout', 'uuid', function ($timeout, uuid) {
+  return {
+    restrict: 'EA',
+    scope: {
+      tittle: '@'
+    },
+    replace: true,
+    transclude: true,
+    require: '^appTabs', //继承外层指令
+    templateUrl: 'script/common/directive/tabs/panelLazy.html?t=' + uuid.getUUID(),
+    link: function link(scope, elemenet, attrs, appTabsController) {
+      appTabsController.addScope(scope);
+    }
+  };
+}]);
+'use strict';
+
 //千分位格式化过滤器
 //使用方式 {{123 | thousands :34}}
 //说明 : ":34"表示保留小数点后34位 ,可以不写默认保留2位
@@ -1013,19 +1117,24 @@ APP.directive('dropseaNavUserInfo', ['uuid', function (uuid) {
 }]);
 'use strict';
 
-/**
- * [description]
- * @param  {[type]} $scope   [description]
- * @param  {[type]} $timeout [description]
- * @param  {[type]} $myHttp  [description]
- * @param  {[type]} cache    [description]
- * @param  {[type]} $log     [description]
- * @return {[type]}          [description]
- */
-APP.controller('organizationCtrl', ['$scope', '$timeout', '$myHttp', 'cache', '$log', function ($scope, $timeout, $myHttp, cache, $log) {
-  $scope.callback = function () {
-    alert(12334534);
-  };
+APP.directive('panel1a', ['uuid', function (uuid) {
+	return {
+		templateUrl: 'script/platform/directive/panel1/panel1.html?t=' + uuid.getUUID(),
+		scope: {},
+		replace: false,
+		restrict: 'E',
+		controller: function controller($scope) {},
+		link: function link($scope, $element, $attrs, ngModelCtrl) {}
+	};
+}]);
+'use strict';
+
+APP.controller('panel1Ctrl', ['$timeout', function ($timeout) {
+  var data = new Set();
+  data.add(1);
+  $timeout(function () {
+    console.log('aaa');
+  }, 0);
 }]);
 'use strict';
 
@@ -1113,4 +1222,20 @@ APP.controller('mainCtrl', ['$scope', '$timeout', '$myHttp', 'cache', '$log', fu
 			console.log('请求结束');
 		});
 	};
+}]);
+'use strict';
+
+/**
+ * [description]
+ * @param  {[type]} $scope   [description]
+ * @param  {[type]} $timeout [description]
+ * @param  {[type]} $myHttp  [description]
+ * @param  {[type]} cache    [description]
+ * @param  {[type]} $log     [description]
+ * @return {[type]}          [description]
+ */
+APP.controller('organizationCtrl', ['$scope', '$timeout', '$myHttp', 'cache', '$log', function ($scope, $timeout, $myHttp, cache, $log) {
+  $scope.callback = function () {
+    alert(12334534);
+  };
 }]);

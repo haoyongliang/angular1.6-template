@@ -1,32 +1,36 @@
-<div ng-controller="organizationCtrl" class="pc_body " >
-<style>
-	.organization{
-		app-page-panel{
-
-		}
-	}
-</style>
-	<div class="h-100 w-100 organization" >
-		<app-left-right-layout  left-width="444px" class="h-100" left-style="border:1px solid black;" right-style="" center-style="p-t-27" >
+<div ng-controller="organizationCtrl" class="pc_body ">
+	<style>
+		.organization {}
+	</style>
+	<div class="h-100 w-100 organization">
+		<app-left-right-layout left-width="444px" class="h-100" left-style="border:1px solid black;" right-style="" center-style="p-t-27">
 			<left class="h-100">
-				<app-page-panel width="100%"  height="100%" head-style='2' class="animated fadeIn" header="我的组织" callback="callback()" left-btn-icon="glyphicon glyphicon-plus">
+				<app-page-panel width="100%" height="100%" head-style='2' class="animated fadeIn" header="我的组织" callback="callback()" left-btn-icon="glyphicon glyphicon-plus">
 					<div class="h-100 ">
 						<app-count-head>
 							当前有20条数据
 						</app-count-head>
-						<div style="height:calc(100% - 28px); border:1px solid #D9D9D9;"></div>
+						<div style="height:calc(100% - 28px); border:1px solid #bfbfbf;"></div>
 					</div>
 				</app-page-panel>
 			</left>
 			<right class="h-100">
-				<app-page-panel  head-style='2' class="h-100 w-100 animated fadeIn" header="广东普惠金融（湛江）股份有限公司" callback="callback()" left-btn-icon="" >
+				<app-page-panel head-style='2' class="h-100 w-100 animated fadeIn" header="广东普惠金融（湛江）股份有限公司" callback="callback()" left-btn-icon="">
 					<div class="h-100 ">
-						<app-count-head>
-							当前有50条基础数据
-						</app-count-head>
-						<div style="height:calc(100% - 28px); border:1px solid #D9D9D9;">
-
-						</div>
+						<app-tabs>
+							<app-panel tittle='组织管理'>
+								<panel1a></panel1a>
+							</app-panel>
+							<app-panel tittle='工作设置'>
+							</app-panel>
+							<app-panel-lazy tittle='基础数据'>
+								<app-count-head>
+									当前有50条基础数据
+								</app-count-head>
+								<div class="h-100 w-100" style="border:1px solid #bfbfbf; height:calc(100% - 28px) !important;">
+								</div>
+							</app-panel-lazy>
+						</app-tabs>
 					</div>
 				</app-page-panel>
 			</right>

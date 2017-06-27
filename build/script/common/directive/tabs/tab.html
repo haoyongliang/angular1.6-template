@@ -1,0 +1,51 @@
+<div class="h-100 w-100">
+  <style>
+    app-tabs a:link, app-tabs a:visited, app-tabs a:active,app-tabs a:hover {
+        color: #808080 !important;
+        text-decoration:none;
+    }
+    app-tabs .ul{
+      padding-left: 0;
+      margin-bottom: 0;
+      list-style: none;
+      border-bottom: 1px solid #ddd;
+    }
+
+    app-tabs ul >li {
+        float: left;
+        margin-bottom: -1px;
+        height: 28px;
+        line-height: 28px;
+        text-align: center;
+        border: 1px solid transparent;
+        border-right: 1px solid #bfbfbf !important;
+        border-top:1px solid transparent !important;
+        border-bottom: 1px solid #bfbfbf !important;
+    }
+    app-tabs ul :last-child{
+      border-right:0 !important;
+    }
+    app-tabs ul >li>a {
+        position: relative;
+        display: block;
+    }
+
+    app-tabs ul>li.active>a,app-tabs  ul>li.active>a:focus,app-tabs  ul>li.active>a:hover {
+      color: black !important;
+      font-weight: bold;
+      cursor: default;
+      background-color: #fff;
+      height: 27px;
+      line-height: 27px;
+      border-bottom: 1px solid black !important;
+    }
+  </style>
+  <div class="app-tabs w-100 h-100">
+    <ul>
+      <li ng-repeat="pane in scopes" ng-class="{active:pane.selected}" style="width:{{width}} !important">
+        <a href="" ng-click='select(pane)'>{{pane.tittle}}</a>
+      </li>
+    </ul>
+    <div ng-transclude class='tab-content' style="height:calc(100%);padding-top:28px;"></div>
+  </div>
+</div>
