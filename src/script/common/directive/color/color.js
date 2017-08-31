@@ -8,19 +8,20 @@
  * target='{{number}}'，如果不需要判断容器content中的数据，则用target指定需要判断的数据
  * <div app-color default-color='red' positive-color='{{blue}}' negative-color='{{black}}' zero-color='white' target='{{number}}'>-1</div>
  */
+
 APP.directive('appColor',[()=>{
 	return {
 		scope:{},
 		restrict: 'A',
 		link: function($scope, $element, $attrs, ngModelCtrl){
-			
+
 		    //如果有target，则监听target的值，不监听元素内容中的值，否则监听元素内容中的值
 		    if($attrs['target'] != undefined){
 		    	$scope.$watch(
 		    		function(){
 						return $attrs.target;
 					},
-			    	function(newVal, oldVal) { 
+			    	function(newVal, oldVal) {
 			    		exec(newVal,oldVal);
 			    	}
 			    );
@@ -29,12 +30,12 @@ APP.directive('appColor',[()=>{
 					function(){
 						return $element[0].innerHTML;
 					},
-			    	function(newVal, oldVal) { 
+			    	function(newVal, oldVal) {
 			    		exec(newVal,oldVal);
 			    	}
 			    );
 		    }
-		    
+
 		    //根据数据设置color色
 			function exec(newVAL, oldVal){
 				var val;
@@ -43,13 +44,13 @@ APP.directive('appColor',[()=>{
 				var negativecolor = !!$attrs['negativeColor'] ? $attrs['negativeColor'] + ' !important' : $attrs['negativeColor'];//负数
 				var zerocolor =     !!$attrs['zeroColor']     ? $attrs['zeroColor']     + ' !important' : $attrs['zeroColor'];//零
 				var target = $attrs['target'];//要判断的数据
-				
+
 				if(target != undefined){
 					val = target;
 				}else{
 					val = $($element)[0].innerHTML.replace(/,/g,"");
 				}
-				
+
 				//非数字
 				if(isNaN(parseFloat(val))){
 					$element.css("cssText",'color:'+defaultcolor);
@@ -74,7 +75,7 @@ APP.directive('appColor',[()=>{
 							$element.css("cssText",'color:'+defaultcolor);
 						}
 					}
-					
+
 					//负数
 					if(val < 0){
 						if(!!negativecolor){

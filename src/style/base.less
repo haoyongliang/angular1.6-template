@@ -1,10 +1,14 @@
 
+.no-select{
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
 /*
  * 常用的工具样式
  */
-
-.p-a{position:absolute !important}
-
+ 
 //字体大小
 .f-12{font-size:12px !important;}
 .f-13{font-size:13px !important;}
@@ -14,10 +18,12 @@
 .f-18{font-size:18px !important;}
 .f-20{font-size:20px !important;}
 .f-22{font-size:22px !important;}
-.f-big{font-size:16px !important;}
-.f-middleBig{font-size:14px !important;}
+.f-big{font-size:18px !important;}
+.f-middleBig{font-size:15px !important;}
 .f-middleSmall{font-size:13px !important;}
 .f-small{font-size:12px !important;}
+.f-bold{font-weight: bold !important}
+
 
 //margin
 .m-auto{margin:0px auto !important;}
@@ -197,9 +203,13 @@
 
 //top,left,bottom,right
 .t0{top:0px !important;}
+.t5{top:5px !important;}
 .l0{left:0px !important;}
+.l5{left:5px !important;}
 .r0{right:0px !important;}
+.r5{right:5px !important;}
 .b0{bottom:0px !important;}
+.b5{bottom:5px !important;}
 .t66{top:66px !important;}
 
 
@@ -210,6 +220,19 @@
 .f-r{
     float: right !important;
 }
+.clearfix:before,
+ .clearfix:after {
+    content: "";
+    display: table;
+ }
+ .clearfix:after {
+    clear: both;
+ }
+ .clearfix {
+    *zoom: 1;
+ }
+
+
 
 //text-align
 .left{
@@ -225,4 +248,175 @@
 //overflow
 .overflow-h{
     overflow: hidden !important;
+}
+
+.t-o-clip{
+  text-overflow: clip;
+}
+.t-o-ellipsis{
+  text-overflow: ellipsis;
+}
+
+/**
+ * [ 按钮相关 ]
+ * @type {[type]}
+ */
+//按钮右边分割线
+.cutting-line{
+
+}
+.cutting-line::after{
+  content: "";
+  height:16px;
+  border-right:1px solid #E8E8E8;
+  right:0;
+  position:absolute;
+  right:0px;
+  top:6px;
+}
+//提交按钮
+.app-submitBtn {
+  text-align: center;
+  padding:0 10px;
+  background-color:@pc_bodyContainer_navBGColor;
+  .tr-height;
+  .no-select;
+  color:@btnColor;
+  position:relative;
+}
+.app-submitBtn:hover{
+  cursor: pointer;
+}
+.app-submitBtn:active{
+  background-color: @color_menu_selected;
+}
+//默认样式
+.app-btn{
+
+}
+.app-btn:hover,.app-btn:active{
+  background-color: #95B3D7;
+  cursor: pointer;
+}
+
+/**
+ * 表格相关
+ * @type {[type]}
+ */
+.tr-height{
+  height: 28px !important;
+  line-height: 28px !important;
+}
+th{
+  font-weight:400 !important;
+}
+td{
+  font-weight:400 !important;
+}
+.app-table{
+  width: 100%;
+  max-width: 100%;
+  background-color: transparent;
+}
+.app-table th{
+  text-align: center;
+}
+.app-table{
+  text-align: center;
+  .tr-height;
+  .f-small;
+  table-layout: fixed;
+}
+
+.app-table td ,.app-table th{
+  word-break:keep-all;/* 不换行 */
+  white-space:nowrap;/* 不换行 */
+  overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+  text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+//表格边框外部颜色
+.app-table-border{
+  border:1px solid @color_table_border;
+}
+.app-table-border-left{
+  border-left: 1px solid @color_table_border;
+}
+.app-table-border-right{
+  border-right: 1px solid @color_table_border;
+}
+.app-table-border-bottom{
+  border-bottom: 1px solid @color_table_border;
+}
+.app-table-border-top{
+  border-top: 1px solid @color_table_border;
+}
+.app-table-border-inside-left{
+  border-left:1px solid @color_table_inside_border2;
+}
+.app-table-border-inside-right{
+  border-right:1px solid @color_table_inside_border2;
+}
+.app-table-border-inside-bottom{
+  // border-bottom:1px solid @color_table_inside_border2;
+  box-shadow: inset 0 -1px 1px -1px @color_table_inside_border2;
+}.app-table-border-inside-top{
+  border-top:1px solid @color_table_inside_border2;
+}
+
+.app-table-head{
+  background-color: @color_table_bg !important;
+
+  color:#366092;
+}
+.app-table-body{
+
+}
+.app-table-body td{
+  box-shadow: inset 0 -1px 1px -1px #D9D9D9;
+
+  // border-bottom:1px solid @color_table_inside_border2;
+}
+.app-table-body tr:hover{
+  background-color:@color_table_bg !important;
+}
+
+
+/*
+表单
+ */
+input[type='text'],input[type='password']{
+  position:absolute;
+  height: 26px;
+  line-height: 26px;
+  .p-l-10;
+  .d-ib;
+  .f-small;
+  border:0;
+  width:calc(~'100% - 20px');
+}
+input[type=checkbox], input[type=radio] {
+    margin: 0px 0 0;
+    margin-top: 1px\9;
+    line-height: normal;
+}
+.textarea{
+    background: url('./../../image/text-bg.png') no-repeat center center;
+    border:1px solid #bfbfbf;
+    padding:10px;
+    height:38px;
+}
+select{
+  width:100%;
+  height:100%;
+  line-height: 24px;
+  border:0;
+  padding-left:10px;
+  position:absolute;
+  padding-left:7px;
+}
+select:after{
+  content:'';
+  width:'10px';
+  height:'10px';
+  background-color:gray;
 }

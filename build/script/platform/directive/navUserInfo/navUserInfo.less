@@ -1,88 +1,131 @@
-.navUserInfo{
-    background-color:@color_menu_second !important;
-    width:400px;
-    height: 240px;
-    right:0;
-    z-index:1000;
-//  .opacity(10);
-    .userinfo-top{
-       height:80px;
-       .w-100;
-       .userinfo-left{
-           width:25%;
-           height: 80px;
-           float: left;
-           line-height: 80px;
-           padding-left:35px;
-           img{
-               width:45px;
-               height: 45px;
-               border-radius: 50px;
-               border:1px solid white;
-           }
-           &:hover{
-               cursor: pointer;
+.navUserInfo {
+  background-color: @color_menu_second !important;
+  width: 400px;
+  height: 240px;
+  right: 0;
+  z-index: 1000;
 
-           }
-           &:active{
-                background-color:@color_menu_selected;
-           }
-       }
-       .userinfo-right{
-           width:75%;
-           height: 100%;
-           float:left;
-           .name{
-               font-size:18px;
-               color:white;
-               font-weight: 500;
-               padding-top:20px;
+  .userinfo-top {
+    height: 80px;
+    .w-100;
 
-           }
-           .signature{
-               font-size:13px;
-              color:@color_font6;
-           }
-       }
+    .userinfo-left {
+      width: 25%;
+      height: 80px;
+      float: left;
+      line-height: 80px;
+      padding-left: 35px;
+
+      img {
+        width: 45px;
+        height: 45px;
+        border-radius: 50px;
+        border: 1px solid white;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:active,&:visited,&:hover {
+        background-color: @color_menu_selected;
+      }
     }
-    .userinfo-center{
-        height:80px;
-       .w-100;
-       .userinfo-left{
-           width:50%;
-           height: 100%;
-           background-color:@pc_bodyContainer_navBGColor;
-           float: left;
-           border-right:2px solid @nav-spliceLineColor;
-       }
-       .userinfo-right{
-           width:50%;
-           height: 100%;
-           background-color:@pc_bodyContainer_navBGColor;
-           float:left;
-       }
+
+    .userinfo-right {
+      width: 75%;
+      height: 100%;
+      float: left;
+
+      .name {
+        font-size: 18px;
+        color: white;
+        font-weight: 500;
+        padding-top: 20px;
+      }
+
+      .signature {
+        font-size: 13px;
+        color: @color_font6;
+      }
     }
-    .userinfo-bottom{
-        height:80px;
-        .w-100;
-        width: 100%;
-        .block1{
-            width:400/3px;
-            float: left;
-            background-color:red;
-            height: 80px;
-        }
-        .block2{
-            width:400/3px;
-            float: left;
-            background-color:gray;
-            height: 80px;
-        }
-        .block3{
-             width:400/3px;
-            float: left;
-            background-color:red;
-            height: 80px;
-        }
+  }
+
+  .userinfo-center {
+    height: 80px;
+    .w-100;
+
+    span {
+      display: block;
+      width: 100%;
+      text-align: center;
+
+      &:first-child {
+        .f-big;
+        height: 33px;
+        line-height: 33px;
+        margin-top: 14px;
+      }
+
+      &:last-child {
+        .f-small;
+        .color_font6;
+      }
     }
+
+    .userinfo-left {
+      width: 50%;
+      height: 100%;
+      background-color: @pc_bodyContainer_navBGColor;
+      float: left;
+      border-right: 1px solid @nav-spliceLineColor;
+    }
+
+    .userinfo-right {
+      width: 50%;
+      height: 100%;
+      background-color: @pc_bodyContainer_navBGColor;
+      float: left;
+    }
+
+    .userinfo-left:hover,
+    .userinfo-right:hover,
+    userinfo-left:active,
+    userinfo-left:visited,
+    userinfo-right:active,
+    userinfo-right:visited {
+      cursor: pointer;
+      .background_color_menu_selected;
+    }
+  }
+
+  .userinfo-bottom {
+    height: 80px;
+    .w-100;
+    width: 100%;
+
+    div {
+      width: 400/3px;
+      float: left;
+      height: 80px;
+      .center;
+      &:hover,&:active,&:visited{
+        cursor: pointer;
+        .background_color_menu_selected;
+      }
+      i{
+        margin-top:5px;
+        font-size: 30px;
+        color:white;
+        display: inline-block;
+      }
+      div{
+        display: inline-block;
+        height: 20px;
+        text-align: center;
+        .color_font6;
+        .f-small;
+      }
+    }
+  }
 }

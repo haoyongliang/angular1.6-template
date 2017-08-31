@@ -18,8 +18,13 @@ code, kbd, pre, samp, tt { font-family: Consolas,"Courier New", Courier, monospa
 address, cite, dfn, em, var,i {font-style: normal;}
 blockquote, q {quotes: none;}
 blockquote:before, blockquote:after,q:before, q:after {content:"";content: none;}
-a { 
+a {
     color:#06f; text-decoration:none;cursor: pointer;
     &:link,&:visited, &:active{color: #06f;}
-    &:hover, &:focus {color:#f60; text-decoration:underline;outline:none;}
+    &:hover, &:focus {color:#f60; text-decoration:  underline;outline:none;}
+}
+select,input,textarea{
+  outline: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+
 }

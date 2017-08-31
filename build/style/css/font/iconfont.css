@@ -1,35 +1,187 @@
 
-@font-face {font-family: "platform";
-  src: url('iconfont.eot?t=1498444369698'); /* IE9*/
-  src: url('iconfont.eot?t=1498444369698#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1498444369698') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1498444369698') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1498444369698#platform') format('svg'); /* iOS 4.1- */
+@font-face {font-family: "ColorChangeFont";
+  src: url('iconfont.eot?t=1502439386822'); /* IE9*/
+  src: url('iconfont.eot?t=1502439386822#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1502439386822') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1502439386822') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1502439386822#ColorChangeFont') format('svg'); /* iOS 4.1- */
 }
 
-.platform {
-  font-family:"platform" !important;
+.ColorChangeFont {
+  font-family:"ColorChangeFont" !important;
   font-size:16px;
   font-style:normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-shuaxin:before { content: "\e600"; }
+
+.icon-shanchu:before { content: "\e66a"; }
+
+.icon-gengduo:before { content: "\e618"; }
+
 .icon-set:before { content: "\e61f"; }
 
 .icon-jieshu:before { content: "\e6e5"; }
 
+.icon-iconfontcolor32:before { content: "\e690"; }
+
+.icon-yonghuming:before { content: "\e617"; }
+
+.icon-mima:before { content: "\e692"; }
+
+.icon-bianji3:before { content: "\e60e"; }
+
+.icon-shouji:before { content: "\e613"; }
+
+.icon-bianji:before { content: "\e610"; }
+
 .icon-gerenziliao:before { content: "\e604"; }
+
+.icon-duihao:before { content: "\e608"; }
+
+.icon-sort-down-copy-copy:before { content: "\e605"; }
+
+.icon-circle:before { content: "\e6ff"; }
+
+.icon-icon1460188493695:before { content: "\e61a"; }
+
+.icon-wode:before { content: "\e611"; }
+
+.icon-xiangji:before { content: "\e671"; }
+
+.icon-shape:before { content: "\e631"; }
+
+.icon-xiangqing:before { content: "\e673"; }
+
+.icon-jian:before { content: "\e60a"; }
+
+.icon-toumingbeijing:before { content: "\e672"; }
+
+.icon-asmkticon0249:before { content: "\e80b"; }
+
+.icon-location:before { content: "\e603"; }
 
 .icon-wancheng:before { content: "\e620"; }
 
+.icon-xia:before { content: "\e655"; }
+
+.icon-zhongmingming:before { content: "\e612"; }
+
+.icon-duihua:before { content: "\e67e"; }
+
 .icon-kaishi:before { content: "\e62c"; }
 
-.icon-fanzhuan:before { content: "\e60a"; }
+.icon-sanjiao-copy-copy-copy:before { content: "\e6c2"; }
+
+.icon-yidong:before { content: "\e630"; }
+
+.icon-fanzhuan:before { content: "\e60b"; }
+
+.icon-you:before { content: "\e60c"; }
+
+.icon-zuo:before { content: "\e60d"; }
+
+.icon-weibiaoti--:before { content: "\e657"; }
+
+.icon-sanjiao:before { content: "\e607"; }
+
+.icon-wenjianjia:before { content: "\e63f"; }
+
+.icon-float-close:before { content: "\e62d"; }
 
 .icon-fangdajing:before { content: "\e64f"; }
+
+.icon-yunpan:before { content: "\e731"; }
 
 .icon-jinhangzhong:before { content: "\e63d"; }
 
 .icon-cloud-cloud:before { content: "\e635"; }
+
+.icon-qingjia:before { content: "\e670"; }
+
+.icon-gongzuo1:before { content: "\e656"; }
+
+.icon-gongzuo2:before { content: "\e658"; }
+
+.icon-xinjianxiangmuwenjian:before { content: "\e614"; }
+
+.icon-zhongmingming1:before { content: "\e65c"; }
+
+.icon-xiazai:before { content: "\e60f"; }
+
+.icon-wode1:before { content: "\e609"; }
+
+.icon-wenjianjia1:before { content: "\e606"; }
+
+.icon-wode2:before { content: "\e615"; }
+
+.icon-wodeweixuan:before { content: "\e616"; }
+
+.icon-ai:before { content: "\e632"; }
+
+.icon-eps:before { content: "\e633"; }
+
+.icon-pdf:before { content: "\e636"; }
+
+.icon-word:before { content: "\e637"; }
+
+.icon-exe:before { content: "\e63c"; }
+
+.icon-unknown:before { content: "\e638"; }
+
+.icon-excel:before { content: "\e639"; }
+
+.icon-ppt:before { content: "\e63a"; }
+
+.icon-zip:before { content: "\e63b"; }
+
+.icon-flash:before { content: "\e63e"; }
+
+.icon-gdoc:before { content: "\e640"; }
+
+.icon-gdocs:before { content: "\e641"; }
+
+.icon-gpres:before { content: "\e642"; }
+
+.icon-gsheet:before { content: "\e643"; }
+
+.icon-image:before { content: "\e644"; }
+
+.icon-keynote:before { content: "\e645"; }
+
+.icon-mp:before { content: "\e646"; }
+
+.icon-overlay:before { content: "\e647"; }
+
+.icon-pack:before { content: "\e648"; }
+
+.icon-pages:before { content: "\e649"; }
+
+.icon-psd:before { content: "\e64a"; }
+
+.icon-rtf:before { content: "\e64b"; }
+
+.icon-stypi:before { content: "\e64c"; }
+
+.icon-webex:before { content: "\e64d"; }
+
+.icon-visio:before { content: "\e64e"; }
+
+.icon-slide:before { content: "\e650"; }
+
+.icon-word1:before { content: "\e651"; }
+
+.icon-xml:before { content: "\e652"; }
+
+.icon-zip1:before { content: "\e653"; }
+
+.icon-ppt1:before { content: "\e654"; }
+
+.icon-html:before { content: "\e659"; }
+
+.icon-txt:before { content: "\e65a"; }
+
+.icon-csv:before { content: "\e65b"; }
 

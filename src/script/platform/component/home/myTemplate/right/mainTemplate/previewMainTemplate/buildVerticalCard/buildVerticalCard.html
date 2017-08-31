@@ -1,0 +1,28 @@
+<div ng-controller="buildVerticalCardCtrl" style="height:233px;" app-loading="buildVerticalCard" app-loading-options="{text: '{{message}}..'}">
+
+  <app-page-panel has-header-color="false" has-border="false" callback="closeThisDialog('close')" ng-init="init()" border-weight="2px" left-btn-icon="icon ColorChangeFont  icon-float-close" header="纵向分类卡" head-style="2" class="w-100 h-100" app-loading="buildVerticalCard" app-loading-options="{text: '{{message}}..'}">
+    <form name="buildVerticalCard">
+      <app-vertical-card>
+        以下内容均为必填项
+      </app-vertical-card>
+      <div class="w-100 clearfix color_line_right_outside color_line_left_outside" >
+        <app-input title="字段名称">
+          <input placeholder="请输入字段名称"  type="text" name="cardElementName" ng-model="form.cardElementName" validator="required ">
+        </app-input>
+        <app-input  title="文字颜色" >
+          <oi-select readonly oi-options="item.name for item in colorConstant " ng-model="form.fontColor" ></oi-select>
+        </app-input>
+        <app-input title="文字位置">
+          <oi-select readonly oi-options="item.name for item in buildVerticalCardConstant.descPosition" ng-model="form.descPosition" ></oi-select>
+        </app-input>
+        <app-input title="文字加粗" is-bottom="true">
+          <oi-select readonly oi-options="item.name for item in buildVerticalCardConstant.isBold" ng-model="form.isBold" ></oi-select>
+        </app-input>
+      </div>
+      <div style="width:100%; bottom:0 ; height:28px;left:0" class="p-a">
+        <div style="width:calc(100% / 2); " class="cutting-line f-l app-submitBtn f-small" validation-submit="buildVerticalCard" ng-click="save()">保 存</div>
+        <div style="width:calc(100% / 2); " class="f-l app-submitBtn f-small" ng-click="closeThisDialog('cancel')">取 消</div>
+      </div>
+      </form>
+  </app-page-panel>
+</div>

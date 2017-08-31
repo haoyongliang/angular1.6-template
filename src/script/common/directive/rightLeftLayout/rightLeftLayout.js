@@ -29,17 +29,17 @@ APP.directive('appRightLeftLayout',['$timeout','uuid',($timeout,uuid)=>{
 		},
 		restrict: 'E',
 		controller($scope){
-			
+
 		},
 		link($scope, $element, $attrs, ngModelCtrl){
 			$scope.id = "lrc-containerd-" + uuid.getUUID();
 			$scope.curIsShowLeft = true;//当前是否显示左边布局
 			$scope.leftWidthBak = $scope.leftWidth;//备份左边布局宽度，滑动时使用
-			
+
 			const leftIcon = "glyphicon glyphicon-triangle-left";
 			const rightIcon = "glyphicon glyphicon-triangle-right";
 			$scope.centerIcon = leftIcon;
-			
+
 			//给属性设置默认值
 			if(!$scope.height){
 				$scope.height = '100%';
@@ -50,14 +50,14 @@ APP.directive('appRightLeftLayout',['$timeout','uuid',($timeout,uuid)=>{
 			if(!$scope.class){
 				$scope.class = '';
 			}
-			
+
 			if(!$scope.leftWidth){
 				$scope.leftWidth = '50%';
 			}else{
 				console.log(parseFloat($scope.leftWidth)+10+'px');
 				$scope.leftWidth = parseFloat($scope.leftWidth)+10+'px';
 			}
-			
+
 			if(!angular.isDefined($scope.leftStyle)){
 				$scope.leftStyle = "";
 			}
@@ -70,14 +70,21 @@ APP.directive('appRightLeftLayout',['$timeout','uuid',($timeout,uuid)=>{
 			if(!angular.isDefined($scope.centerWidth)){
 				$scope.centerWidth = "13.6px";
 			}
-			
+
 			if(!angular.isDefined($scope.centerIconStyle)){
 				$scope.centerIconStyle = "";
 			}
-			//初始化left,right标签样式			
+			//初始化left,right标签样式
 			$element.find('left,right').addClass('h-100 w-100 d-ib');
-			
-			
+
+
+			$element.find('.lrl-centerBtn').css('visibility','hidden');
+			$element.on('mouseenter',function(){
+				$element.find('.lrl-centerBtn').css('visibility','visible');
+			});
+			$element.on('mouseleave',function(){
+				$element.find('.lrl-centerBtn').css('visibility','hidden');
+			});
 			//给中间栏添加点击事件,切换左右滑动特效
 			$(".lrl-centerBtn").on('click',()=>{
 				if(!!$scope.curIsShowLeft){

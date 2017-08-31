@@ -1,0 +1,51 @@
+<div style="p-a t-0" style="width:0;height:0">
+  <style>
+    [app-loading] {
+      position: relative;
+    }
+
+    .app-loading {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      text-align: center;
+      display: none;
+    }
+
+    .app-loading:before {
+      content: '';
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+    }
+
+    .app-loading.app-loading-active {
+      display: block;
+    }
+
+    .app-loading.app-loading-overlay {
+      background-color: rgba(255, 255, 255, .7);
+      z-index: 9999;
+    }
+
+    .app-loading>.app-loading-body {
+      display: inline-block;
+      vertical-align: middle;
+      position: relative;
+    }
+
+    .app-loading>.app-loading-body>.app-loading-spinner {
+      position: relative;
+    }
+
+    .app-loading>.app-loading-body>.app-loading-text {
+      position: relative;
+      top: 25px;
+      font-weight: 400 !important;
+      font-size: 12px;
+      text-shadow: 0 0 2px rgb(255, 255, 255);
+    }
+  </style>
+</div>

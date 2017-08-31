@@ -25,6 +25,9 @@ APP.directive('appTabs', ['$timeout', 'uuid','$log', ($timeout, uuid,$log) => {
     restrict: "EA",
     transclude: true,
     scope: {
+      clazz:'@class',
+      style:'@',
+      defaultPanel:'@'
     },
     templateUrl: 'script/common/directive/tabs/tab.html?t=' + uuid.getUUID(),
     controller: ["$scope", function($scope) {
@@ -32,48 +35,96 @@ APP.directive('appTabs', ['$timeout', 'uuid','$log', ($timeout, uuid,$log) => {
       //点击选项卡标题操作
       $scope.clickTtile = function(pane){
         if(angular.isFunction(pane.callback)){
-          console.log(123);
           pane.callback();
         }
       }
+
+
       //切换选项卡
       $scope.select = function(pane) {
-        angular.forEach(panes, scope=> {
-          scope.selected = false;
-        });
-        pane.selected = true;
-        // pane.callback();
+        if(!!pane){
+          angular.forEach(panes, scope=> {
+            scope.selected = false;
+          });
 
+          pane.selected = true;
+        }
       };
+
+      this.removeScope = function(scope){
+        for(let i=panes.length-1; i>=0; i--){
+          panes[i].selected = false;
+          if(panes[i].uuid == scope.uuid){
+            panes.splice(i,1);
+          }
+        }
+        if (panes.length != 0) {
+          $scope.select(panes[0]);
+        }
+      }
+
 
       //添加选项卡，供子标签app-panel 或者app-panel-lazy 使用
       this.addScope = function(scope) {
-        if (panes.length === 0) {
-          $scope.select(scope);
+        let has = false;
+        for(let i=0; i<panes.length; i++){
+          if(panes[i].uuid == scope.uuid){
+            has = true;
+          }
         }
-        panes.push(scope);
-        $scope.width = 100/panes.length + '%';
+
+        if(!has){
+          if(!!$scope.defaultPanel && panes.length == $scope.defaultPanel){
+            $scope.select(scope);
+          }else if (panes.length === 0) {
+            $scope.select(scope);
+          }
+          panes.push(scope);
+          $scope.width = 100/panes.length + '%';
+        }
+
+
       }
     }],
     link($scope, $element, $attrs, ngModelCtrl) {
-
     }
   }
 }]);
 //子标签,不进行懒加载
-APP.directive('appPanel', ['$timeout', 'uuid', ($timeout,uuid) => {
+APP.directive('appPanel', ['$timeout', 'uuid', '$compile',($timeout,uuid,$compile) => {
   return {
     restrict: 'EA',
     scope: {
       tittle: '@',
-      callback : '&appClick'
+      callback : '&appClick',
+      showed:'@',
     },
-    replace:true,
+    replace:false,
     transclude: true,
     require: '^appTabs', //继承外层指令
     templateUrl: 'script/common/directive/tabs/panel.html?t=' + uuid.getUUID(),
     link($scope, elemenet, attrs, appTabsController) {
-      appTabsController.addScope($scope);
+
+      // $scope.$watch(function(scope){
+      //   return scope.$eval(attrs.compile);
+      // },function(v){
+      //   console.log(1111111111);
+      //   elemenet.html(v);
+      //   $compile(elemenet.contents())($scope);
+      // });
+      if(!angular.isDefined($scope.uuid)){
+        $scope.uuid = uuid.getUUID();
+      }
+      if(!angular.isDefined($scope.showed)){
+        $scope.showed = true;
+      }
+      $scope.$watch('showed',(newVal,oldVal)=>{
+        if(!!newVal & newVal != 'false'){
+          appTabsController.addScope($scope);
+        }else{
+          appTabsController.removeScope($scope);
+        }
+      });
     }
   }
 }]);
@@ -83,14 +134,28 @@ APP.directive('appPanelLazy', ['$timeout', 'uuid', ($timeout,uuid) => {
     restrict: 'EA',
     scope: {
       tittle: '@',
-      callback : '&appClick'
+      callback : '&appClick',
+      showed:"@"
     },
-    replace:true,
+    replace:false,
     transclude: true,
     require: '^appTabs', //继承外层指令
     templateUrl: 'script/common/directive/tabs/panelLazy.html?t=' + uuid.getUUID(),
-    link(scope, elemenet, attrs, appTabsController) {
-      appTabsController.addScope(scope);
+    link($scope, elemenet, attrs, appTabsController) {
+
+      if(!angular.isDefined($scope.uuid)){
+        $scope.uuid = uuid.getUUID();
+      }
+      if(!angular.isDefined($scope.showed)){
+        $scope.showed = true;
+      }
+      $scope.$watch('showed',(newVal,oldVal)=>{
+        if(!!newVal && newVal!='false'){
+          appTabsController.addScope($scope);
+        }else{
+          appTabsController.removeScope($scope);
+        }
+      });
     }
   }
 }]);

@@ -1,0 +1,10 @@
+<div class="w-100 f-l clearfix {{class}}">
+  <div class="w-100 tr-height f-l " >
+    <div class="tr-height f-l p-l-10 f-small color_line_right_inside  " style="width:150px; background-color:#F0F4FA;color:#5385C2;"
+      ng-class="{'color_line_left_inside':isRight,'color_line_bottom_inside':!isBottom ,'color_line_bottom_outside':isBottom}">
+      {{title}}
+    </div><div class="tr-height   d-ib f-small p-r" style="width:calc(100% - 150px);" ng-class="{'color_line_bottom_inside':!isBottom ,'color_line_bottom_outside':isBottom}" ng-transclude>
+
+    </div>
+  </div>
+</div>

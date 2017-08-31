@@ -1,0 +1,18 @@
+<div class="w-100" >
+  <style>
+    .section-header:hover,.section-header:visited{
+      cursor: pointer;
+    }
+    .section-body section{
+      overflow: hidden;
+    }
+  </style>
+  <div class="tr-height section-header" ng-click="showSectionHandler()" >
+    <div ng-transclude='header' >
+
+    </div>
+  </div>
+  <div style="height:calc(100% - 28px); " class="section-body" id="{{id}}" name="containerkl234jnsd">
+    <div ng-transclude='section'></div>
+  </div>
+</div>

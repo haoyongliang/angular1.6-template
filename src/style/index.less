@@ -2,23 +2,26 @@
 @import "./base.less";
 @import "./function.less";
 @import "./reset.less";
-//@import "./normalize.less";
+@import "./normalize.less";
 @import "./theme/default.less";
 @import "./validation.less";
 @import "./scrollbar.less";
-@import "./component.less";  
+@import "./component.less";
 @import "./login.less";
+@import "./ui.tree.less";
+@import "./dialog-custom.less";    
+@import "./select.less";
 @import "./../script/platform/directive/navUserInfo/navUserInfo.less";
 
 @pc_bodyContainer_nav_height:50px;
 @pc_bodyContainer_body_padding: 16px;
 @pc_bodyContainer_body_height : @pc_bodyContainer_nav_height;
 
+ 
 
 
 
-
-//每一个body都要引入的样式
+//每一个body都要引入的样式 
 .pc_body{
     position: relative;
 //  height: calc(~'100% - @{pc_bodyContainer_body_height}');

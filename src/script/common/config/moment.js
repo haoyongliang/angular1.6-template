@@ -2,7 +2,7 @@
 APP.config(['momentPickerProvider', function (momentPickerProvider) {
         momentPickerProvider.options({
             /* Picker properties */
-            locale:        'en',
+            locale:        'zh-cn',
             format:        'L LTS',
             minView:       'decade',
             maxView:       'minute',

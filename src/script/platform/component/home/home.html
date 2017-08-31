@@ -1,4 +1,4 @@
-<div class="w-100 h-100" ng-controller="homeCtrl">
+<div class="w-100 h-100" ng-controller="homeCtrl" ng-init="init()">
 	<div class="pc_bodyContainer" ng-if="!mainMode">
 		<nav>
 			<img class="logo" ng-src="image/pc_logo.png"></img>
@@ -8,11 +8,11 @@
 				</li>
 				<li class="nav-pipe">|</li>
 				<li class="nav-catalog">
-					<a href="">数据</a>
+					<a href="">数据{{homectrl}}</a>
 				</li>
 				<li class="nav-pipe">|</li>
 				<li class="nav-catalog">
-					<a href="" ng-click="showOrHideNav('navuserinfo')">Angilababy</a>
+					<a href="" ng-click="showUserInfo($event)">{{loginName}}</a>
 				</li>
 				<li class="nav-pipe">|</li>
 				<li class="nav-catalog">
@@ -24,7 +24,7 @@
 				</li>
 			</ul>
 		</nav>
-		<dropsea-nav-user-info ng-if="navuserinfo" ></dropsea-nav-user-info>
+		<dropsea-nav-user-info ng-if="userInfoMode" ></dropsea-nav-user-info>
 		<div ui-view class="h-100 w-100 p-r animated fadeIn" >
 
 		</div>

@@ -1,0 +1,78 @@
+<div ng-controller="userSetCtrl" class="pc_body p-r ">
+  <div class="p-a" style="height:80%; width:700px; top:50%;transform: translate(-50%,-50%);left:50% " app-loading="userSet" app-loading-options="{text: '{{message}}..'}">
+    <app-page-panel callback="close()" ng-init="init()" border-bottom="1px solid black" left-btn-icon="icon ColorChangeFont  icon-float-close" header="个人资料" head-style="2" class="w-100 h-100">
+      <div class="w-100 h-100">
+        <app-tabs style='border-top:0;'>
+
+          <app-panel tittle='授权' app-click='alert(1)'>
+            <app-table data="{{tbConfig}}">
+              <app-tr ng-repeat="item in items">
+                <app-td>{{$index}}</app-td>
+                <app-td>{{item.name}}</app-td>
+                <app-td>--</app-td>
+                <!-- 用户名 -->
+                <app-td>--</app-td>
+                <!-- 职务 -->
+                <app-td>--</app-td>
+                <!-- 角色 -->
+                <app-td>--</app-td>
+                <!-- 移动电话 -->
+                <app-td>--</app-td>
+                <!-- 电子邮件 -->
+                <app-td>--</app-td>
+                <!-- 账户状态 -->
+                <app-td>--</app-td>
+                <!-- 备注 -->
+                <app-td>角色 解冻 删除</app-td>
+                <!-- 用户名 -->
+              </app-tr>
+            </app-table>
+          </app-panel>
+          <app-panel tittle='提醒' app-click=''>
+            <app-table data="{{tbConfig}}">
+              <app-tr ng-repeat="item in items">
+                <app-td>1</app-td>
+                <app-td>{{item.name}}</app-td>
+                <app-td>--</app-td>
+                <!-- 用户名 -->
+                <app-td>--</app-td>
+                <!-- 职务 -->
+                <app-td>--</app-td>
+                <!-- 角色 -->
+                <app-td>--</app-td>
+                <!-- 移动电话 -->
+                <app-td>--</app-td>
+                <!-- 电子邮件 -->
+                <app-td>--</app-td>
+                <!-- 账户状态 -->
+                <app-td>--</app-td>
+                <!-- 备注 -->
+                <app-td>角色 解冻 删除</app-td>
+                <!-- 用户名 -->
+              </app-tr>
+
+            </app-table>
+          </app-panel>
+          <app-panel tittle='密码' app-click='' ng-init="passwordPanelInit()">
+            <form name="userPasswordForm">
+              <div class="tr-height"></div>
+              <div class="color_table_border_top color_table_border_right">
+                <app-input title="原密码">
+                  <input type="password" name="password" placeholder="请输入原密码" ng-model="userSetForm.password" validator="required,compareOldPassword={{oldPassword}}">
+                </app-input>
+                <app-input title="新密码">
+                  <input type="password" name="newPassword" placeholder="请输入新密码" ng-model="userSetForm.newPassword" id="newpwd" validator="required " />
+                </app-input>
+                <app-input title="再次输入新密码">
+                  <input type="password" name="repassword" placeholder="请再次输入新原密码" ng-model="userSetForm.repassword" id="reppwd" validator="required,comparePassword=newpwd" >
+                </app-input>
+                <div class="tr-height"></div>
+                <div class="app-submitBtn f-small" validation-submit="userPasswordForm" ng-click="changePassword()">保 存</<div>
+              </div>
+            </form>
+          </app-panel>
+        </app-tabs>
+        </div>
+    </app-page-panel>
+    </div>
+  </div>

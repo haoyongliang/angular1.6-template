@@ -1,22 +1,37 @@
 <div>
 	<div class="navUserInfo color_menu_second p-a animated fadeIn" >
 		<div class="userinfo-top">
-			<div class="userinfo-left" ui-sref="home.organization">
+			<div class="userinfo-left" >
 				<img ng-src="image/touxiang.gif" />
 			</div>
 			<div class="userinfo-right">
-				<div class="name">Angliababy</div>
-				<div class="signature">请填写签名</div>
+				<div class="name f-middleBig">Angliababy</div>
+				<div class="signature f-small p-t-5">佛为心，道为骨,儒为表,大度看世界</div>
 			</div>
 		</div>
-		<div class="userinfo-center">
-			<div class="userinfo-left"></div>
-			<div class="userinfo-right"></div>
+		<div class="userinfo-center" style="color:white">
+			<div class="userinfo-left " ng-click="gotoOrganization($event)">
+				<span>3</span>
+				<span>我的组织</span>
+			</div>
+			<div class="userinfo-right" ng-click="gotoMyTemplate($event)">
+				<span>48</span>
+				<span >我的模板</span>
+			</div>
 		</div>
 		<div class="userinfo-bottom">
-			<div class="block1"></div>
-			<div class="block2"></div>
-			<div class="block3"></div>
+			<div class="block1" ng-click="gotoUserInfo($event)">
+				<i class="icon ColorChangeFont  icon-gerenziliao"></i>
+				<div >个人资料</div>
+			</div>
+			<div class="block2" ng-click="gotoUserSet($event)">
+				<i class="icon ColorChangeFont  icon-set"></i>
+				<div>个人设置</div>
+			</div>
+			<div class="block3">
+				<i class="icon ColorChangeFont  icon-cloud-cloud"></i>
+				<div>企业云盘</div>
+			</div>
 		</div>
 	</div>
 </div>

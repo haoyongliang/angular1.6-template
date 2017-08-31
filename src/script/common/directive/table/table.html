@@ -1,0 +1,16 @@
+<div id="{{id}}" class="w-100 h-100 {{clazz}}" >
+  <table class="app-table  app-table-head w-100 app-table-border-inside-bottom">
+    <thead>
+      <tr>
+        <th ng-repeat="(key,value) in titleData" style="{{value.style}}" title="{{value.label}}">{{value.label}}</th>
+      </tr>
+    </thead>
+  </table>
+
+  <div style="height:{{contentHeight}}">
+    <div ng-scrollbars>
+      <table class="app-table app-table-body  w-100 " ng-transclude>
+      </table>
+    </div>
+  </div>
+</div>

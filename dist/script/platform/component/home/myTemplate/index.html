@@ -1,0 +1,17 @@
+<div ng-controller="selectOrgsCtrl" class="pc_body p-r ">
+  <div class="p-a" style="height:80%; width:700px; top:50%;transform: translate(-50%,-50%);left:50% " >
+      <app-page-panel has-header-color="false" has-border="false" header="我的模板(选择公司)" head-style="3" left-btn-icon="icon ColorChangeFont icon-float-close"  ng-init="initTemplateList()" app-loading="orgList" app-loading-options="{text: '{{message}}'}">
+        <app-vertical-card>
+          您在6个组织下共创建了48个工作模板、15个子工作模板
+        </app-vertical-card>
+        <div style="height:calc(100% - 28px); "   class="color_line_outside">
+          <div ng-scrollbars>
+            <!-- 列表 -->
+            <app-list-item name="organName" right-icon-auto-visible="true" ui-sref="home.myTemplate({entId:data.entId,createUserId:data.createUserId,enterpriseName:data.enterpriseName})"   right-btn-handler="a()" ng-repeat="data in  organizations;">
+                {{data.enterpriseName}}
+            </app-list-item>
+          </div>
+        </div>
+      </app-page-panel>
+  </div>
+</div>

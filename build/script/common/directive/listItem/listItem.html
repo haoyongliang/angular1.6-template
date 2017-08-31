@@ -1,0 +1,19 @@
+<div class="w-100 f-small tr-height app-list-item" style="border-bottom:1px solid #E8E8E8; padding-left:10px; background-color:white" >
+  <style>
+    .app-list-item-selected{
+      background-color: #373d41 !important;
+      color:white;
+    }
+    .app-list-item:hover,.app-list-item:visited{
+      background-color: #373d41 !important;
+      cursor: pointer;
+      color:white;
+    }
+  </style>
+  <div class="w-100 h-100 p-r " >
+    <div ng-transclude class="w-100 h-100 {{clazz}}"></div>
+    <div class="p-a t0 r0 tr-height">
+      <span ng-click='clickRightBtn()' class="f-small  p-a t0 tr-height r0 rightIcon {{rightIcon}}" style="width:20px"></span>
+    </div>
+  </div>
+</div>

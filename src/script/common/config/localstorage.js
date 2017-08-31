@@ -1,6 +1,6 @@
 APP.config(['localStorageServiceProvider',(localStorageServiceProvider)=> {
   localStorageServiceProvider
-  .setPrefix('XIZHUOKEJI')
+  .setPrefix('dropsea')
   .setStorageType('sessionStorage')
   .setNotify(true, true)
 }]);

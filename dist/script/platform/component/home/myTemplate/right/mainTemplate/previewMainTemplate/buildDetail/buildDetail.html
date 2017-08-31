@@ -1,0 +1,36 @@
+<div ng-controller="buildDetailCtrl" style="height:400px" app-loading="buildDetail" app-loading-options="{text: '{{message}}..'}">
+  <app-page-panel callback="cancel()"  header="明细构件" has-border="false" has-header-color="false" head-style="2" left-btn-icon="icon ColorChangeFont icon-float-close">
+    <form name="buildDetailCtrlForm">
+      <app-vertical-card>以下内容均为必填项</app-vertical-card>
+      <div class="clearfix color_line_right_outside color_line_left_outside">
+        <app-input title="字段名称">
+			<input type="text" name="cardElementName" ng-model="form.cardElementName" validator="required" placeholder="请输入字段名称"/>
+		   </app-input>
+		    <app-input title="构件属性">
+          <oi-select
+            name="cardElementAttribute"
+            oi-options="item.name for item in buildDetailConstant.cardElementAttribute"
+            ng-model="form.cardElementAttribute"
+            multiple
+            ></oi-select>
+        </app-input>
+        <app-input title="资料业务归档">
+          <oi-select
+            name="isBusType"
+            oi-options="item.name for item in buildDetailConstant.isBusType"
+            ng-model="form.isBusType"
+            validator="required"
+            ></oi-select>
+        </app-input>
+        <app-input title="提示">
+            <input type="text" name="cardElementDesc" placeholder="请输入提示文字" ng-model="form.cardElementDesc" ></input>
+        </app-input>
+
+        <div style="width:100%; bottom:0 ; height:28px;left:0" class="p-a">
+          <div style="width:calc(100% / 2); " class="cutting-line f-l app-submitBtn f-small" validation-submit="buildDetailCtrlForm" ng-click="save()">保 存</div>
+          <div style="width:calc(100% / 2); " class="f-l app-submitBtn f-small" ng-click="closeThisDialog('cancel')">取 消</div>
+        </div>
+      </div>
+    </form>
+  </app-page-panel>
+</div>

@@ -2,6 +2,7 @@ APP.config(['ScrollBarsProvider',(ScrollBarsProvider)=>{
 	// scrollbar defaults
 	ScrollBarsProvider.defaults = {
 		autoHideScrollbar: false,
+		scrollAmount:'auto',
 		setHeight: '100%',
 		scrollInertia: 500,
 		axis: 'yx',

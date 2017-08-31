@@ -5,12 +5,12 @@
  * ng-model 必须有
  * currency 必须有
  * bit 小数点保留位数，可以不写，默认保留2位
+ * isF 是否是负数
  */
 APP.directive('appCurrency', ['$filter','$browser',($filter, $browser)=> {
 	return {
 		require: 'ngModel',
 		link: function($scope, $element, $attrs, ngModelCtrl) {
-
 			var separators = {
 				'thousands': $filter('number')(1000).substr(1, 1),
 				'decimal': $filter('number')(1.1).substr(1, 1)
@@ -85,4 +85,29 @@ APP.directive('appCurrency', ['$filter','$browser',($filter, $browser)=> {
 			})
 		}
 	}
+}])
+
+
+APP.directive('appendText',[function(){
+    return {
+        scope:{
+        	
+        },
+        restrict: 'A',
+        link: function($scope, $element, $attrs, ngModelCtrl){            
+            $element.on('blur', function() {
+            	if(!!$attrs.appendText){
+            		$element.val($element.val()+$attrs.appendText);
+            	}	
+			})
+            $element.on('focus',function(){
+            	if(!!$attrs.appendText){
+            		let val = $element.val();
+            		val = val.substring(0,val.indexOf($attrs.appendText));
+            		$element.val(val);
+            	}
+            })
+            
+        }
+    }
 }])

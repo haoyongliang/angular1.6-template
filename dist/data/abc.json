@@ -1,0 +1,5 @@
+{
+    "result": "200",
+    "msg": "请求成功",
+    "data": "{\"swift_number\":\"3000816_20170817143948_5109\",\"code\":600000,\"product\":{\"message\":{\"status\":\"0\",\"value\":\"处理成功\"},\"priskChecks\":[{\"@inputXm\":\"廖家伟\",\"@inputZjhm\":\"440822197002141014\",\"wybs\":{\"@desc\":\"唯一标识\",\"#text\":\"402889405de03a47015deeeb5cd97a28\"},\"message\":{\"status\":\"0\",\"value\":\"查询成功_有数据\"},\"checkCode\":{\"@desc\":\"核验代码\",\"#text\":\"2\"},\"checkMsg\":{\"@desc\":\"核验代码描述\",\"#text\":\"比中前科\"},\"caseDetail\":[{\"caseType\":{\"@desc\":\"案件类别\",\"#text\":\"持有、使用假币案\"},\"caseTime\":{\"@desc\":\"发案时间\",\"#text\":\"2000-04-18\"},\"caseSource\":{\"@desc\":\"案件来源（在逃、前科）\",\"#text\":\"前科\"}},{\"caseType\":{\"@desc\":\"案件类别\",\"#text\":\"持有、使用假币案\"},\"caseTime\":{\"@desc\":\"发案时间\",\"#text\":\"2000-04-18\"},\"caseSource\":{\"@desc\":\"案件来源（在逃、前科）\",\"#text\":\"前科\"}}]}],\"costTime\":141},\"flag\":{\"flag_crimeinfo\":1}}"
+}

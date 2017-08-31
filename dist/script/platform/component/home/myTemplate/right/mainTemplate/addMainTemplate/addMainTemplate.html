@@ -1,0 +1,47 @@
+<div class="w-100 h-100" ng-controller="addMainTemplateCtrl">
+  <app-page-panel callback="close()" ng-init="init()" border-bottom="1px solid black" left-btn-icon="icon ColorChangeFont  icon-float-close" header="创建主工作模板" head-style="2" class="w-100 h-100" app-loading="addMainTemplate" app-loading-options="{text: '{{message}}..'}">
+    <app-vertical-card>
+      您在6个组织下共创建了48个工作模板、15个子工作模板
+    </app-vertical-card>
+    <div class="w-100 " style="height:calc(100% - 28px); ">
+      <form name="addMainTemplate">
+
+        <div style="border-top:1px solid #BFBFBF; border-right:1px solid #BFBFBF">
+          <app-input title="主工作模板名称">
+            <input type="text" ng-model="form.templateName" name="templateName" placeholder="请输入主工作模板名称" validator="required ">
+          </app-input>
+          {{mainType}}
+          <app-input title="模板类型">
+
+            <select ng-init="form.mainType = templateMainTypes[0].type" ng-model="form.mainType" >
+              <option value="{{x.type}}" ng-repeat="x in templateMainTypes">{{x.name}}</option>
+            </select>
+          </app-input>
+          <app-input title="模板用途说明">
+            <input type="text" ng-model="form.templateDesc" name="templateDesc" placeholder="请输入（最多20个字）">
+          </app-input>
+          <div class="w-100 tr-height f-small p-l-10" style="font-weight:bold; border-left:1px solid #bfbfbf;border-bottom:1px solid #bfbfbf">
+            分类卡设置
+          </div>
+          <div class="w-100 f-mall" style="border-left:1px solid #bfbfbf ;height:56px;line-height:56px; border-bottom:1px solid #bfbfbf">
+            <div style="padding-top:6px; width:500px;height:30px;margin:0 auto;">
+              <div class="d-ib">
+                <app-classified-card ng-model="form.card1" placeholder="输入名称"></app-classified-card>
+              </div>
+              <div class="d-ib">
+                <app-classified-card ng-model="form.card2"  placeholder="输入名称"></app-classified-card>
+              </div>
+              <div class="d-ib">
+                <app-classified-card ng-model="form.card3"  placeholder="输入名称"></app-classified-card>
+              </div>
+              <div class="d-ib">
+                <app-classified-card ng-model="form.card4"  placeholder="输入名称"></app-classified-card>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="width:100%; bottom:0" class="p-a app-submitBtn f-small" validation-submit="addMainTemplate"  ng-click="submit()">下一步：构建页面</<div>
+      </form>
+    </div>
+  </app-page-panel>
+</div>

@@ -1,0 +1,25 @@
+<div ng-controller="buildUploadCtrl" style="height:206px" app-loading="buildUpload" app-loading-options="{text: '{{message}}..'}">
+  <app-page-panel head-style="2" callback="cancel()" header="上传构件" has-header-color="false" has-border="false" left-btn-icon="icon ColorChangeFont  icon-float-close" border-weight="2px" >
+    <form name="buildUploadForm">
+      <app-vertical-card>
+        请慎重填写
+      </app-vertical-card>
+      <div class="w-100 clearfix color_line_right_outside color_line_left_outside">
+        <app-input title="字段名称">
+          <input type="text" name="cardElementName" ng-model="form.cardElementName" placeholder="请填写字段名称" validator="required"/>
+        </app-input>
+        <app-input title="构件属性">
+          <oi-select readonly oi-options="item.name for item in buildUploadConstant.cardElementAttribute" ng-model="form.cardElementAttribute"  name="textRows"></oi-select>
+        </app-input>
+        <app-input title="提示">
+          <input type="text" ng-model="form.cardElementDesc" placeholder="请填写提示信息" >
+        </app-input>
+      </div>
+      <div style="width:100%; bottom:0 ; height:28px;left:0" class="p-a">
+        <div style="width:calc(100% / 2); " class="cutting-line f-l app-submitBtn f-small" validation-submit="buildUploadForm" ng-click="save()">保 存</div>
+        <div style="width:calc(100% / 2); " class="f-l app-submitBtn f-small" ng-click="closeThisDialog('cancel')">取 消</div>
+      </div>
+    </form>
+
+  </app-page-panel>
+</div>

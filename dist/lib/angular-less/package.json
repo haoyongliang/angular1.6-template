@@ -1,0 +1,28 @@
+{
+  "name": "angular-less",
+  "version": "1.0.0",
+  "description": "Automagically render LESS <link>s in AngularJS.",
+  "main": "angular-less.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlicanC/angular-less.git"
+  },
+  "keywords": [
+    "angular",
+    "less"
+  ],
+  "author": "Alican Çubukçuoğlu <alicancubukcuoglu@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlicanC/angular-less/issues"
+  },
+  "homepage": "https://github.com/AlicanC/angular-less",
+  "devDependencies": {
+    "gulp": "git://github.com/gulpjs/gulp.git#4.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglifyjs": "^0.6.1"
+  }
+}

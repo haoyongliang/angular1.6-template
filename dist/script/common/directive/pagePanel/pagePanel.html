@@ -1,11 +1,9 @@
-<div id="{{id}}" class="pagePanel p-r {{clazz}}" style="width: {{width}}; height: {{height}};background-color: white; overflow:hidden">
+<div id="{{id}}" ng-class="{'color_line_outside':hasBorder}" class="pagePanel  p-r {{clazz}}" style="width: {{width}}; height: {{height}};background-color: white; overflow:hidden">
 	<style>
 		.pp-font-size{
-			font-size: 16px !important;
+			font-size: 12px !important;
 		}
-		.pp-blue{
-			color:#366092 !important;
-		}
+
 		.pp-gray{
 			color:#808080 !important;
 		}
@@ -23,29 +21,29 @@
 		}
 	</style>
 	<div class="p-a h-100 w-100  d-n animated fadeIn" style="z-index: 333; background-color: rgba(0,0,0,.2);" id="visiblePanel" ng-click="hidePanel()"></div>
-	<header style="border-bottom: {{borderBottom}};height: 38px; line-height: 38px;" class="pp-font-size pp-gray">
+	<header style="border-bottom:{{borderWeight}} solid #d9d9d9;height: 38px; line-height: 38px;" class="pp-font-size pp-gray">
 		<!--包含返回 标题 操作-->
-		<div class="w-100 h-100 flex " ng-if="headStyle=='1'">
-			<div class="d-ib center pp-btn " style="width: 38px;" ui-sref="<">
-				<span class=" {{leftBtnIcon}} leftBtnIcon"></span>
+		<div class="w-100 h-100 flex " ng-if="headStyle=='1'" ng-class="{'form_bg':hasHeaderColor}">
+			<div class="d-ib center pp-btn leftBtnIcon" style="width: 38px;" ng-click="leftBtnClick($event)">
+				<span class=" icon ColorChangeFont  icon-zuo "></span>
 			</div>
-			<div class="d-ib w-30 flex-1 pp-blue" style="text-align: {{textAlign}};">{{header}}</div>
-			<div class="d-ib pp-btn center leftBtnIcon" style="width: 38px;" ng-click="showPanel()">
+			<div class="d-ib w-30 flex-1  f-middleBig color_font4 f-bold" style="text-align: {{textAlign}}; ">{{header}}</div>
+			<div class="d-ib pp-btn center leftBtnIcon" style="width: 38px;">
 				<span class="{{leftBtnIcon}}"></span>
 			</div>
 		</div>
 		<!--包含返回标题操作，但返回仅仅是占用位置，不显示-->
-		<div class="w-100 h-100 flex fd-r" ng-if="headStyle=='2'">
+		<div class="w-100 h-100 flex fd-r" ng-if="headStyle=='2'" ng-class="{'form_bg':hasHeaderColor}">
 			<div class="d-ib " style="width: 38px;"> </div>
-			<div class="d-ib w-30 flex-1" style="text-align: {{textAlign}};">{{header}}</div>
+			<div class="d-ib w-30 flex-1 f-middleBig color_font4 f-bold" style="text-align: {{textAlign}};">{{header}}</div>
 			<div class="d-ib center leftBtnIcon" style="width: 38px;">
 				<span class="{{leftBtnIcon}}" style="color: #808080;"></span>
 			</div>
 		</div>
 		<!--包含标题、操作-->
-		<div class="w-100 h-100 flex fd-r" ng-if="headStyle=='3'">
+		<div class="w-100 h-100 flex fd-r" ng-if="headStyle=='3'" ng-class="{'form_bg':hasHeaderColor}">
 			<div class="d-ib " style="width: 10px;"> </div>
-			<div class="d-ib w-30 flex-1" style="text-align: {{textAlign}};">{{header}}</div>
+			<div class="d-ib w-30 flex-1 f-middleBig color_font4 f-bold" style="text-align: {{textAlign}};">{{header}}</div>
 			<div class="d-ib center leftBtnIcon" style="width: 38px;">
 				<span class="{{leftBtnIcon}}" style="color: #808080;"></span>
 			</div>

@@ -54,7 +54,6 @@ APP.directive('appLeftRightLayout',['$timeout','uuid',($timeout,uuid)=>{
 			if(!$scope.leftWidth){
 				$scope.leftWidth = '50%';
 			}else{
-				console.log(parseFloat($scope.leftWidth)+10+'px');
 				$scope.leftWidth = parseFloat($scope.leftWidth)+10+'px';
 			}
 
@@ -77,6 +76,14 @@ APP.directive('appLeftRightLayout',['$timeout','uuid',($timeout,uuid)=>{
 			//初始化left,right标签样式
 			$element.find('left,right').addClass('h-100 w-100 d-ib');
 
+			//自动隐藏中间蓝
+			$element.find('.lrl-centerBtn').css('visibility','hidden');
+			$element.on('mouseenter',function(){
+				$element.find('.lrl-centerBtn').css('visibility','visible');
+			});
+			$element.on('mouseleave',function(){
+				$element.find('.lrl-centerBtn').css('visibility','hidden');
+			});
 
 			//给中间栏添加点击事件,切换左右滑动特效
 			$(".lrl-centerBtn").on('click',()=>{
@@ -92,7 +99,6 @@ APP.directive('appLeftRightLayout',['$timeout','uuid',($timeout,uuid)=>{
 					},0);
 				}else{
 					$scope.curIsShowLeft = true;
-
 					$('#b'+$scope.id).animate({'margin-left': $scope.leftWidthBak});
 					$('#a'+$scope.id).animate({width: $scope.leftWidthBak});
 					$scope.leftWidth = $scope.leftWidthBak;
@@ -103,8 +109,6 @@ APP.directive('appLeftRightLayout',['$timeout','uuid',($timeout,uuid)=>{
 					},0);
 				}
 			});
-
 		}
-
 	}
 }]);

@@ -8,28 +8,92 @@
 //@orange : #F47935;
 //@lightOrange : #FDF3E5;
 //@gold : #CBA145;
-//@yellow : #FDD100;
+//@yellow : #FDD100; 
 //@deepYellow: #fdb933;
 //@black : #4f5555;
 //@green: #00ae9d;
 //@red: #ed1941;
+
+@btnColor:white;
+
 @white: #FFF;
+.color_white{color: @white !important}
+.background_color_white{background-color: @white !important};
+.white_bg{background-color: @white !important}
+
+
 @color_main : #366092;//主色
+.color_main{color:@color_main !important}
+.background_color_main{background-color: @color_main !important}
+
+@normal_bg:#F9F9F9;
+.normal_bg{
+  background-color: @normal_bg !important;
+}
+@black_bg:#373d41;
+.black_bg{
+  background-color: @black_bg !important;
+}
+@form_bg:#F0F4FA;
+.form_bg{
+  background-color: @form_bg !important;
+}
 
 @color_table_bg : #f0f4fa;//表格背景色辅色
-@color_table_border : #bfbfbf;//表格边框及线条的颜色
-@color_table_inside_border1 : #d9d9d9;//表格内部仙桃及其他辅助的颜色
-@color_table_inside_border2 : #e8e8e8;//表格内部仙桃及其他辅助的颜色
-@color_menu_second : #373d41;//二级菜单背景色
-@color_menu_selected : #95b3d7;//菜单选中背景色
+.color_table_bg{color: @color_table_bg !important}
+.background_color_table_bg{background-color: @color_table_bg !important}
 
+@color_table_border : #bfbfbf;//表格边框及线条的颜色
+.color_table_border{color:@color_table_border !important}
+.background_color_table_border{background-color: @color_table_border !important}
+.color_table_border_top{border-top:1px solid @color_table_border}
+.color_table_border_right{border-right:1px solid @color_table_border}
+.color_table_border_left{border-lft:1px solid @color_table_border}
+.color_table_border_bottom{border-bottom:1px solid @color_table_border}
+
+@color_table_inside_border1 : #d9d9d9;//表格外部线条及其他辅助的颜色,过时
+.color_color_table_inside_border1{color:@color_table_inside_border1 !important}//日后用西面的,过时
+//<!--S 表格外边框 -->
+.color_line_outside{border:1px solid @color_table_inside_border1 !important}
+.color_line_top_outside{border-top:1px solid @color_table_inside_border1 !important}
+.color_line_right_outside{border-right:1px solid @color_table_inside_border1 !important}
+.color_line_bottom_outside{border-bottom:1px solid @color_table_inside_border1 !important}
+.color_line_left_outside{border-left:1px solid @color_table_inside_border1 !important}
+.background_color_table_inside_border1{background-color: @color_table_inside_border1 !important}
+//<!--E 表格外边框 -->
+
+@color_table_inside_border2 : #e8e8e8;//表格内部仙桃及其他辅助的颜色,过时
+.color_table_inside_border2{color:@color_table_inside_border2 !important}//过时
+//<!--E 表格内边框 -->
+.color_line_inside{border:1px solid @color_table_inside_border2}
+.color_line_top_inside{border-top:1px solid @color_table_inside_border2}
+.color_line_bottom_inside{border-bottom:1px solid @color_table_inside_border2}
+.color_line_left_inside{border-left:1px solid @color_table_inside_border2}
+.color_line_right_inside{border-right:1px solid @color_table_inside_border2}
+.background_color_table_inside_border2{background-color: @color_table_inside_border2 !important}
+//<!--E 表格内边框 -->
+
+@color_menu_second : #373d41;//二级菜单背景色
+.color_menu_second{color:@color_menu_second !important}
+.background_color_menu_second{background-color: @color_menu_second !important}
+
+@color_menu_selected : #95b3d7;//菜单选中背景色
+.color_menu_selected{color:@color_menu_selected !important}
+.background_color_menu_selected{background-color: @color_menu_selected !important}
 
 @color_font1 : #366092; //深蓝
+.color_font1{color: @color_font1 !important}
+
 @color_font2 : #5385c1; //浅蓝
+.color_font2{color: @color_font2 !important}
 @color_font3 : #ff0000; //红色
+.color_font3{color: @color_font3 !important}
 @color_font4 : #000000; //黑色
+.color_font4{color: @color_font4 !important}
 @color_font5 : #333333; //浅黑
-@color_font6 : #808080; //灰色  
+.color_font5{color: @color_font5 !important}
+@color_font6 : #808080; //灰色
+.color_font6{color: @color_font6 !important}
 
 //PC 端首页的导航分割线颜色
 @nav-spliceLineColor : #757F76;
@@ -40,8 +104,9 @@
 //PC 端首页的导航颜色
 @pc_bodyContainer_navBGColor:#24282C;
 //PC 端首页的背景颜色
-@pc_bodyContainerBGColor :#E8EEF8;
+@pc_bodyContainerBGColor :#383D41;
 .pc_bodyContainerBGColor{
     background-color:@pc_bodyContainerBGColor !important;
 }
-                                                                                                                                                                                       
+
+.h-trHeight{height: 28px !important}

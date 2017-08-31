@@ -1,5 +1,5 @@
 /**
- * 
+ *
 <div style="height: 200px; width: 200px; background-color: pink;"> 通过最外层的div设置宽高
 	<div ng-scrollbars> 在容器中添加滚动条
 		<div app-scroll-load url='http://localhost:8080/springmvc_project/getAllStudent' params="{{params}}" method="get" num-name="page2"  callback="handler()" histroy-count="200" histroy-count-name="num"> 在滚动条中添加下拉加载
@@ -26,7 +26,7 @@
  * 	}
  */
 
-APP.directive('appScrollLoad',['$myHttp','$log','uuid', ($myHttp, $log,uuid) => {
+APP.directive('appScrollLoad',['$appHttp','$log','uuid', ($appHttp, $log,uuid) => {
 	return {
 //		templateUrl:'script/directive/scrollLoad/scrollLoad.html?t='+ uuid.getUUID(),
 		template : '',
@@ -40,13 +40,13 @@ APP.directive('appScrollLoad',['$myHttp','$log','uuid', ($myHttp, $log,uuid) => 
 			histroyCountName:"@",
 			histroyCount:"@"
 		},
-		replace: true, 
+		replace: true,
 		restrict: 'A',
 		controller($scope) {
-			
+
 		},
 		link($scope, $element, $attrs, ngModelCtrl) {
-			
+
 			let busy = false;//防止重复滚动多次
 			let hasMoreData = {flag:true};//标记是否继续请求数据
 			let draggerBottom ;//滚动条距离底部的距离
@@ -62,7 +62,7 @@ APP.directive('appScrollLoad',['$myHttp','$log','uuid', ($myHttp, $log,uuid) => 
 				}
 				//执行自定义回调函数处理数据
 				if(!!$scope.callback()){
-					$scope.callback()(data,hasMoreData);	
+					$scope.callback()(data,hasMoreData);
 				}
 			}
 			let catchMethod = function(e){
@@ -75,7 +75,7 @@ APP.directive('appScrollLoad',['$myHttp','$log','uuid', ($myHttp, $log,uuid) => 
 			let reqHandler = function(callback){
 				switch(method){
 				case "post":
-					$myHttp.getData($scope.url, params).then((data) => {
+					$appHttp.getData($scope.url, params).then((data) => {
 						handlerMethod(data);
 						if($.isFunction(callback)){
 							callback();
@@ -87,7 +87,7 @@ APP.directive('appScrollLoad',['$myHttp','$log','uuid', ($myHttp, $log,uuid) => 
 					});
 				break;
 				case "get":
-					$myHttp.getDataByGet($scope.url, params).then((data) => {
+					$appHttp.getDataByGet($scope.url, params).then((data) => {
 						handlerMethod(data);
 						if($.isFunction(callback)){
 							callback();
@@ -100,14 +100,14 @@ APP.directive('appScrollLoad',['$myHttp','$log','uuid', ($myHttp, $log,uuid) => 
 				break;
 			}
 			}
-			
+
 			params[numName] = 1;
 			params[histroyCountName] = historyCount;
-			
+
 			reqHandler(function(){
 				params[numName] = 2;
 			});
-			
+
 			$element.on('mousewheel', () => {
 				draggerBottom = $element.closest('.mCustomScrollBox').next().find('.mCSB_dragger').css('bottom');//mCustomScrollBox，mCSB_dragger是ng-scrollbars指令中的类
 				//如果滚动条滚动到底部

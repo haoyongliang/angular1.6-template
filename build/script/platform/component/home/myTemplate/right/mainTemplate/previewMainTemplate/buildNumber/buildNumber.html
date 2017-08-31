@@ -1,0 +1,47 @@
+<div ng-controller="buildNumberCtrl" style="height:377px;" app-loading="buildText" app-loading-options="{text: '{{message}}..'}">
+
+  <app-page-panel has-header-color="false" has-border="false" callback="closeThisDialog('close')" ng-init="init()" border-weight="2px" left-btn-icon="icon ColorChangeFont  icon-float-close" header="数字构件" head-style="2" class="w-100 h-100" app-loading="buildVerticalCard" app-loading-options="{text: '{{message}}..'}">
+    <form name="buildNumber">
+      <app-vertical-card>
+        以下内容均为必填项
+      </app-vertical-card>
+      <div class="w-100 clearfix color_line_right_outside color_line_left_outside" >
+        <app-input title="字段名称">
+          <input placeholder="请输入字段名称"  type="text" name="cardElementName" ng-model="form.cardElementName" validator="required ">
+        </app-input>
+        <app-input  title="小数位数">
+          <oi-select readonly oi-options="item.name for item in buildNumberConstant.decimalDigits " ng-model="form.decimalDigits" validator="required " name="textType"></oi-select>
+        </app-input>
+        <app-input title="千分位">
+          <oi-select readonly oi-options="item.name for item in buildNumberConstant.thousands" ng-model="form.thousands" validator="required " name="textRows"></oi-select>
+        </app-input>
+        <app-input title="百分比">
+          <oi-select readonly oi-options="item.name for item in buildNumberConstant.percentage" ng-model="form.percentage" validator="required " name="position"></oi-select>
+        </app-input>
+        <app-input title="单位">
+          <input placeholder="请输入单位名称" type="text" ng-model="form.units" validator="required" name="units">
+        </app-input>
+        <app-input title="构件属性">
+          <oi-select multiple readonly oi-options="item.name for item in buildNumberConstant.cardElementAttributeConstant" ng-model="form.cardElementAttribute" validator="required " name="cardElementAttribute"></oi-select>
+        </app-input>
+        <app-input title="列表内容" ng-if="hasCardElementAttribute(form.cardElementAttribute,3)">
+          <oi-select readonly oi-options="item.name for item in positionConstant" ng-model="form.position" validator="required " name="position"></oi-select>
+        </app-input>
+        <app-input title="提示">
+          <input type="text" placeholder="请输入提示文字,不能超过20字" name="cardElementDesc" ng-model="form.cardElementDesc" validator="required " name="cardElementDesc">
+        </app-input>
+        <app-input title="字段填写说明" is-bottom="true" class="w-60">
+          <input type="text" placeholder="请输入字段说明" name="cardElementExplain" ng-model="form.cardElementExplain" validator="required " name="cardElementExplain">
+        </app-input>
+        <app-input title="显示审批时是否可改" class="w-40" is-right="true" is-bottom="true">
+          <oi-select readonly oi-options="item.name for item in buildNumberConstant.cardElementExplainShowFlagConstant" ng-model="form.cardElementExplainShowFlag" validator="required " name="cardElementExplainShowFlagConstant"></oi-select>
+        </app-input>
+
+      </div>
+      <div style="width:100%; bottom:0 ; height:28px;left:0" class="p-a">
+        <div style="width:calc(100% / 2); " class="cutting-line f-l app-submitBtn f-small" validation-submit="buildNumber" ng-click="save()">保 存</div>
+        <div style="width:calc(100% / 2); " class="f-l app-submitBtn f-small" ng-click="closeThisDialog('cancel')">取 消</div>
+      </div>
+      </form>
+  </app-page-panel>
+</div>

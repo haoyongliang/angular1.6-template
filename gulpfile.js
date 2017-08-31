@@ -1,11 +1,13 @@
 var gulp = require('gulp');
+
 var $ = require('gulp-load-plugins')();//自动加载其他插件
 var open = require('open');
-
+var proxy = require('http-proxy-middleware');//
+var Proxy = require('gulp-connect-proxy');
 var app = {
 	srcPath: 'src/',	//源代码
-	devPath: 'build/',	//开发目录
-	prdPath: 'dist/'	//部署目录
+	devPath: 'build/',	//开发目录 里面的代码不压缩
+	prdPath: 'dist/'	//部署目录 里面的代码压缩
 };
 
 gulp.task('lib',function(){
@@ -67,8 +69,8 @@ gulp.task('js',function(){
 
 	.pipe($.concat('index.js'))
 	.pipe(gulp.dest(app.devPath + 'js'))
-	.pipe($.ngAnnotate())
-	.pipe($.uglify())
+	.pipe($.ngAnnotate())//解决压缩JS时候的错误
+	.pipe($.uglify())//压缩JS
 	.pipe(gulp.dest(app.prdPath + 'js'))
 	.pipe($.connect.reload());
 });
@@ -92,7 +94,16 @@ gulp.task('serve',['build'],function(){
 	$.connect.server({
 		root : [app.devPath],
 		livereload:true,
-		port:1234
+		port:1234,
+		middleware: function(connect, opt) {
+        return [
+            proxy('/CommonPlatform',  {
+                target: 'https://app.zhuoxitech.com:8443',
+                changeOrigin:true
+            })
+        ]
+    }
+
 	});
 	open('http://localhost:1234');
 	gulp.watch(app.srcPath + 'script/**/*.js', ['js']);

@@ -1,0 +1,57 @@
+<div ng-controller="buildDateIntervalCtrl" style="height:323px" app-loading="buildDateInterval" app-loading-options="{text: '{{message}}..'}">
+  <app-page-panel  header="日期区间构件" has-border="false" has-header-color="false" head-style="2" left-btn-icon="icon ColorChangeFont icon-float-close">
+    <form name="buildDateIntervalForm">
+      <app-vertical-card>以下内容均为必填项</app-vertical-card>
+      <div class="clearfix color_line_right_outside color_line_left_outside">
+
+        <app-input title="开始日期">
+          <input type="text" name="beginDateName" ng-model="form.beginDateName" validator="required">
+        </app-input>
+        <app-input title="结束日期">
+          <input type="text" name="endDateName" ng-model="form.endDateName" validator="required">
+        </app-input>
+        <app-input title="日期类型">
+          <oi-select
+            name="dateType"
+            oi-options="item.name for item in buildDateIntervalConstant.dateType"
+            ng-model="form.dateType"
+            validator="required"
+            ></oi-select>
+        </app-input>
+        <app-input title="提醒设置">
+          <oi-select
+            name="isAlert"
+            oi-options="item.name for item in buildDateIntervalConstant.isAlert"
+            ng-model="form.isAlert"
+            validator="required"
+            ></oi-select>
+        </app-input>
+
+        <app-input title="构件属性">
+          <oi-select
+            name="cardElementAttribute"
+            oi-options="item.name for item in buildDateIntervalConstant.cardElementAttribute"
+            ng-model="form.cardElementAttribute"
+            multiple
+            ></oi-select>
+        </app-input>
+        <app-input title="列表内容" ng-if="hasCardElementAttribute(form.cardElementAttribute,3)">
+          <oi-select
+            name="position"
+            oi-options="item.name for item in positionConstant"
+            ng-model="form.position"
+            validator="required"
+            ></oi-select>
+        </app-input>
+        <app-input title="提示">
+            <input type="text" name="cardElementDesc" placeholder="请输入提示文字" ng-model="form.cardElementDesc" ></input>
+        </app-input>
+
+        <div style="width:100%; bottom:0 ; height:28px;left:0" class="p-a">
+          <div style="width:calc(100% / 2); " class="cutting-line f-l app-submitBtn f-small" validation-submit="buildDateIntervalForm" ng-click="save()">保 存</div>
+          <div style="width:calc(100% / 2); " class="f-l app-submitBtn f-small" ng-click="closeThisDialog('cancel')">取 消</div>
+        </div>
+      </div>
+    </form>
+  </app-page-panel>
+</div>

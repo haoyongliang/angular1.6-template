@@ -1,0 +1,34 @@
+<div style="height:500px">
+	<!--
+    	作者：haoyongliang
+    	时间：2017-08-29
+    	描述：显示部门人员列表
+    -->
+	<app-page-panel has-header-color="false" has-border="false" callback="closeThisDialog('close')" ng-init="init()" border-weight="2px" left-btn-icon="icon ColorChangeFont  icon-float-close" header="{{header}}" head-style="2" class="w-100 h-100" app-loading="buildSelectDevUserList" app-loading-options="{text: '{{message}}..'}">
+		<app-vertical-card>
+			<div class="w-100 h-100 left">
+				<span class="app-btn" style="float:left" ng-click="back()" ng-show="cache.length>0">返回上一层</span>
+			</div>
+		</app-vertical-card>
+		<div class="w-100 clearfix color_line_right_outside color_line_left_outside color_line_bottom_outside" style="height:382px;">
+			<div ng-scrollbars>
+				<!--部门列表-->
+				<app-list-item ng-dblclick="getSubList(item.dicinfo,item.entId,item.fid,item.id,item.userCount)" ng-repeat="item in groupList" right-icon="">
+					<span style="float:left;margin-right:10px;width:12.8px;height:100%"><input type="checkbox" ng-model="item.check" ng-click="console.log(item.check)" ng-if="type=='group'"></span> {{item.dicinfo}}
+				</app-list-item>
+				<!--人员列表-->
+				<app-list-item  ng-repeat="item in userList" right-icon="" ng-if="type=='user'">
+					<span style="float:left;margin-right:10px">
+						<input type="checkbox" ng-model="item.check" >
+					</span> 
+					{{item.userName}}
+				</app-list-item>
+			</div>
+		</div>
+		<div style="width:100%; bottom:0 ; height:28px;left:0" class="p-a">
+			<div style="width:calc(100% / 2); " class="cutting-line f-l app-submitBtn f-small" ng-click="save()">保 存</div>
+			<div style="width:calc(100% / 2); " class="f-l app-submitBtn f-small" ng-click="closeThisDialog('cancel')">取 消</div>
+		</div>
+	</app-page-panel>
+	
+</div>

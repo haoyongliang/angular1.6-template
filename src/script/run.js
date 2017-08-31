@@ -1,6 +1,17 @@
-APP.run(['$rootScope', '$log', '$timeout', 'loginMode', '$state', '$stateParams', ($rootScope, $log, $timeout, loginMode, $state, $stateParams) => {
+APP.run(['$rootScope', '$log', '$timeout', 'loginMode', '$state', '$stateParams', '$transitions', 'localStorageService', '$trace', ($rootScope, $log, $timeout, loginMode, $state, $stateParams, $transitions, localStorageService, $trace) => {
+
   $rootScope.$state = $state;
   $rootScope.$stateParams = $stateParams;
+
+  // $trace.enable('TRANSITION'); //打印路由信息
+  // $state.defaultErrorHandler(() => {}); //不打印错误信息
+  $transitions.onStart({}, ()=> {
+    //没有登陆成功则跳转到登陆界面
+    if (localStorageService.get(loginMode.NAME) != loginMode.RESULT) {
+      $state.go('login');
+    }
+  });
+
 
   $rootScope.$on('LocalStorageModule.notification.setitem', (event, data) => {
     if (!!data) {

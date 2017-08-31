@@ -1,0 +1,55 @@
+<div ng-controller="userInfoCtrl" class="pc_body p-r ">
+  <div class="p-a" style="height:80%; width:700px; top:50%;transform: translate(-50%,-50%);left:50% " app-loading="userInfo" app-loading-options="{text: '{{message}}...'}">
+    <div ng-scrollbars>
+      <app-page-panel callback="close()" ng-init="init()" left-btn-icon="icon ColorChangeFont  icon-float-close" header="个人资料" head-style="2" class="w-100 h-100">
+        <div class="w-100 h-100" style="font-size:0">
+          <div class="p-r" style="height:142px; ">
+            <div class="p-a" style="top:20px;left:50%;transform: translateX(-50%); width:56px; height:56px;background-color:blue">
+              <img class="p-a w-100" ng-src="image/touxiang.gif" />
+            </div>
+            <div class="p-a w-100" style="bottom:0;  height:66px; ">
+              <div class="p-r w-100 f-middleBig center" style="height:36px; line-height:36px;font-weight:bold">
+                {{data.nickName}}
+              </div>
+              <div class="p-r w-100 center f-small" style="height:30px; z-index:1000">
+                {{data.autograph}}
+              </div>
+            </div>
+          </div>
+          <form name="userInfoForm">
+            <div class="f-small" style="border-top:1px solid #bfbfbf; border-right:1px solid #bfbfbf">
+              <app-input title="姓名">
+                <input type="text" placeholder="请输入" ng-model="data.userName">
+              </app-input>
+              <app-input title="职务">
+                <input type="text" placeholder="请输入">
+              </app-input>
+              <app-input title="角色">
+                <input type="text" placeholder="请输入">
+              </app-input>
+              <app-input title="移动电话">
+                <input type="text" name="mobilePhone" placeholder="请输入" ng-model="data.mobilePhone" validator="required,phone">
+              </app-input>
+              <app-input title="固定电话">
+                <input type="text" placeholder="请输入">
+              </app-input>
+              <app-input title="电子邮箱">
+                <input type="text" name="email" placeholder="请输入" ng-model="data.eMail" validator="required,email">
+              </app-input>
+              <app-input title="身份证号码">
+                <input type="text" placeholder="请输入">
+              </app-input>
+              <app-input title="账户状态">
+                <input type="text" placeholder="请输入">
+              </app-input>
+              <textarea class="textarea" ng-model="data.remark" rows="4" style="width:100%;  border-top:0">
+            </textarea>
+            </div>
+            <div class="tr-height"></div>
+            <div class="app-submitBtn f-small" validation-submit="userInfoForm" ng-click="submit()">保 存</div>
+          </form>
+        </div>
+      </app-page-panel>
+    </div>
+  </div>
+</div>

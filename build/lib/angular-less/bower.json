@@ -1,0 +1,18 @@
+{
+  "name": "angular-less",
+  "main": "angular-less.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/AlicanC/angular-less",
+  "authors": [
+    "Alican Çubukçuoğlu <alicancubukcuoglu@gmail.com>"
+  ],
+  "description": "Automagically render LESS <link>s in AngularJS.",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "angular",
+    "less"
+  ],
+  "license": "MIT"
+}

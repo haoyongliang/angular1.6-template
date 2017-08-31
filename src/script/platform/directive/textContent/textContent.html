@@ -1,0 +1,33 @@
+<div class="w-100 f-small">
+  <style>
+    .app-text-area{
+      height: auto;
+      display: block;
+    width: calc(100% - 24px);
+    height: 52px;
+    padding: 6px 12px;
+    font-size: 12px;
+    line-height: 26px;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 0;
+    resize: none;
+    }
+  </style>
+  <div ng-if="textrows==1"  class="tr-height">
+    <app-input title="{{title}}">
+      <input type="text" placeholder="{{placeholder}}" ng-model="ngBindModel" validator=" {{validator}}">
+    </app-input>
+  </div>
+  <div  ng-if="textrows != 1">
+    <div class="color_line_bottom_inside">
+      <div style="padding-left:10px;background-color:#F0F4FA" class="tr-height color_line_bottom_inside">{{title}}</div>
+      <textarea class="app-text-area" rows="3" placeholder="{{placeholder}}" ng-model="ngBindModel" validator=" {{validator}}"></textarea>
+    </div>
+
+  </div>
+  <div class="color_line_bottom_inside " style="padding:3px 10px 3px 10px" ng-if="showDesc">
+    {{desc}}
+  </div>
+</div>

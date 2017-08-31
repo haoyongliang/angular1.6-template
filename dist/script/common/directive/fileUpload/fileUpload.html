@@ -1,0 +1,24 @@
+<div>
+  <div class="clearfix">
+    <app-input title="上传">
+      <div class="p-r tr-height" ngf-select="uploadFiles($file, $invalidFiles)"  ngf-max-height="1000" ngf-max-size="20MB">
+        <input type="text" placeholder="请选择文件" readonly/>
+        <span type="file" class="p-a icon ColorChangeFont icon-jian" style="right:10px"></span>
+      </div>
+
+    </app-input>
+  </div>
+  <app-vertical-card ng-repeat="item in files track by $index">
+    <div class="w-100 left h-100 clearfix">
+      <span  style="width:60px;height:28px;display:inline-block; float:left;overflow:hidden" title="{{item.file.name}} ">
+        {{item.file.name}}
+      </span>
+      <span class="d-ib h-100 p-r" style="width:calc(100% - 60px);padding:0 10px;float:left">
+        <div style="height:21px; border:1px solid #383E42; width:95%;top:4px;line-height:20px" class="p-a center" ng-show="item.progress >= 0">
+          <div style="color:white;background-color:#383E42;width:{{item.progress}}%" >{{item.progress+'%'}} <span style="color:#D9534F" ng-if="!!item.errorMsg">上传失败,错误信息: {{item.errorMsg}}</span></div>
+        </div>
+      </span>
+    </div>
+
+  </app-vertical-card>
+</div>

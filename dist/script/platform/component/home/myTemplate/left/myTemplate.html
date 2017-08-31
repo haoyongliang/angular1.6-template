@@ -1,0 +1,50 @@
+<div ng-controller="myTemplateCtrl" class="pc_body ">
+	<!-- 我的模板左侧树形菜单 -->
+	<style>
+		.myTemplate {}
+	</style>
+	<div class="h-100 w-100 myTemplate">
+		<app-left-right-layout left-width="444px">
+			<left class="h-100">
+				<div class="w-100 h-100">
+					<app-page-panel header="我的模板" left-btn-icon="icon ColorChangeFont icon-jian" callback="gotoAddMainTemplate()" left-btn-handler="gotoIndex()" ng-init="initTemplateList()">
+						<div class="normal_bg h-100">
+							<app-vertical-card >
+								您在6个组织下共创建了48个工作模板、15个子工作模板
+							</app-vertical-card>
+							<div style="height:calc(100% - 28px); "  app-loading="templateList" app-loading-options="{text: '{{message}}'}">
+								<div ng-scrollbars>
+									<div ui-tree id="tree-root" class="ng-scope angular-ui-tree" data-drag-enabled="false">
+										<ol ui-tree-nodes ng-model="menuData" class="ng-pristine ng-untouched ng-valid ng-scope angular-ui-tree-nodes">
+											<li ng-repeat="node in menuData" ui-tree-node ng-include="'nodes_renderer'" class="ng-scope angular-ui-tree-node" collapsed="true">
+											</li>
+										</ol>
+									</div>
+								</div>
+							</div>
+						</div>
+					</app-page-panel>
+				</div>
+			</left>
+			<right class="h-100">
+				<div class="h-100 w-100" ui-view="right" class="animated fadeIn">
+
+				</div>
+			</right>
+		</app-left-right-layout>
+	</div>
+	<script type="text/ng-template" id="nodes_renderer">
+		<div ui-tree-handle class="tree-node tree-node-content" style="padding-left:{{node.paddingLeft}}; " ng-if="node.subTemps && node.subTemps.length > 0">
+			{{node.templateName}}
+			<!-- < class="btn  btn-xs " ng-if="node.subTemps && node.subTemps.length > 0" data-nodrag "> -->
+			<span ng-click="toggle(this)" class="icon p-a" ng-class="{' ColorChangeFont icon-you': collapsed,' ColorChangeFont icon-xia': !collapsed}" style="right:10px; font-size:12px"></span>
+		</div>
+		<div ui-tree-handle class="tree-node tree-node-content" style="padding-left:{{node.paddingLeft}}; " ng-if="(node.subTemps && node.subTemps.length == 0) || !node.subTemps" ui-sref="home.myTemplate.previewMainTemplate({templateId:node.templateId,templateName:node.templateName})">
+			{{node.templateName}}
+		</div>
+		<ol ui-tree-nodes="" ng-model="node.subTemps" ng-class="{hidden: collapsed}">
+			<li ng-repeat="node in node.subTemps" ui-tree-node ng-include="'nodes_renderer'">
+			</li>
+		</ol>
+	</script>
+</div>

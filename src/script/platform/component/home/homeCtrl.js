@@ -1,5 +1,13 @@
-APP.controller('homeCtrl', ['$rootScope', '$scope', '$log', 'localStorageService', 'loginMode', '$state', '$timeout', '$ngConfirm', ($rootScope, $scope, $log, localStorageService, loginMode, $state, $timeout, $ngConfirm) => {
-	// $scope.navuserinfo = false;
+APP.controller('homeCtrl', ['$rootScope', '$scope', '$log', 'localStorageService', 'loginMode', '$state', '$timeout', '$ngConfirm','userInfo', ($rootScope, $scope, $log, localStorageService, loginMode, $state, $timeout, $ngConfirm,userInfo) => {
+	$scope.userInfoMode = false;
+
+	$scope.$on('onBodyClick',(event,data)=>{
+		$scope.userInfoMode = false;
+	});
+
+	$scope.init = ()=>{
+		$scope.loginName = localStorageService.get(userInfo.logName);
+	}
 	/**
    * 退出登陆
    */
@@ -28,7 +36,8 @@ APP.controller('homeCtrl', ['$rootScope', '$scope', '$log', 'localStorageService
       }
     });
   }
-  $scope.showUserInfo = function() {
+  $scope.showUserInfo = function($event) {
+		$event.stopPropagation();
     if (!!$scope.userInfoMode) {
       $scope.userInfoMode = false;
     } else {
@@ -36,7 +45,7 @@ APP.controller('homeCtrl', ['$rootScope', '$scope', '$log', 'localStorageService
     }
   }
 
-	
+
   $scope.showOrHideNav = function(element) {
 		if(!!$scope[element]){
 			$scope[element] = false;

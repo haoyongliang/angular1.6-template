@@ -1,0 +1,7 @@
+<div class="tr-height" app-loading="id" app-loading-options="{text: '加载中..'}">
+	<app-input title="{{name}}">
+		
+		<oi-select ng-if="!multiple"   readonly oi-options="item.name for item in items" ng-model="ngBindModel" validator="required " name="textRows"></oi-select>
+		<oi-select ng-if="!!multiple" multiple    readonly oi-options="item.name for item in items" ng-model="ngBindModel" validator="required " name="textRows"></oi-select>
+	</app-input>
+</div>

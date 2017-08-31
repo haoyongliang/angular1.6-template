@@ -1,8 +1,8 @@
-
+//表单校验样式
 .ng-valid-label{
     position:relative;
-    
-    
+
+
     .ng-invalid.ng-dirty{
         &+span{
             text-align: left;
@@ -14,9 +14,9 @@
             z-index: 99;
             font-size:8px;
             opacity: 0.7;
-            padding:0; 
-            margin:0;   
-            
+            padding:0;
+            margin:0;
+
             p{
                 text-align: left;
 //              min-width: 120px;
@@ -27,7 +27,7 @@
                 padding:3px 10px;
                 margin: 0;
                 opacity:1;
-            }         
+            }
         }
         &+span:after{
             border: 5px solid transparent;
@@ -39,6 +39,33 @@
             right: 12px;
             content: ' '
         }
-        
+
     }
+}
+
+.validation-invalid{
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  width: 14px;
+  overflow: hidden;
+  height: 20px;
+  color:#D9534F !important;
+}
+.validation-invalid:before {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  content: "\e083";
+  color:#D9534F !important;
+}
+.validation-invalid:hover{
+  width:auto;
+  height:30px;
+  cursor: pointer;
 }

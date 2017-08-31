@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	</head>
 
-	<body class="w-100 h-100" >
+	<body class="w-100 h-100" ng-click='bodyClick()'>
 		<div ui-view class="h-100 w-100 " >
 
 		</div>
@@ -17,7 +17,7 @@
 		<script type="text/javascript" src="lib/angular-ui-router/release/angular-ui-router.js"></script>
 		<script type="text/javascript" src="lib/angular-cookies/angular-cookies.min.js"></script>
 		<script type="text/javascript" src="lib/angular-validation/dist/angular-validation.js"></script>
-
+		<!-- <script type="text/javascript" src="lib/angular-validation/dist/angular-validation-rule.js"></script> -->
 		<!--动画animate.css-->
 		<link rel="stylesheet" href="lib/animate.css/animate.min.css" />
 
@@ -25,6 +25,18 @@
 		<link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.min.css"/>
 		<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
+		<!-- tree.control 虽引入，但没用，用的是angular-ui-tree -->
+		<script src="lib/angular-tree-control/angular-tree-control.js"></script>
+		<link rel="stylesheet" href="lib/angular-tree-control/css/tree-control.css">
+		<link rel="stylesheet" href="lib/angular-tree-control/css/tree-control-attribute.css">
+
+		<!-- angular-ui-tree -->
+		<link rel="stylesheet" href="lib/angular-ui-tree/dist/angular-ui-tree.css">
+		<script src="lib/angular-ui-tree/dist/angular-ui-tree.js"></script>
+
+		<!-- select -->
+		<link rel="stylesheet" href="lib/oi.select/dist/select.css">
+		<script src="lib/oi.select/dist/select.js"></script>
 		<!--滚动条scroll-->
 		<link rel="stylesheet" href="lib/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" type="text/css"/>
 		<script src="lib/angular/angular.min.js"></script>
@@ -32,10 +44,13 @@
 		<script src="lib/ng-scrollbars/dist/scrollbars.min.js"></script>
 
 		<!--时间控件angular-moment-picker, momentjs-->
+		
 		<script src="lib/moment/min/moment.min.js"></script>
+		<script src="lib/moment/locale/zh-cn.js"></script>
 		<link rel="stylesheet" type="text/css" href="lib/angular-moment-picker/dist/angular-moment-picker.css"/>
 		<link rel="stylesheet" href="lib/angular-moment-picker/dist/themes/material-ui.min.css" />
 		<script src="lib/angular-moment-picker/dist/angular-moment-picker.js"></script>
+		
 
 		<!--localstorage-->
 		<script src="lib/angular-local-storage/dist/angular-local-storage.min.js"></script>
@@ -47,10 +62,30 @@
 		<!-- 项目用到的icon -->
 		<link rel="stylesheet" href="style/css/font/iconfont.css">
 
+		<!-- loading -->
+		<script src="lib/spin.js/spin.js"></script>
+		<link rel="stylesheet" href="lib/angular-loading/angular-loading.css">
+		<!-- <script src="lib/angular-loading/angular-loading.js"></script> -->
+
+		<!-- 文件上传 -->
+		<script src="lib/ng-file-upload-shim/ng-file-upload-shim.js"></script>
+		<script src="lib/ng-file-upload/ng-file-upload.js"></script>
+
+		<!-- dialog模态框 -->
+		<link rel="stylesheet" href="../lib/ng-dialog/css/ngDialog.min.css">
+		<link rel="stylesheet" href="../lib/ng-dialog/css/ngDialog-theme-default.min.css">
+		<link rel="stylesheet" href="../lib/ng-dialog/css/ngDialog-theme-plain.min.css">
+
+		<script src="lib/ng-dialog/js/ngDialog.js"></script>
+
 		<!--版本主题样式-->
 		<link rel="stylesheet" type="text/css" href="style/css/index.css"/>
 
 		<!--项目JS-->
 		<script src="js/index.js"></script>
+		
+		<script>
+			
+		</script>
 	</body>
 </html>

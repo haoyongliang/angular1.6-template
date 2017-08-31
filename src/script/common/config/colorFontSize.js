@@ -1,3 +1,6 @@
+/**
+ * 过时不用
+ */
 APP.run(['$rootScope', function ($rootScope) {
   $rootScope.colors = {
     white:'#FFF',

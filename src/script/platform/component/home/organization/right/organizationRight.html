@@ -1,0 +1,100 @@
+<div class="w-100 h-100" ng-controller="organizationRightCtrl" ng-init="init()" app-loading="organizationDetail" app-loading-options="{text: '{{message}}...'}">
+  <app-page-panel head-style='2' class="h-100 w-100 animated fadeIn" header="{{enterpriseName}}" callback="callback()" left-btn-icon="">
+    <div class="h-100 " >
+      <app-tabs>
+        <app-panel tittle='组织管理' app-click='organizationManger()'>
+          <app-vertical-card>
+            <div class="w-100 h-100 p-r">
+              <div class="w-100 h-100 d-ib p-a l0" style="padding-left:30px; padding-right:30px">
+                当前组织共{{groups.length}}个部门、{{users.length}}人
+              </div>
+              <div style="width:30px;" class="app-btn h-100 d-ib l0 p-a" ng-click="getPreviousData()">
+                <i ng-show="groups.length!=0" class=" icon ColorChangeFont  icon-zuo "></i>
+              </div>
+              <div style="width:30px;" class="app-btn h-100 d-ib r0 p-a">
+                <i class="icon ColorChangeFont  icon-jian"></i>
+              </div>
+            </div>
+          </app-vertical-card>
+          <div class="h-100 w-100" style="border:1px solid #bfbfbf; height:calc(100% - 28px) !important;">
+            <div style="height:40%; border-bottom:1px solid #bfbfbf" >
+              <div ng-scrollbars class="h-100 w-100">
+                <app-list-item right-icon-auto-visible='true' name="groups" ng-click="clickDepartment($event, data.id)" ng-repeat="data in groups" right-icon="icon ColorChangeFont  icon-float-close">
+                  {{data.dicinfo}}
+                </app-list-item>
+              </div>
+            </div>
+            <div style="height:60%">
+              <app-table height='100%' data='{{tbConfig}}'>
+                <app-tr ng-repeat="rowData in users">
+                  <app-td>{{$index+1}}</app-td>
+                  <app-td>{{rowData.userName}}</app-td>
+                  <app-td>--</app-td><!-- 用户名 -->
+                  <app-td>--</app-td><!-- 职务 -->
+                  <app-td>--</app-td><!-- 角色 -->
+                  <app-td>--</app-td><!-- 移动电话 -->
+                  <app-td>--</app-td><!-- 电子邮件 -->
+                  <app-td>--</app-td><!-- 账户状态 -->
+                  <app-td>--</app-td><!-- 备注 -->
+                  <app-td>角色 解冻 删除</app-td><!-- 用户名 -->
+                </app-tr>
+              </app-table>
+            </div>
+          </div>
+        </app-panel>
+        <app-panel tittle='工作设置' showed="{{isAdmin}}" app-click='clickWorkset()' >
+          <app-vertical-card>
+            <div class="w-100 h-100 p-r">
+              <div class="w-100 h-100 d-ib p-a l0" style="padding-left:30px; padding-right:30px">
+                共{{jobClassification.total}}个工作分类
+              </div>
+              <div style="width:30px;" class="app-btn h-100 d-ib l0 p-a" ng-click="workset_previous()">
+                <i ng-show="groups.length!=0" class=" icon ColorChangeFont  icon-zuo "></i>
+              </div>
+              <div style="width:30px;" class="app-btn h-100 d-ib r0 p-a">
+                <i class="icon ColorChangeFont  icon-jian"></i>
+              </div>
+            </div>
+
+          </app-vertical-card>
+          <div class="h-100 w-100" style="border:1px solid #bfbfbf; height:calc(100% - 28px) !important;">
+            <div style="height:40%; border-bottom:1px solid #bfbfbf" >
+
+              <app-list-item  right-icon-auto-visible='true' ng-click="clickWorksetDetail()" name="wadsfadforkset" ng-repeat="data in worksetDetailList"  right-icon="icon ColorChangeFont  icon-float-close">
+                  {{data.menuName}}
+              </app-list-item>
+            </div>
+            <div style="height:60%">
+              <app-list-item name="worksetList"  right-icon="icon ColorChangeFont  icon-jian">
+                  <span style="font-weight:bold !important">工作分类列表</span>
+              </app-list-item>
+              <div style="height:calc(100% - 28px);">
+                <app-table  data='{{tbConfig_workset}}'>
+                  <app-tr >
+                    <app-td>1</app-td>
+                    <app-td>--</app-td><!-- 提醒事项 -->
+                    <app-td>--</app-td><!-- 基准时间 -->
+                    <app-td>--</app-td><!-- 提醒时间 -->
+                    <app-td>--</app-td><!-- 提醒内容配置 -->
+                    <app-td>--</app-td><!-- 发送到 -->
+                    <app-td>停用</app-td><!-- 操作 -->
+                  </app-tr>
+                </app-table>
+              </div>
+            </div>
+          </div>
+        </app-panel>
+        <app-panel-lazy tittle='基础数据' showed="{{isAdmin}}" app-click='workset()' >
+          <app-vertical-card>
+            当前有50条基础数据
+          </app-vertical-card>
+          <div class="h-100 w-100" style="border:1px solid #bfbfbf; height:calc(100% - 28px) !important;">
+            <app-list-item name="worksetList" ng-click="clickDepartment($event, data.id)"  right-icon="icon ColorChangeFont  icon-float-close">
+                <span style="font-weight:bold !important">工作分类设置列表</span>
+            </app-list-item>
+          </div>
+        </app-panel-lazy>
+      </app-tabs>
+    </div>
+  </app-page-panel>
+</div>

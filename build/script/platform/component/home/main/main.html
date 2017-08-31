@@ -1,6 +1,24 @@
 <div ng-controller="mainCtrl" class="pc_body pc_bodyContainerBGColor" >
-	
+
 	<div class="bg-green h-100 " >
+		
+
+		<div class="w-100">
+			<app-input title="姓名">
+				<input type="text" ng-model="username">
+			</app-input>
+		</div>
+
+		<div app-color default-color="blue" negative-color='red' target='{{person.age}}'>{{person.name}}</div>
+		<div dynamic="{{html}}"></div>
+		<div style="width:100px">
+			<app-vertical-card>nihao</app-vertical-card>
+		</div>
+		<div style="width:100px; height:28px">
+			<input type="text" ng-model = "money" app-currency bit="3"/>
+		</div>
+
+
 		<div style="height: 200px; width: 200px; background-color: pink; ">
 			<div ng-scrollbars>
 				<div app-scroll-load url='http://localhost:8080/springmvc_project/getAllStudent' params="{{params}}" method="post" num-name="page2"  callback="handler()" histroy-count="200" histroy-count-name="num">
@@ -8,20 +26,65 @@
 				</div>
 			</div>
 		</div>
+		<app-section height='200px' visible="true">
+			<header>
+				<div class="w-100 h-100" style="background-color:pink">
+					<i class="icon ColorChangeFont icon-you"></i>日志
+				</div>
+			</header>
+			<section >
+				<div class="w-100 h-100" style="border:1px solid black" ng-scrollbars>
+					<div>我今天好开心</div>
+					<div>我今天好开心</div>
+					<div>我今天好开心</div>
+					<div>我今天好开心</div>
+					<div>我今天好开心</div>
+					<div>我今天好开心</div>
+					<div>我今天好开心</div>
+					<div>我今天好开心</div>
+				</div>
+			</section>
+		</app-section>
 		<div style="width: 100px; height: 20px; " moment-picker="mydate"
-		     format="YYYY">
+		     format="YYYY-MM-DD HH">选择时间
 		    {{ mydate}}
 		</div>
-		
-		<app-page-panel width="300px"  height="40%" head-style='2' class="animated fadeIn" border="1px solid red">
-			
-			
-			
+
+		<app-page-panel  width="300px"  height="40%" head-style='2' header="haoyongliang" class="animated fadeIn" border="1px solid red">
+		<div ng-scrollbars>
+		<div>a</div>
+		<div>a</div>
+		<div>a</div>
+		<div>a</div>
+		<div>a</div>
+		<div>a</div>
+
+		<div>a</div>
+		<div>a</div>
+		<div>a</div>
+		<div>a</div>
+
+		<div>a</div>
+		<div>a</div>
+		<div>a</div>
+		<div>a</div>
+		<div>a</div>
+		<div>a</div>
+		<div>a</div>
+		<div>a</div>
+
+		<div>a</div>
+		<div>a</div>
+		<div>a</div>
+		<div>a</div>
+		</div>
+
+
 		</app-page-panel>
 		<button ng-click="add()">添加</button>
-		
-		<app-left-right-layout left-width="300px" class="h-20" left-style="bg-blue" right-style="bg-gray" center-style="p-t-15">
-			<left >
+
+		<app-left-right-layout left-width="100px" class="h-10" left-style="bg-blue" right-style="bg-gray" center-style="p-t-15">
+			<left style="overflow:hidden">
 				 Loremssssssssssssssssssss sssssssssssssssssssssssssssssssssss ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos quis aperiam ad voluptate placeat illo sapiente quo consectetur omnis possimus quibusdam sint repellendus facilis voluptatibus ipsam obcaecati accusamus consequatur enim.
 				 Loremssssssssssssssssssss sssssssssssssssssssssssssssssssssss ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos quis aperiam ad voluptate placeat illo sapiente quo consectetur omnis possimus quibusdam sint repellendus facilis voluptatibus ipsam obcaecati accusamus consequatur enim.
 			</left>
@@ -31,4 +94,3 @@
 		</app-left-right-layout>
 	</div>
 </div>
-
