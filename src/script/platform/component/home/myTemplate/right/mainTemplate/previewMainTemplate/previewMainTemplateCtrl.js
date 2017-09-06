@@ -21,6 +21,7 @@
       $scope.defaultPanel = 0;
       
       $scope.$on('files',function(e,d){
+      	console.log(1111111111111111);
         $log.info(e);
         $log.info(d);
       });
@@ -118,15 +119,15 @@
                 </app-vertical-card>`
                 break;
               case 1: //文本
-//              html += `
-	//              <app-text-content
-	//                title='${element.cardElementName}'
-	//                textrows="${element.textRows}"
-	//                placeholder = "${element.cardElementDesc}"
-	//                desc="${element.cardElementExplain}"
-	//                show-desc="${element.cardElementExplainShowFlag==1?true:false}">
-	//              </app-text-content>
-	//            `;
+                html += `
+	              <dropsea-text-content
+	                title='${element.cardElementName}'
+	                textrows="${element.textRows}"
+	                placeholder = "${element.cardElementDesc}"
+	                desc="${element.cardElementExplain}"
+	                show-desc="${element.cardElementExplainShowFlag==1?true:false}">
+	              </dropsea-text-content>
+	            `;
               	break;
               case 2: //数字
 	              let percentage;
@@ -158,12 +159,12 @@
 	              }   
             
                 break;
-              case 3:
+              case 3://选择
               	let selectType = element.selectType;
               	let multiple = selectType==1?'':'multiple';
               	html += 
               	`
-              		<dropsea-select multiple='${multiple}' select-url=${element.selectURL}></dropsea-select>
+              		<dropsea-select placeholder="${element.cardElementDesc}" class="clearfix" multiple='${multiple}' select-url=${element.selectURL}></dropsea-select>
               	`;
               	break;
               case 4: //日期
@@ -207,10 +208,10 @@
               `;
                 break;
               case 6:
-//								html += 
-//								`
-//									<app-file-upload title="${element.cardElementName}" placeholder="${element.cardElementDesc}" event-name="files"></app-file-upload>
-//								`;
+								html += 
+								`
+									<dropsea-file-upload  title="${element.cardElementName}" placeholder="${element.cardElementDesc}" event-name="files"></dropsea-file-upload>
+								`;
                 break;
               case 7:
 		              html += `
@@ -278,6 +279,7 @@
             $timeout(function() {
 
               $scope.$apply(
+              	
                 function() {
                   for (let i = 0; i < $rootScope.preViewData.typeCards.length; i++) {
                     $rootScope.preViewData.typeCards[i].showed = false;

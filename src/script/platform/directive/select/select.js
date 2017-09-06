@@ -4,6 +4,7 @@ APP.directive('dropseaSelect', ['$timeout', 'uuid', '$log', '$appHttp', '$loadin
 		scope: {
 			selectUrl: '@',
 			ngBindModel: '=ngModel',
+			placeholder:'@'
 		},
 		transclude: true,
 		restrict: 'EA',

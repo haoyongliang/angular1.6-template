@@ -18,7 +18,7 @@
 				
         <div ng-scrollbars class="w-100">
           <div app-dynamic handler="handler(ele)"></div>
-          <div style="height:150px;width:100%;"></div>
+          <div style="height:150px;width:100%;" class="clearfix"></div>
         </div>
         <!-- 底部（保存，添加构件，启用）按钮 -->
         <div style="width:100%; bottom:0 ; height:28px;" class="p-a">
@@ -28,15 +28,19 @@
           <app-pop-select target="#gj">
             <app-list-item name="xx" right-icon="" class="center">
               <div ng-dialog="script/platform/component/home/myTemplate/right/mainTemplate/previewMainTemplate/buildVerticalCard/buildVerticalCard.html" ng-dialog-width="600" ng-dialog-class="ngdialog-theme-plain" ng-dialog-show-close="false" ng-dialog-close-by-document="false">
-                                      纵向分类卡</div>
+								纵向分类卡
+              </div>
             </app-list-item>
             <app-list-item name="xx" right-icon="" class="center">
               <div ng-dialog="script/platform/component/home/myTemplate/right/mainTemplate/previewMainTemplate/buildText/buildText.html" ng-dialog-width="600" ng-dialog-class="ngdialog-theme-plain" ng-dialog-show-close="false" ng-dialog-close-by-document="false">
-                文字</div>
+                文字
+              </div>
             </app-list-item>
             <app-list-item name="xx" right-icon="" class="center">
               <div ng-dialog="script/platform/component/home/myTemplate/right/mainTemplate/previewMainTemplate/buildNumber/buildNumber.html" ng-dialog-width="600" ng-dialog-class="ngdialog-theme-plain" ng-dialog-show-close="false" ng-dialog-close-by-document="false">
-              数字</div></app-list-item>
+              	数字
+              </div>
+            </app-list-item>
             <app-list-item name="xx" right-icon="" class="center">
             	<div ng-dialog="script/platform/component/home/myTemplate/right/mainTemplate/previewMainTemplate/buildSelect/buildSelect.html" ng-dialog-width="600" ng-dialog-class="ngdialog-theme-plain" ng-dialog-show-close="false" ng-dialog-close-by-document="false">
             	选择	
@@ -44,7 +48,8 @@
             </app-list-item>
             <app-list-item name="xx" right-icon="" class="center">
             	 <div ng-dialog="script/platform/component/home/myTemplate/right/mainTemplate/previewMainTemplate/buildData/buildDate.html" ng-dialog-width="600" ng-dialog-class="ngdialog-theme-plain" ng-dialog-show-close="false" ng-dialog-close-by-document="false">
-              日期</div>
+              	日期
+            	 </div>
             </app-list-item>
             </app-list-item>
             <app-list-item name="xx" right-icon="" class="center">
@@ -54,11 +59,10 @@
             </app-list-item>
             <app-list-item name="xx" right-icon="" class="center">
               <div ng-dialog="script/platform/component/home/myTemplate/right/mainTemplate/previewMainTemplate/buildDetail/buildDetail.html" ng-dialog-width="600" ng-dialog-class="ngdialog-theme-plain" ng-dialog-show-close="false" ng-dialog-close-by-document="false">
-              明细
+              	明细
               </div>
             </app-list-item>
-            <app-list-item name="xx" right-icon="" class="center">留言</app-list-item>
-            <app-list-item name="xx" right-icon="" class="center">投票</app-list-item>
+            
           </app-pop-select>
         </div>
       </app-panel>

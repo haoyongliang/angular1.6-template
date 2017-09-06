@@ -156,6 +156,15 @@ APP.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       }
     }
   });
+  
+  /**
+   * [云盘  http://localhost:1234/#!/home/cloud ]
+   * @type {String}
+   */
+  $stateProvider.state('home.cloud', {
+    url: '/cloud',
+    templateUrl: 'script/platform/component/home/cloud/cloud.html'
+  })
 
   $urlRouterProvider.otherwise('login')
 }])

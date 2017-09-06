@@ -14,8 +14,8 @@ APP.controller('loginCtrl', ['$rootScope', '$scope', '$log', 'localStorageServic
 
   //函数
   $scope.login = function() {
-    $scope.logName = '18735885176'; //13922251988(余总，123)18735885176（张鹏，1）18925281551（孙总，123456）,15210820048(晓东，123)
-    $scope.password = '1';
+    $scope.logName = '15210820048'; //13922251988(余总，123)18735885176（张鹏，1）18925281551（孙总，123456）,15210820048(晓东，123)
+    $scope.password = '123';
     $scope.message = "正在登陆";
     let error = false;
 

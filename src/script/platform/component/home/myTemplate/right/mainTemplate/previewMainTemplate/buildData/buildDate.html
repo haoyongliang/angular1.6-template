@@ -12,19 +12,13 @@
 					</oi-select>
 				</app-input>
 				<app-input title="提醒设置">
-					<oi-select name="isAlert" oi-options="item.name for item in buildDateIntervalConstant.isAlert" ng-model="form.isAlert" validator="required">
-					</oi-select>
+					<oi-select name="isAlert" oi-options="item.name for item in buildDateIntervalConstant.isAlert" ng-model="form.isAlert" validator="required"></oi-select>
 				</app-input>
 				<app-input title="构件属性">
 					<oi-select name="cardElementAttribute" oi-options="item.name for item in buildDateIntervalConstant.cardElementAttribute" ng-model="form.cardElementAttribute" multiple></oi-select>
 				</app-input>
 				<app-input title="列表内容" ng-if="hasCardElementAttribute(form.cardElementAttribute,3)">
-		          <oi-select
-		            name="position"
-		            oi-options="item.name for item in positionConstant"
-		            ng-model="form.position"
-		            validator="required"
-		            ></oi-select>
+		          <oi-select name="position" oi-options="item.name for item in positionConstant" ng-model="form.position" validator="required" ></oi-select>
 		        </app-input>
 				<app-input title="提示">
 					<input type="text" name="cardElementDesc" placeholder="请输入提示文字" ng-model="form.cardElementDesc"></input>

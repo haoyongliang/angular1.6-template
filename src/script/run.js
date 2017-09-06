@@ -7,9 +7,9 @@ APP.run(['$rootScope', '$log', '$timeout', 'loginMode', '$state', '$stateParams'
   // $state.defaultErrorHandler(() => {}); //不打印错误信息
   $transitions.onStart({}, ()=> {
     //没有登陆成功则跳转到登陆界面
-    if (localStorageService.get(loginMode.NAME) != loginMode.RESULT) {
-      $state.go('login');
-    }
+//  if (localStorageService.get(loginMode.NAME) != loginMode.RESULT) {
+//    $state.go('login');
+//  }
   });
 
 

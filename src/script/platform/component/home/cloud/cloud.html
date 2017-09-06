@@ -1,0 +1,104 @@
+<div id="page-setup" class="page h-100" ng-controller="cloudCtrl" app-loading="cloud" app-loading-options="{text: '{{message}}..'}">
+	<style>
+		.editBtn{
+		    display: none;
+		    position: absolute !important;
+		    width: 22%;
+		    line-height: 28px;
+		    font-size: 18px;
+		    text-align: center;
+		    color: #F3691D;
+		}
+	</style>
+	<div class="w-100 h-100">
+		<app-page-panel border-weight="2px"  left-btn-handler="back()" ng-init="init()" callback="close()" border-bottom="1px solid black" left-btn-icon="" header="{{currentFolderName}}" head-style="{{headStyle}}" class="w-100 h-100" app-loading="previewMainTemplate" app-loading-options="{text: '{{message}}..'}">
+			<app-vertical-card>
+				<div class="w-100 h-100 left">
+					<div style="width:100px ;color: #F3691D;"  class="app-btn f-small d-ib center" ngf-select="uploadFiles($files)"  accept="*" ngf-max-size="20MB"><span class="icon ColorChangeFont icon-yunpan"></span>上  传</div>
+					<div style="width:100px ; color: #F3691D;" class="app-btn f-small d-ib center" ng-click="createFloder()"><span class="icon ColorChangeFont icon-xinjianxiangmuwenjian"></span>新建文件夹</div>
+				</div>
+				
+				<!--<button class="btn btn-primary" style="margin-left:10px" ng-click="showFileUploadDialog()"><span class="fa fa-cloud-upload"></span> 上传</button>-->
+			<!--<button class="btn" ng-click="createFloder()" style="border: 1px solid #F38C53;color: #F3691D; margin-left:5px"><span class="glyphicon glyphicon-folder-close"></span> 新建文件夹</button>-->
+			</app-vertical-card>
+			<div class="w-100 " style="background-color:#F9F9F9; height:calc(100% - 28px)">
+				<div ng-scrollbars>
+					<app-list-item  right-icon = "" name="a" class="" ng-repeat="file in fileList"  onmouseenter="show(this)" onmouseleave="hide(this)"><!---->
+						<!--
+							显示文件夹
+						-->
+						<div ng-if="file.isFolder" title="{{file.folderName}}" ng-dblclick="getSubFileAndFolder(file.folderId,file.folderName)">
+							
+							<!--文件夹图标-->
+							<span ng-if="file.isFolder" class="icon ColorChangeFont icon-wenjianjia" style="color:#FFD659"></span>
+							<span>{{file.folderName}}</span>
+							<span style="position:absolute; right:0;width:130px;">{{file.creatDate}}</span>
+							<span style="position:absolute; right:280px;width:120px;height: 100%;">
+								<span title=""       style="left:0"  class="editBtn" ></span>
+								<span title="移动"   style="left:30px" class="editBtn  icon ColorChangeFont icon-yidong"   ng-click="movefolder(file.folderId, file.folderName, $event)"></span>
+								<span title="重命名" style="left:60px" class="editBtn  icon ColorChangeFont icon-zhongmingming1"       ng-click="renameFolder(file.folderId,file.folderName,$event)"></span>
+								<span title="删除"   style="left:90px" class="editBtn  icon ColorChangeFont icon-shanchu"      ng-click="deleteFloder(file.folderId,$event,file.folderName)"></span>
+							</span>
+						</div>
+						
+						
+						<!--显示文件-->
+						<div ng-if="!file.isFolder"  class="btnShow" title="{{file.fileName}}" ng-dblclick="preview(file.fileUrl,$event)">
+							
+							<!--文件图标-->
+							<span ng-if="file.isPicture" style=" color:#FF7743" class=" icon ColorChangeFont icon-image"></span>
+							<span ng-if="file.isExcel"   style=" color:#63C422" class=" icon ColorChangeFont icon-excel" ></span>
+							<span ng-if="file.isWord"    style=" color:#4D97FF" class=" icon ColorChangeFont icon-word" ></span>
+							<span ng-if="file.isVideo"   style=" color:#8183F1" class=" icon ColorChangeFont icon-mp" ></span>
+							<span ng-if="file.isText"    style=" color:#4D97FF" class=" icon ColorChangeFont icon-txt" ></span>
+							<span ng-if="file.isZip"     style=" color:#7ECF3B" class=" icon ColorChangeFont icon-zip1" ></span>
+							<span ng-if="file.isPdf"     style=" color:#FF5A5A" class=" icon ColorChangeFont icon-pdf" ></span>
+							<span ng-if="file.isPpt"     style=" color:#FF9743" class=" icon ColorChangeFont icon-ppt1" ></span>
+							<span ng-if="file.isDefault" style=" color:#B9C9D6" class=" icon ColorChangeFont icon-unknown" ></span>
+							<span >{{file.fileName}}</span>
+							<span style="position:absolute;  right:130px;width:130px; text-align: left;">{{file.fileSize}}</span>
+							<span style="position:absolute;  right:0;width:130px;">{{file.creatDate}}</span>
+							<span style="position:absolute;  right:280px;width:120px;height: 100%;">
+								<span title="下载"   style="left:0"   class="editBtn  icon ColorChangeFont icon-xiazai" ><a style="display: inline-block;width:100%;height: 28px;position:absolute;top:0;left:0" download href="{{file.newUrl}}"></a></span>
+								<span title="移动"   style="left:30px"   class="editBtn  icon ColorChangeFont icon-yidong" ng-click="moveFile(file.fileId,file.fileName,file.fileUrl,file.fileSize,$event)"></span>
+								<span title="重命名" style="left:60px"   class="editBtn  icon ColorChangeFont icon-zhongmingming1" ng-click="renameFile(file.fileId,file.fileName,file.fileUrl,file.fileSize,$event)"></span>
+								<span title="删除"   style="left:90px"   class="editBtn  icon ColorChangeFont icon-shanchu" ng-click="deleteFile(file.fileId,$event,file.fileName)"></span>
+							</span>
+						</div>
+					</app-list-item>
+				</div>
+			</div>
+		</app-page-panel>
+	</div>
+	
+	<!--<div class="titleBar" style="">
+		<i class="leftBtn ucgi" ng-show="!isRoot" ng-click="back()"></i>
+		<span class="text" >{{currentFolderName}}</span>
+	</div>-->
+	
+	<div style="position: relative;height: 100%;">
+		<div style="height: 50px;line-height: 50px;">
+			<button class="btn btn-primary" style="margin-left:10px" ng-click="showFileUploadDialog()"><span class="fa fa-cloud-upload"></span> 上传</button>
+			<button class="btn" ng-click="createFloder()" style="border: 1px solid #F38C53;color: #F3691D; margin-left:5px"><span class="glyphicon glyphicon-folder-close"></span> 新建文件夹</button>
+			<div class="search-file" style="display: none;">
+				<input type="text" placeholder="搜索您的文件" color="#929292"/><button><span class="fa fa-search"></span></button>
+				
+			</div>
+		</div>
+		<div style="height: calc(100% - 50px); " id="list-file-folder">
+			
+			
+		</div>
+	</div>
+	
+	<script type="text/javascript-lazy">
+		function show(t){
+			$(t).find('.editBtn').css('display','inline-block');
+		}
+		function hide(t){
+			$(t).find('.editBtn').css('display','none');
+		}
+
+
+	</script>
+</div>

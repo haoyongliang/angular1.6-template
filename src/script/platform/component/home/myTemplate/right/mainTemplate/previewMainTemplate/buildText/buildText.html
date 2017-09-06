@@ -13,7 +13,7 @@
           <oi-select readonly oi-options="item.name for item in buildTextConstant.textType " ng-model="form.textType" validator="required " name="textType"></oi-select>
         </app-input>
         <app-input title="多行/单行">
-          <oi-select readonly oi-options="item.name for item in buildTextConstant.textRows" ng-model="form.textRows" validator="required " name="textRows"></oi-select>
+          <oi-select readonly  oi-options="item.name for item in buildTextConstant.textRows" ng-model="form.textRows" validator="required " name="textRows"></oi-select>
         </app-input>
         <app-input title="构件属性" >
           <oi-select multiple readonly oi-options="item.name for item in buildTextConstant.cardElementAttributeConstant" ng-model="form.cardElementAttribute" validator="required " name="cardElementAttribute"></oi-select>

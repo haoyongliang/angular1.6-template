@@ -1,0 +1,182 @@
+<div ng-controller="componentDemoCtrl">
+	<h1>classifiedCard   分类卡</h1>
+	<app-classified-card ng-model="a" placeholder="请输入"></app-classified-card>
+	
+	
+	
+	<h1>color 给内容添加颜色</h1>
+	<div style="visibility: hidden;">
+		{{money=4}}
+		{{blue='blue'}}
+		{{black='black'}}
+	</div>
+	
+	<div app-color default-color='red' positive-color='{{blue}}' negative-color='{{black}}' zero-color='yellow' >0</div>
+	<div app-color default-color='red' positive-color='{{blue}}' negative-color='{{black}}' zero-color='yellow' >1</div>
+	<div app-color default-color='red' positive-color='{{blue}}' negative-color='{{black}}' zero-color='yellow' >-1</div>
+	<div app-color default-color='red'>-1</div>
+	<div app-color default-color='red' positive-color='{{blue}}' negative-color='{{black}}' zero-color='yellow' target='{{money}}'>你好</div>
+	
+	
+	
+	
+	<h1>currency 将输入框内的数字格式化成千分位，保留指定小数位数</h1>
+	<div style="height:28px; width:100%; border:1px solid black">
+		<input type="text" ng-model="aa" app-currency bit="3"/>
+	</div>
+	
+	
+	<h1>dynamic 动态插入HTML</h1>
+	<button ng-click="addHtml()">点我动态插入</button>
+	<div app-dynamic="{{html}}"></div>
+	<div app-dynamic  handler="myfunction()"> </div>
+	
+	
+	<h1>input 表单输入框</h1>
+	<div style="height:28px;">
+		<app-input title="表单框">
+			<input type="text" placeholder="请输入" />
+		</app-input>
+		<app-input title="表单框">
+			<input type="text" placeholder="请输入" />
+		</app-input>
+		<app-input title="表单框" class="w-50" is-bottom="true">
+			<input type="text" placeholder="请输入" />
+		</app-input>
+		<app-input title="表单框" class="w-50" is-right="true" is-bottom="true">
+			<input type="text" placeholder="请输入" />
+		</app-input>
+	</div>
+	
+	<h1>leftrightlayout 左右布局，向左缩放</h1>
+	<div style="width: 100%; height:200px">
+		<app-left-right-layout left-width="444px" left-style="bg-blue" right-style="bg-gray">
+			<left>
+				<div>
+					左边
+				</div>
+			</left>
+			<right>
+				<div class="w-100; h-100; bg-gray">
+					右边
+				</div>
+			</right>
+		</app-left-right-layout>
+	</div>
+	
+	
+	<h1>listItem 列表</h1>
+	<app-list-item name="a" right-icon = "">1</app-list-item>
+	<app-list-item name="a" right-icon-auto-visible="true" right-btn-handler="clickListItem()">2</app-list-item>
+	<app-list-item name="a" >3</app-list-item>
+	
+	
+	<h1>loading</h1>
+	<button ng-click="clickLoading()">点我加载</button>
+	<div style="height:400px;width:400px;background-color:chocolate" class="p-a clearfix" app-loading="sddfaf" app-loading-options="{text: '加载中..'}">
+		
+	</div>
+	<div class="clearfix"></div>
+	<h1>pagePanel 面板</h1>
+	<div style="height:400px; width:200px;" class="clearfix">
+		<app-page-panel header="用户列表" head-style="2" has-border="false" has-header-color="false">
+		f
+		</app-page-panel>
+	</div>
+
+
+	<h1>下拉框{{form.bundle}}</h1>
+	<div style="height:28px;">
+		<app-input title="表单框">
+			<oi-select
+			    oi-options="item.name for item in items"
+			    ng-model="form.bundle"
+			    
+			    placeholder="Select"
+			    ></oi-select>
+		</app-input>
+	</div>
+	<button ng-click="aaa()">aa</button>
+	
+	
+	<h1>section</h1>
+	<app-section height='200px' visible="true">
+	  <header>
+	    <div class="w-100 h-100" style="background-color:pink">
+	      <i class="icon ColorChangeFont icon-you"></i>日志
+	    </div>
+	  </header>
+	  <section >
+	  	<div class="h-100" ng-scrollbars>
+	  		<app-list-item name="a" right-icon = "">1</app-list-item>
+			<app-list-item name="a" right-icon-auto-visible="true" right-btn-handler="clickListItem()">2</app-list-item>
+			<app-list-item name="a" >3</app-list-item>
+			<app-list-item name="a" right-icon = "">1</app-list-item>
+			<app-list-item name="a" right-icon-auto-visible="true" right-btn-handler="clickListItem()">2</app-list-item>
+			<app-list-item name="a" >3</app-list-item>
+			<app-list-item name="a" right-icon = "">1</app-list-item>
+			<app-list-item name="a" right-icon-auto-visible="true" right-btn-handler="clickListItem()">2</app-list-item>
+			<app-list-item name="a" >3</app-list-item>
+			<app-list-item name="a" right-icon = "">1</app-list-item>
+			<app-list-item name="a" right-icon-auto-visible="true" right-btn-handler="clickListItem()">2</app-list-item>
+			<app-list-item name="a" >3</app-list-item>
+	  	</div>
+	  </section>
+	</app-section>
+	
+	
+	<h1>table</h1>
+	<app-table data="{{tbConfig}}" height="100px">
+      <app-tr ng-repeat="item in items">
+        <app-td>{{$index}}</app-td>
+        <app-td>{{item.name}}</app-td>
+        <app-td>--</app-td>
+        <!-- 用户名 -->
+        <app-td>--</app-td>
+        <!-- 职务 -->
+        <app-td>--</app-td>
+        <!-- 角色 -->
+        <app-td>--</app-td>
+        <!-- 移动电话 -->
+        <app-td>--</app-td>
+        <!-- 电子邮件 -->
+        <app-td>--</app-td>
+        <!-- 账户状态 -->
+        <app-td>--</app-td>
+        <!-- 备注 -->
+        <app-td>角色 解冻 删除</app-td>
+        <!-- 用户名 -->
+      </app-tr>
+    </app-table>
+	
+	<h1>tab 选项卡</h1>
+		<app-tabs >
+
+	      <app-panel tittle='授权' app-click='organizationManger()'>
+	      	
+	        a
+	      </app-panel>
+	      <app-panel tittle='提醒' app-click='organizationManger()'>
+	        b
+	      </app-panel>
+	      <app-panel tittle='密码' app-click='organizationManger()' >
+	        c
+	      </app-panel>
+	    </app-tabs>
+	
+		
+	
+	<h1>verticalCard</h1>
+	<app-vertical-card>
+		纵向分类卡
+	</app-vertical-card>
+	
+	<div style="height:300px">
+		
+	</div>
+	
+	
+	<h1>弹出框</h1>
+	<button ng-click="clickDialog()">弹出框</button>
+	
+</div>

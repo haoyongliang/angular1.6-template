@@ -23,6 +23,9 @@ APP.directive('dropseaNavUserInfo',['uuid','$state',(uuid,$state)=>{
 				$scope.gotoMyTemplate = function($event){
 					$state.go('home.myTemplateIndex');
 				}
+				$scope.gotoCloud = function($event){
+					$state.go('home.cloud');
+				}
 		}
 	}
 }])
